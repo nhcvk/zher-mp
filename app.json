@@ -1,7 +1,14 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/show/show",
+    "pages/details/details",
+    "pages/bookmarks/bookmarks",
+    "pages/locals/locals",
+    "pages/profile/profile",
+    "pages/upload/upload",
+    "pages/edit/edit"
   ],
   "window":{
     "backgroundTextStyle":"light",
