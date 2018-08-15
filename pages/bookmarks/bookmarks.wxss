@@ -10,10 +10,6 @@
   color: white;
 }
 
-section.title {
-  color: white;
-}
-
 .tabs {
   position: fixed;
   top:0;
@@ -27,7 +23,6 @@ section.title {
   flex: 0 0 1%;
   text-align: center;
   padding-top: 5px;
-
 }
 
 .menu {
@@ -36,20 +31,19 @@ section.title {
   height: 75rpx;
 }
 
-.bookmark {
-  width: 75rpx;
-  height: 75rpx;
-}
-
-.namelocation {
-  font-size: 80px;
-  bottom: 0;
-  left: 7px;
-  position: fixed;
-  font-weight: lighter;
-}
-
 .cityName {
-  font-weight: lighther;
-  font-size: 50rpx;
+  font-weight: lighter;
+  font-size: 60rpx;
+}
+
+.card {
+  width: 100vw;
+  height: 15vh;
+  display: flex;
+}
+
+.cardBackground {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
 }
