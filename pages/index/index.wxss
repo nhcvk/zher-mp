@@ -1,22 +1,61 @@
 /**index.wxss**/
-.userinfo {
+.backgroundblack {
+  background: black;
+  height: 100vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.backgroundwhite {
+  background: white;
+  height: 100vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  height: 500rpx;
+  width: 500rpx;
+}
+
+.city {
+  width: 100vw;
+  position: fixed;
+  bottom: -147rpx;
+}
+
+.titlewhite {
+  color: white;
+  font-size: 60rpx;
+  font-weight: lighter;
+  margin-bottom: 400rpx;
+}
+
+.titleblack {
+  color: black;
+  font-size: 60rpx;
+  font-weight: lighter;
+  margin-bottom: 400rpx;
+}
+
+.cityPage {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.cityswiper {
+  height: 100vh!important;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
 

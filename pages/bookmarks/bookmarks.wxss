@@ -1,1 +1,55 @@
 /* pages/bookmarks/bookmarks.wxss */
+.background {
+  background: #888888;
+  height: 100vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+
+.tabs {
+  position: fixed;
+  top:0;
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 0 0 1%;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.menu {
+  padding-left: 10px;
+  width: 75rpx;
+  height: 75rpx;
+}
+
+.cityName {
+  font-weight: lighter;
+  font-size: 60rpx;
+}
+
+.card {
+  width: 100vw;
+  height: 15vh;
+  padding-top: 10rpx;
+  font-weight: lighter;
+}
+
+.cardBackground {
+  width: 100vw;
+  height: 225rpx;
+}
+
+.locationDistance {
+}
+
+.locationName {
+}

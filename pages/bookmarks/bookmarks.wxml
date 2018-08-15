@@ -1,2 +1,51 @@
 <!--pages/bookmarks/bookmarks.wxml-->
-<text>pages/bookmarks/bookmarks.wxml</text>
+
+<view class="background">
+
+<!--top menu-->
+<view class="tabs">
+  <view class="tab" bindtap="goMenu">
+    <view class="tabHeader">
+      <image class="menu" src="../../assets/icons/menu.png"/>
+    </view>
+  </view>
+  <view class="tab">
+    <view class="tabHeader">
+      <view class="cityName">Chengdu</view>
+    </view>
+  </view>
+  <view class="tab" bindtap="bookmark">
+    <view class="tabHeader">
+    </view>
+  </view>
+</view>
+<!--top menu-->
+
+<view class="card">
+  <view class="cardBackground" style="background-image: url('../../assets/images/angkor.jpg');">
+    <view class="cardContent">
+      <view class="locationDistance">1.5km</view>
+      <view class="locationName">Taikooli</view>
+    </view>
+  </view>
+</view>
+
+<view class="card">
+  <view class="cardBackground" style="background-image: url('../../assets/images/taj.jpg');">
+    <view class="cardContent">
+      <view class="locationDistance">2.5km</view>
+      <view class="locationName">Tianfu</view>
+    </view>
+  </view>
+</view>
+
+<view class="card">
+  <view class="cardBackground" style="background-image: url('../../assets/images/canal.jpg');">
+    <view class="cardContent">
+      <view class="locationDistance">0.5km</view>
+      <view class="locationName">Panda IFS</view>
+    </view>
+  </view>
+</view>
+
+</view>
