@@ -5,9 +5,12 @@ const myRequest = require('../../lib/request');
 Page({
 
   data: {
+    showLocation: false, 
     items: [], 
-    margin: "width: 0"
+    margin: "width: 0",
+    markers: [{ latitude: 30.572815, longitude: 104.066803 }]
   },
+
 
   onLoad: function () {
     let page = this
@@ -15,14 +18,16 @@ Page({
       path: 'places',
       success(res) {
         console.log(res)
-        page.setData({ items: res.data.places })
+        page.setData({ 
+          items: res.data.places
+        })
       }
     })
   },
 
 scroll: function(e) {
   this.setData({
-    filter: `filter: blur(${e.detail.scrollTop / 100 }rpx);`
+    filter: `filter: blur(${e.detail.scrollTop  / 60 }rpx);`
   })
  }, 
 
@@ -39,6 +44,12 @@ goMenu: function(e) {
       movable: "margin-left: 0px"
     })
   }
+},
+
+resetBlur: function(e) {
+  this.setData({
+    filter: "filter: blur(0px);"
+  })
 }
 
 })
