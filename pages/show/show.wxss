@@ -1,35 +1,19 @@
 /* pages/show/show.wxss */
 /* Banner Component */
-.banner {
-  color: white;
-  text-align: center;
-  height: 100vh;
-  /* if you have a 70px navbar => height: calc(100vh - 70px); */
-  background-size: cover !important;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-section.title {
-  color: white;
-}
-
 .tabs {
-  position: fixed;
+   position: fixed; 
   top:0;
   width: 100%;
   flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
+  color: white;
 }
 
 .tab {
   flex: 0 0 1%;
   text-align: center;
   padding-top: 5px;
-
 }
 
 .menu {
@@ -43,10 +27,62 @@ section.title {
   height: 75rpx;
 }
 
+#main_image {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  position: fixed;
+  object-fit: cover;
+  top: 0;
+}
+
+.scroll {
+  position: absolute;
+  overflow: scroll; 
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
+
+.scroll-content {
+  margin-top: 85vh;
+}
+
 .namelocation {
   font-size: 80px;
   bottom: 0;
   left: 7px;
-  position: fixed;
   font-weight: lighter;
+}
+
+.card {
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.flex-wrp {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-item-head {
+  flex: 0 0 60px;
+}
+
+.flex-item-msg {
+  flex: 0 0 60px;
+  font-size: 14px;
+  text-align: left;
+  margin: 7px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  border-bottom: solid;
+  border-bottom-color: white;
+  border-bottom-width: 1px;
 }
