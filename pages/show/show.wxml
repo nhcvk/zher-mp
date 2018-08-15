@@ -1,11 +1,13 @@
 <!--pages/show/show.wxml-->
-
+<view id="mySideNav" class="sideNav" style="{{margin}}px;">
+   <navigator url=""></navigator>
+</view>
 <!--background image-->
-<image  id="main_image" mode="aspectFill" src="/assets/images/angkor.jpg" style="{{filter}}"/>
-
+<view class="movable" style="{{movable}}">
+<image  id="main_image" mode="aspectFill" src="/assets/images/angkor.jpg" style="{{filter}};"/>
 
 <!--bottom location name-->
-<scroll-view scroll-y class="scroll" bindscroll="fuck">
+<scroll-view scroll-y class="scroll" bindscroll="scroll">
 <view class="scroll-content">
     <view class="namelocation">Ankor Wat</view>
   <view  class="card">
@@ -46,6 +48,7 @@
   </view>  
   </view>
 </scroll-view>
+
 <!--bottom location name-->
 
 
@@ -81,5 +84,6 @@
       <image class="bookmark" src="../../assets/icons/bookmark.png"/>
     </view>
   </view>
+</view>
 </view>
 <!--top menu-->

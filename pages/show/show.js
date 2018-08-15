@@ -6,7 +6,7 @@ Page({
 
   data: {
     items: [], 
-    filter: ""
+    margin: "width: 0"
   },
 
   onLoad: function () {
@@ -20,11 +20,25 @@ Page({
     })
   },
 
-fuck: function(e) {
-
+scroll: function(e) {
   this.setData({
     filter: `filter: blur(${e.detail.scrollTop / 100 }px)`
   })
- } 
+ }, 
+
+goMenu: function(e) {
+  if (this.data.margin == "width: 0") {
+  this.setData({
+    margin: "width: 250",
+    movable: "margin-left: 250px"
+  })
+  }
+  else {
+    this.setData({
+      margin: "width: 0",
+      movable: "margin-left: 0px"
+    })
+  }
+}
 
 })
