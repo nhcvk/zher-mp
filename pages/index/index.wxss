@@ -1,6 +1,16 @@
 /**index.wxss**/
-.background {
+.backgroundblack {
   background: black;
+  height: 100vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.backgroundwhite {
+  background: white;
   height: 100vh;
   display: flex;
   justify-items: center;
@@ -20,17 +30,32 @@
   bottom: -147rpx;
 }
 
-.title {
+.titlewhite {
   color: white;
   font-size: 60rpx;
   font-weight: lighter;
   margin-bottom: 400rpx;
 }
 
-.swiper-item {
-  height: 100vh;
+.titleblack {
+  color: black;
+  font-size: 60rpx;
+  font-weight: lighter;
+  margin-bottom: 400rpx;
 }
 
-.swiper {
-  height:100vh;
+.cityPage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
 }
+
+.cityswiper {
+  height: 100vh!important;
+}
+
+

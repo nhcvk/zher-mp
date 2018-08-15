@@ -1,7 +1,34 @@
 <!--index.wxml-->
-    <view class="background">
+<swiper
+  class="cityswiper"
+  indicator-dots="{{indicatorDots}}" 
+  autoplay="{{autoplay}}" 
+  circular="{{circular}}" 
+  vertical="{{vertical}}"
+  interval="{{interval}}" 
+  duration="{{duration}}" 
+  previous-margin="{{previousMargin}}px" 
+  next-margin="{{nextMargin}}px"
+  height="100vh">
+
+<swiper-item>
+ 
+    <view class="backgroundblack">
       <image class="logo" src="../../assets/icons/logo_zher.png"/>
-      <view class="title" bindtap='goShow'>Chengdu</view>
+      <view class="titlewhite" bindtap='goShow'>Chengdu</view>
       <image class="city" src="../../assets/icons/chengdu.png"/>
     </view>
+
+</swiper-item>
+
+<swiper-item>
+    <view class="backgroundwhite">
+      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <view class="titleblack" bindtap='goShow'>Chongqing</view>
+      <image class="city" src="../../assets/icons/chongqing.png"/>
+    </view>
+</swiper-item>
+
+</swiper>
+
  
