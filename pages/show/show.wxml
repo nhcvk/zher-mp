@@ -1,57 +1,138 @@
 <!--pages/show/show.wxml-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
-   <navigator url=""></navigator>
+   <navigator url="../index/index">Change Location</navigator>
+    <!-- ADD BLOCK FOR FAVORITES -->
+
 </view>
 <!--background image-->
 <view class="movable" style="{{movable}}">
+
+
+
+
+<!-- SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
+<swiper class="cityswiper" bindchange="resetBlur">
+<block wx:for="{{items}}" wx:for-item ="place">
+<swiper-item >
+
 <image  id="main_image" mode="aspectFill" src="/assets/images/angkor.jpg" style="{{filter}};"/>
 <!--bottom location name-->
 <scroll-view scroll-y class="scroll" bindscroll="scroll">
 <view class="scroll-content">
-    <view class="namelocation">Paris</view>
+    <view class="namelocation">{{place.name}}</view>
+    <!-- UNDER HERE IS CARD -->
   <view  class="card">
     <view class="flex-wrp">
-
-      <!-- HEAD PART  -->
       <view class="flex-item-head ">
         <view class="card-head">
-            <!-- HEAD LEFT (titel) -->
             <view class="card-head-left">Description</view>
         </view>
       </view>
-      <!-- HEAD PART  -->
-
-      <!--CONTENT  -->
       <view class="flex-item-msg">
-        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-        </block>
+        {{place.description}}
       </view>
-       <view class="flex-item-msg">
-        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-        </block>
-      </view>
-       <view class="flex-item-msg">
-        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-        </block>
-      </view>
-       <view class="flex-item-msg">
-        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-        </block>
-      </view>
-       <view class="flex-item-msg">
-        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-        </block>
-      </view>
-      <!--CONTENT-->
     </view>
-  </view>  
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+     <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">Map</view>
+        </view>
+      </view>
+      <view class="flex-item-card">
+        <map   
+        show-location="{{showLocation}}"
+        scale="13"
+        latitude="{{place.latitude}}"
+        longitude="{{place.longitude}}"
+        markers="{{ [{ latitude: place.latitude, longitude: place.longitude}]}}"
+        ></map>
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+      <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">Photos</view>
+        </view>
+      </view>
+      <view class="">
+        <swiper indicator-dots="true" indicator-active-color='white'>
+       <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo">
+       <swiper-item > <image src='{{photo}}'></image> </swiper-item>
+       </block>
+        </swiper>
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+      <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">Local</view>
+        </view>
+      </view>
+       <view class="">
+        <image src="{{place.user.avatar_url}}"></image>
+        {{place.user.name}}
+      </view> 
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
   </view>
 </scroll-view>
+
+
+
+
+
+</swiper-item>
+</block>
+</swiper>
+<!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
 
 <!--bottom location name-->
 
 
+<!-- <swiper
+  class="cityswiper"
+  indicator-dots="{{indicatorDots}}" 
+  autoplay="{{autoplay}}" 
+  circular="{{circular}}" 
+  vertical="{{vertical}}"
+  interval="{{interval}}" 
+  duration="{{duration}}" 
+  previous-margin="{{previousMargin}}px" 
+  next-margin="{{nextMargin}}px"
+  height="100vh">
 
+<swiper-item>
+ 
+    <view class="backgroundblack">
+      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <view class="titlewhite" bindtap='goShow'>Chengdu</view>
+      <image class="city" src="../../assets/icons/chengdu.png"/>
+    </view>
+
+</swiper-item>
+
+<swiper-item>
+    <view class="backgroundwhite">
+      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <view class="titleblack" bindtap='goShow'>Chongqing</view>
+      <image class="city" src="../../assets/icons/chongqing.png"/>
+    </view>
+</swiper-item>
+
+</swiper> -->
 
 
 
