@@ -5,7 +5,8 @@ const myRequest = require('../../lib/request');
 Page({
 
   data: {
-    items: []
+    items: [], 
+    filter: ""
   },
 
   onLoad: function () {
@@ -19,5 +20,11 @@ Page({
     })
   },
 
+fuck: function(e) {
+
+  this.setData({
+    filter: `filter: blur(${e.detail.scrollTop / 100 }px)`
+  })
+ } 
 
 })
