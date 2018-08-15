@@ -22,7 +22,7 @@ Page({
 
 scroll: function(e) {
   this.setData({
-    filter: `filter: blur(${e.detail.scrollTop / 100 }px)`
+    filter: `filter: blur(${e.detail.scrollTop / 100 }rpx);`
   })
  }, 
 

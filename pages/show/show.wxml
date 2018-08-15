@@ -5,11 +5,10 @@
 <!--background image-->
 <view class="movable" style="{{movable}}">
 <image  id="main_image" mode="aspectFill" src="/assets/images/angkor.jpg" style="{{filter}};"/>
-
 <!--bottom location name-->
 <scroll-view scroll-y class="scroll" bindscroll="scroll">
 <view class="scroll-content">
-    <view class="namelocation">Ankor Wat</view>
+    <view class="namelocation">Paris</view>
   <view  class="card">
     <view class="flex-wrp">
 
