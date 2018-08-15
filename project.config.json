@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -56,7 +56,8 @@
 				{
 					"id": -1,
 					"name": "profile",
-					"pathName": "pages/profile/profile"
+					"pathName": "pages/profile/profile",
+					"query": ""
 				}
 			]
 		}

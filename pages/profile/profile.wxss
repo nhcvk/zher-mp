@@ -80,7 +80,7 @@
 
 .card {
   margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: rgba(0, 0, 0, 0.2)
 }
 
@@ -127,7 +127,7 @@
   border-bottom: solid;
   border-bottom-color: black;
   border-bottom-width: 1px;
-  border-bottom-margin
+  /* border-bottom-margin */
 }
 
 .flex-for-name-time {
