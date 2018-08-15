@@ -8,7 +8,8 @@ Page({
     showLocation: false, 
     items: [], 
     margin: "width: 0",
-    markers: [{ latitude: 30.572815, longitude: 104.066803 }]
+    bookmark:  "../../assets/icons/bookmark.png",
+    currentPage: 0
   },
 
 
@@ -46,10 +47,31 @@ goMenu: function(e) {
   }
 },
 
-resetBlur: function(e) {
+pageChange: function(e) {
+  console.log(e)
   this.setData({
-    filter: "filter: blur(0px);"
+    filter: "filter: blur(0px);", 
+    currentPage: e.detail.current
   })
+  console.log(this.data.currentPage)
+},
+
+bookmark: function(e) {
+  let page = this
+  console.log(page.data.currentPage)
+  myRequest.post({
+    path: `users/1/bookmarks`,
+    data: {
+     user_id: 1,
+     place_id: page.data.currentPage + 1, 
+    }
+  }),
+  page.setData({
+    bookmark: "../../assets/icons/bookmarked.png"
+  }), 
+   wx.showToast({
+    title: 'SAVED'
+  }) 
 }
 
 })

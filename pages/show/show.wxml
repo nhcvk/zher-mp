@@ -11,7 +11,7 @@
 
 
 <!-- SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
-<swiper class="cityswiper" bindchange="resetBlur">
+<swiper class="cityswiper" bindchange="pageChange">
 <block wx:for="{{items}}" wx:for-item ="place">
 <swiper-item >
 
@@ -99,56 +99,6 @@
 </swiper>
 <!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
 
-<!--bottom location name-->
-
-
-<!-- <swiper
-  class="cityswiper"
-  indicator-dots="{{indicatorDots}}" 
-  autoplay="{{autoplay}}" 
-  circular="{{circular}}" 
-  vertical="{{vertical}}"
-  interval="{{interval}}" 
-  duration="{{duration}}" 
-  previous-margin="{{previousMargin}}px" 
-  next-margin="{{nextMargin}}px"
-  height="100vh">
-
-<swiper-item>
- 
-    <view class="backgroundblack">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
-      <view class="titlewhite" bindtap='goShow'>Chengdu</view>
-      <image class="city" src="../../assets/icons/chengdu.png"/>
-    </view>
-
-</swiper-item>
-
-<swiper-item>
-    <view class="backgroundwhite">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
-      <view class="titleblack" bindtap='goShow'>Chongqing</view>
-      <image class="city" src="../../assets/icons/chongqing.png"/>
-    </view>
-</swiper-item>
-
-</swiper> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!--top menu-->
 <view class="tabs">
   <view class="tab" bindtap="goMenu">
@@ -159,9 +109,9 @@
   <view class="tab">
     <view class="tabHeader">1.5 km</view>
   </view>
-  <view class="tab" bindtap="bookmark">
+  <view id="{{index}}" class="tab" bindtap="bookmark">
     <view class="tabHeader">
-      <image class="bookmark" src="../../assets/icons/bookmark.png"/>
+      <image class="bookmark" src="{{bookmark}}"/>
     </view>
   </view>
 </view>
