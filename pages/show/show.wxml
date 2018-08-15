@@ -1,7 +1,70 @@
 <!--pages/show/show.wxml-->
 
 <!--background image-->
-<view class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.1) 50%), url('/assets/images/angkor.jpg');">
+<image  id="main_image" mode="aspectFill" src="/assets/images/angkor.jpg" style="{{filter}}"/>
+
+
+<!--bottom location name-->
+<scroll-view scroll-y class="scroll" bindscroll="fuck">
+<view class="scroll-content">
+    <view class="namelocation">Ankor Wat</view>
+  <view  class="card">
+    <view class="flex-wrp">
+
+      <!-- HEAD PART  -->
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <!-- HEAD LEFT (titel) -->
+            <view class="card-head-left">Description</view>
+        </view>
+      </view>
+      <!-- HEAD PART  -->
+
+      <!--CONTENT  -->
+      <view class="flex-item-msg">
+        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        </block>
+      </view>
+       <view class="flex-item-msg">
+        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        </block>
+      </view>
+       <view class="flex-item-msg">
+        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        </block>
+      </view>
+       <view class="flex-item-msg">
+        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        </block>
+      </view>
+       <view class="flex-item-msg">
+        <block>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        </block>
+      </view>
+      <!--CONTENT-->
+    </view>
+  </view>  
+  </view>
+</scroll-view>
+<!--bottom location name-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--top menu-->
 <view class="tabs">
@@ -20,9 +83,3 @@
   </view>
 </view>
 <!--top menu-->
-
-<!--bottom location name-->
-<view class="namelocation">Taikooli</view>
-<!--bottom location name-->
-
-</view>
