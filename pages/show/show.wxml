@@ -1,2 +1,28 @@
 <!--pages/show/show.wxml-->
-<text>pages/show/show.wxml</text>
+
+<!--background image-->
+<view class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.1) 50%), url('/assets/images/angkor.jpg');">
+
+<!--top menu-->
+<view class="tabs">
+  <view class="tab" bindtap="goMenu">
+    <view class="tabHeader">
+      <image class="menu" src="../../assets/icons/menu.png"/>
+    </view>
+  </view>
+  <view class="tab">
+    <view class="tabHeader">1.5 km</view>
+  </view>
+  <view class="tab" bindtap="bookmark">
+    <view class="tabHeader">
+      <image class="bookmark" src="../../assets/icons/bookmark.png"/>
+    </view>
+  </view>
+</view>
+<!--top menu-->
+
+<!--bottom location name-->
+<view class="namelocation">Taikooli</view>
+<!--bottom location name-->
+
+</view>

@@ -1,1 +1,52 @@
 /* pages/show/show.wxss */
+/* Banner Component */
+.banner {
+  color: white;
+  text-align: center;
+  height: 100vh;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  background-size: cover !important;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.title {
+  color: white;
+}
+
+.tabs {
+  position: fixed;
+  top:0;
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 0 0 1%;
+  text-align: center;
+  padding-top: 5px;
+
+}
+
+.menu {
+  padding-left: 10px;
+  width: 75rpx;
+  height: 75rpx;
+}
+
+.bookmark {
+  width: 75rpx;
+  height: 75rpx;
+}
+
+.namelocation {
+  font-size: 80px;
+  bottom: 0;
+  left: 7px;
+  position: fixed;
+  font-weight: lighter;
+}

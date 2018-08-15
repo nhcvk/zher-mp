@@ -1,7 +1,6 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
     "pages/show/show",
     "pages/details/details",
     "pages/bookmarks/bookmarks",
@@ -12,8 +11,8 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "ZHER",
+    "navigationBarTextStyle":"light"
   }
 }
