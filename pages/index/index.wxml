@@ -1,19 +1,7 @@
 <!--index.wxml-->
-<view class="background">
-
-  <image class="logo" src="../../assets/icons/logo_zher.png"/>
-  <view class="title" bindtap='goShow'>Chengdu</view>
-
-  <image class="city" src="../../assets/icons/chengdu.png"/>
-
-</view>
-
-<!-- <view class="section section_gap">
-  <view class="section__title">horizontal scroll</view>
-  <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
-    <view id="green" class="scroll-view-item_H bc_green">1 </view>
-    <view id="red"  class="scroll-view-item_H bc_red">2</view>
-    <view id="yellow" class="scroll-view-item_H bc_yellow">3</view>
-    <view id="blue" class="scroll-view-item_H bc_blue">4</view>
-  </scroll-view>
-</view> -->
+    <view class="background">
+      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <view class="title" bindtap='goShow'>Chengdu</view>
+      <image class="city" src="../../assets/icons/chengdu.png"/>
+    </view>
+ 

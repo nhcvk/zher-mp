@@ -26,3 +26,11 @@
   font-weight: lighter;
   margin-bottom: 400rpx;
 }
+
+.swiper-item {
+  height: 100vh;
+}
+
+.swiper {
+  height:100vh;
+}

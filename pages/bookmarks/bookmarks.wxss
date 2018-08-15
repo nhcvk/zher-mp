@@ -39,11 +39,17 @@
 .card {
   width: 100vw;
   height: 15vh;
-  display: flex;
+  padding-top: 10rpx;
+  font-weight: lighter;
 }
 
 .cardBackground {
   width: 100vw;
-  height: 20vh;
-  display: flex;
+  height: 225rpx;
+}
+
+.locationDistance {
+}
+
+.locationName {
 }
