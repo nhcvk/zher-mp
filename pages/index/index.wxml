@@ -23,7 +23,7 @@
 
 <swiper-item>
     <view class="backgroundwhite">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <image class="logowhite" src="../../assets/icons/zherlogowhite.jpeg"/>
       <view class="titleblack" bindtap='goShow'>Chongqing</view>
       <image class="city" src="../../assets/icons/chongqing.png"/>
     </view>
