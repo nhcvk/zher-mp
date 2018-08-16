@@ -40,7 +40,7 @@
             </view>
           </view>
           <view class="flex-item-card" bindtap="pinLocation">
-          <image wx:if="{{!value_location}}" class="avatar"   src="../../assets/icons/city.png" ></image> 
+          <image wx:if="{{!value_location}}" class="location-icon"   src="../../assets/icons/city.png"/> 
                         <!-- <image wx:if="{{value_location}}" class="avatar"   src="../../assets/icons/location-active.jpg" ></image>  -->
             <map
             wx:if="{{value_location}}"   
