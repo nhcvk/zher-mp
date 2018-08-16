@@ -103,4 +103,10 @@
     overflow-x: hidden; 
     padding-top: 60px;
     transition: 0.5s; 
+    color: white;
+      white-space: nowrap;
+}
+
+.cityswiper {
+  height: 100vh!important;
 }
