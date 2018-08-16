@@ -129,3 +129,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.flex-item-button {
+  color: white;
+  background-color: grey;
+  padding: 55rpx;
+  margin: 40rpx;
+  text-align: center;
+}
