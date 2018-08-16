@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <swiper
   class="cityswiper"
-  indicator-dots="{{indicatorDots}}" 
+  indicator-dots="true" 
   autoplay="{{autoplay}}" 
   circular="{{circular}}" 
   vertical="{{vertical}}"
@@ -14,7 +14,7 @@
 <swiper-item>
  
     <view class="backgroundblack">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <image class="logo" src="../../assets/icons/logo_zher.png" bindtap='goBookmarks'/>
       <view class="titlewhite" style="{{visibility}}" bindtap='goShow'>
         <view>tap to explore</view>
         <view>Chengdu</view>

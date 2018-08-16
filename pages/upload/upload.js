@@ -134,8 +134,8 @@ Page({
         console.log(res)
         that.setData({
           value_location: res.name,
-          value_latitude: res.latitude,
-          value_longitude: res.longitude
+          latitude: res.latitude,
+          longitude: res.longitude
         })
       },
       fail: function (e) {

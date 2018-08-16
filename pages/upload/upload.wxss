@@ -60,10 +60,9 @@
 
 .namelocation-input {
   font-size: 80px;
-  bottom: 5;
-  left: 7px;
   font-weight: lighter;
   height: 100px;
+  padding-left: 30rpx;
 }
 
 .card {
@@ -77,11 +76,11 @@
 }
 
 .flex-item-head {
-  flex: 0 0 60px;
+  flex: 0 0 auto;
 }
 
 .flex-item-msg {
-  flex: 0 0 60px;
+  flex: 0 0 auto;
   font-size: 14px;
   text-align: left;
   margin: 7px;
@@ -112,7 +111,7 @@
     padding-top: 60px;
     transition: 0.5s; 
     color: white;
-      white-space: nowrap;
+    white-space: nowrap;
 }
 
 .cityswiper {
@@ -120,6 +119,13 @@
 }
 
 .location-icon {
-  width: 50px;
+  width: 25px;
   height: 25px;
+  margin: 50rpx;
+}
+
+.flex-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

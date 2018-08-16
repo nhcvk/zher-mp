@@ -23,19 +23,19 @@ Page({
             code: res.code
           },
           success: res => {
-            console.log(res)
-            this.globalData.userId = res.data.userId
-            console.log(888, this.data.hasUserID)
+            console.log(456, res)
+            app.globalData.userId = res.data.userId
+            console.log(888, app.globalData.userId)
             this.setData ({
               hasUserID: true
             })
-            console.log(999, this.data.hasUserID)
+            let page = this
+            // console.log(page.data.currentPage)
+            page.setData({
+              visibility: "visibility:show"
+            })
+            // console.log(999, this.data.hasUserID)
           },
-        })
-        let page = this
-        console.log(page.data.currentPage)
-        page.setData ({
-          visibility: "visibility:show"
         })
       }
     })
@@ -45,7 +45,7 @@ Page({
 
   goShow: function (e) {
     if (this.data.hasUserID = true) {
-      console.log(789, this.hasUserID)
+      // console.log(789, this.data.hasUserID)
       wx.navigateTo({
         url: '/pages/show/show'
       })
@@ -55,5 +55,27 @@ Page({
       })
     }
   },
+
+  goBookmarks: function (e) {
+    wx.navigateTo({
+      url: '/pages/bookmarks/bookmarks'
+    })
+  },
+
+  goMenu: function (e) {
+    if (this.data.margin == "width: 0") {
+      this.setData({
+        margin: "width: 250",
+        movable: "margin-left: 250px"
+      })
+    }
+    else {
+      this.setData({
+        margin: "width: 0",
+        movable: "margin-left: 0px"
+      })
+    }
+  },
+
 
 })
