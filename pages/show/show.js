@@ -1,26 +1,41 @@
 // pages/show/show.js
 const app = getApp()
 const myRequest = require('../../lib/request');
-
 Page({
-
   data: {
     showLocation: false, 
     items: [], 
     margin: "width: 0",
-    bookmark:  "../../assets/icons/bookmark.png",
-    currentPage: 0
+    user_id: app.globalData.userId,
+    bookmarked: {},
+    bookmark_id: {}
   },
 
 
-  onLoad: function () {
+  onShow: function () {
     let page = this
     myRequest.get({
       path: 'places',
       success(res) {
         console.log(res)
         page.setData({ 
-          items: res.data.places
+          items: res.data.places,
+        })
+      }
+    }), 
+    myRequest.get({
+      path:`users/${app.globalData.userId}/bookmarks`,
+      success(res) {
+        let bookmarked = page.data.bookmarked
+        let bookmark_id = page.data.bookmark_id
+        res.data.forEach ((bookmark) => {
+        console.log(bookmark.id)
+        bookmark_id[bookmark.place_id] = bookmark.id
+        bookmarked[bookmark.place_id] = true
+        })
+        page.setData({
+          bookmarked,
+          bookmark_id
         })
       }
     })
@@ -48,30 +63,62 @@ goMenu: function(e) {
 },
 
 pageChange: function(e) {
-  console.log(e)
   this.setData({
     filter: "filter: blur(0px);", 
-    currentPage: e.detail.current
   })
-  console.log(this.data.currentPage)
 },
 
 bookmark: function(e) {
   let page = this
-  console.log(page.data.currentPage)
-  myRequest.post({
-    path: `users/1/bookmarks`,
-    data: {
-     user_id: 1,
-     place_id: page.data.currentPage + 1, 
-    }
-  }),
-  page.setData({
-    bookmark: "../../assets/icons/bookmarked.png"
-  }), 
-   wx.showToast({
-    title: 'SAVED'
-  }) 
+  if (page.data.bookmarked[e.currentTarget.id] == true) {
+    myRequest.delete({
+      path: `users/${app.globalData.userId}/bookmarks/${page.data.bookmark_id[e.currentTarget.id]}`, 
+      success(res) {
+        let bookmarked = page.data.bookmarked
+        let bookmark_id = page.data.bookmark_id
+        delete bookmark_id[e.currentTarget.id]
+        delete bookmarked[e.currentTarget.id]
+        
+        page.setData({
+          bookmarked, 
+          bookmark_id       
+        })
+      }
+    })
+   } else {
+    myRequest.post({
+      path: `users/${app.globalData.userId}/bookmarks`,
+      data: {
+        user_id: app.globalData.userId,
+        place_id: e.currentTarget.id
+      }, success(res) {
+        let bookmarked = page.data.bookmarked
+        let bookmark_id = page.data.bookmark_id
+        bookmarked[e.currentTarget.id] = true
+        bookmark_id[e.currentTarget.id] = res.data.id
+        page.setData({
+          bookmarked,
+          bookmark_id
+        }) 
+      }
+    })
 }
-
+}
 })
+
+
+
+
+
+
+
+
+
+  // if (page.data.bookmark == "../../assets/icons/bookmark.png") {
+  //   page.setData({
+  //       bookmark: "../../assets/icons/bookmarked.png"})
+  // } else {
+  //   page.setData({
+  //     bookmark: "../../assets/icons/bookmark.png"
+  //   })
+  // }
