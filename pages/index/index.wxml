@@ -15,7 +15,10 @@
  
     <view class="backgroundblack">
       <image class="logo" src="../../assets/icons/logo_zher.png"/>
-      <view class="titlewhite" bindtap='goShow'>Chengdu</view>
+      <view class="titlewhite" style="{{visibility}}" bindtap='goShow'>
+        <view>tap to explore</view>
+        <view>Chengdu</view>
+      </view>
       <image class="city" src="../../assets/icons/chengdu.png"/>
     </view>
 

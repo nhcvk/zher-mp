@@ -35,6 +35,7 @@
   font-size: 60rpx;
   font-weight: lighter;
   margin-bottom: 400rpx;
+  text-align: center;
 }
 
 .titleblack {
