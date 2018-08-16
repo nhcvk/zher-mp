@@ -55,7 +55,7 @@
       </view> 
       <!-- ABOVE HERE IS CARD  -->
           <!-- UNDER HERE IS CARD -->
-      <view  class="card">
+      <!-- <view  class="card">
         <view class="flex-wrp">
           <view class="flex-item-head ">
             <view class="card-head">
@@ -70,10 +70,10 @@
             </swiper>
           </view>
         </view>
-      </view> 
+      </view>  -->
       <!-- ABOVE HERE IS CARD  -->
           <!-- UNDER HERE IS CARD -->
-      <view  class="card">
+      <!-- <view  class="card">
         <view class="flex-wrp">
           <view class="flex-item-head ">
             <view class="card-head">
@@ -85,9 +85,28 @@
             {{place.user.name}}
           </view> 
         </view>
+      </view>  -->
+      <!-- ABOVE HERE IS CARD  -->
+
+      <!-- UNDER HERE IS CARD -->
+      <view  class="card">
+        <view class="flex-wrp">
+          <view class="flex-item-head ">
+            <view class="card-head">
+                <view class="card-head-left">Submit</view>
+            </view>
+          </view>
+            <view class="submit-button">
+              <view class="flex-item-button">Upload location</view>
+            </view>
+          </view> 
+        </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
-    </view>
+
+
+    
+  
   </scroll-view>
 
   <!--top menu-->
