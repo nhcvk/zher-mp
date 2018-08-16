@@ -1,6 +1,6 @@
 /* pages/bookmarks/bookmarks.wxss */
 .background {
-  background: #888888;
+  background: black;
   height: 100vh;
   display: flex;
   justify-items: center;
@@ -34,22 +34,56 @@
 .cityName {
   font-weight: lighter;
   font-size: 60rpx;
+  color: white;
 }
 
-.card {
+/* .card {
   width: 100vw;
   height: 15vh;
   padding-top: 10rpx;
   font-weight: lighter;
-}
+  position: relative;
+} */
 
 .cardBackground {
   width: 100vw;
+  /* height: 15vh; */
+  font-weight: lighter;
+  position: relative;
   height: 225rpx;
+  background-position: center;
+  background-size: 100vw;
+  margin: 2rpx;
 }
 
 .locationDistance {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 60rpx;
 }
 
 .locationName {
+  position: absolute;
+  bottom: 0;
+  left: 15rpx;
+  font-size: 60rpx;
+}
+
+.movable {
+    transition: margin-left .5s;
+}
+.sideNav {
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden; 
+    padding-top: 60px;
+    transition: 0.5s; 
+    color: white;
+    white-space: nowrap;
 }
