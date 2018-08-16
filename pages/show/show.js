@@ -26,9 +26,10 @@ Page({
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
+        console.log(res.data)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-        res.data.forEach ((bookmark) => {
+        res.data.bookmarks.forEach ((bookmark) => {
         console.log(bookmark.id)
         bookmark_id[bookmark.place_id] = bookmark.id
         bookmarked[bookmark.place_id] = true
@@ -105,20 +106,3 @@ bookmark: function(e) {
 }
 }
 })
-
-
-
-
-
-
-
-
-
-  // if (page.data.bookmark == "../../assets/icons/bookmark.png") {
-  //   page.setData({
-  //       bookmark: "../../assets/icons/bookmarked.png"})
-  // } else {
-  //   page.setData({
-  //     bookmark: "../../assets/icons/bookmark.png"
-  //   })
-  // }
