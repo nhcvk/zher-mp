@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <swiper
   class="cityswiper"
-  indicator-dots="{{indicatorDots}}" 
+  indicator-dots="true" 
   autoplay="{{autoplay}}" 
   circular="{{circular}}" 
   vertical="{{vertical}}"
@@ -14,8 +14,11 @@
 <swiper-item>
  
     <view class="backgroundblack">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
-      <view class="titlewhite" bindtap='goShow'>Chengdu</view>
+      <image class="logo" src="../../assets/icons/logo_zher.png" bindtap='goBookmarks'/>
+      <view class="titlewhite" style="{{visibility}}" bindtap='goShow'>
+        <view>tap to explore</view>
+        <view>Chengdu</view>
+      </view>
       <image class="city" src="../../assets/icons/chengdu.png"/>
     </view>
 
@@ -23,7 +26,7 @@
 
 <swiper-item>
     <view class="backgroundwhite">
-      <image class="logo" src="../../assets/icons/logo_zher.png"/>
+      <image class="logowhite" src="../../assets/icons/zherlogowhite.jpeg"/>
       <view class="titleblack" bindtap='goShow'>Chongqing</view>
       <image class="city" src="../../assets/icons/chongqing.png"/>
     </view>
