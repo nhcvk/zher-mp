@@ -8,14 +8,16 @@ Page({
     margin: "width: 0",
     user_id: app.globalData.userId,
     bookmarked: {},
-    bookmark_id: {}
+    bookmark_id: {},
+    bookmarks: [], 
+    city_name_array: []
   },
 
 
   onShow: function () {
     let page = this
     myRequest.get({
-      path: 'places',
+      path: 'cities/1/places',
       success(res) {
         console.log(res)
         page.setData({ 
@@ -26,17 +28,24 @@ Page({
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        console.log(res.data)
+        console.log("MyRequestGet", res.data)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
+        let city_name_array = page.data.city_name_array
         res.data.bookmarks.forEach ((bookmark) => {
-        console.log(bookmark.id)
-        bookmark_id[bookmark.place_id] = bookmark.id
-        bookmarked[bookmark.place_id] = true
+          bookmark_id[bookmark.place_id] = bookmark.id
+          bookmarked[bookmark.place_id] = true
+          const temp_array = [bookmark.city.name]
+          city_name_array = [...(new Set(temp_array))]
+
         })
         page.setData({
           bookmarked,
-          bookmark_id
+          bookmark_id,
+          city_name_array
+        }), 
+        page.setData({
+          bookmarks: res.data.bookmarks
         })
       }
     })

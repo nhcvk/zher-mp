@@ -1,6 +1,9 @@
 <!--pages/show/show.wxml-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
    <navigator url="../index/index">Change Location</navigator>
+   <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark">
+    <navigator style="color: white" >{{city_bookmark}}</navigator>
+   </block>
     <!-- ADD BLOCK FOR FAVORITES -->
 
 </view>
