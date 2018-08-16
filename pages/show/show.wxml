@@ -90,16 +90,6 @@
   </view>
 </scroll-view>
 
-
-
-
-
-</swiper-item>
-</block>
-</swiper>
-<!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
-
-<!--top menu-->
 <view class="tabs">
   <view class="tab" bindtap="goMenu">
     <view class="tabHeader">
@@ -109,11 +99,18 @@
   <view class="tab">
     <view class="tabHeader">1.5 km</view>
   </view>
-  <view id="{{index}}" class="tab" bindtap="bookmark">
+  <view id="{{place.id}}" class="tab" bindtap="bookmark">
     <view class="tabHeader">
-      <image class="bookmark" src="{{bookmark}}"/>
+    <image wx:if="{{bookmarked[place.id] === true}}"  class="bookmark" src="../../assets/icons/bookmarked.png"/>
+      <image wx:else class="bookmark"  src="../../assets/icons/bookmark.png"/>
     </view>
   </view>
 </view>
+</swiper-item>
+</block>
+</swiper>
+<!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
+<!--top menu-->
+
 </view>
 <!--top menu-->
