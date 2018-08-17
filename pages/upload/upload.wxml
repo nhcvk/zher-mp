@@ -4,13 +4,13 @@
     <!-- ADD BLOCK FOR FAVORITES -->
 
 </view>
+<image  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
 <!--background image-->
 <view class="movable" style="{{movable}}">
 <view class="cityswiper">
   <image  
     id="main_image" 
     mode="aspectFill" 
-    src="{{imageSrc}}"    
     style="{{filter}};"/>
 
     <!--bottom location name-->
@@ -64,48 +64,48 @@
           </view>
           <view class="">
             <swiper indicator-dots="true" indicator-active-color='white'>
-          <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo">
-          <swiper-item > <image src='{{photo}}'></image> </swiper-item>
-          </block>
+          <!-- <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo"> -->
+          <swiper-item ><image bindtap='uploadSmallPhoto' class="upload-photo" src="../../assets/icons/focus.png"/> 
+          <image bindtap='uploadSmallPhoto' class="upload-photo" src="{{smallImageUrl}}"/> </swiper-item>
+          <!-- </block> -->
             </swiper>
           </view>
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
-          <!-- UNDER HERE IS CARD -->
-      <view  class="card">
+    </view>
+
+       <view  class="card">
         <view class="flex-wrp">
           <view class="flex-item-head ">
             <view class="card-head">
-                <view class="card-head-left">Local</view>
+                <view class="card-head-left">Submit</view>
             </view>
           </view>
-          <view class="">
-            <image src="{{place.user.avatar_url}}"></image>
-            {{place.user.name}}
+            <view class="submit-button">
+              <view class="flex-item-button">Upload location</view>
+            </view>
           </view> 
         </view>
-      </view> 
-      <!-- ABOVE HERE IS CARD  -->
-    </view>
+
   </scroll-view>
 
   <!--top menu-->
-  <view class="tabs">
-    <view class="tab" bindtap="goMenu">
-      <view class="tabHeader">
-        <image class="menu" src="../../assets/icons/menu.png"/>
-      </view>
-    </view>
-    <view class="tab">
-      <view class="tabHeader">Chengdu</view>
-    </view>
-    <view id="{{index}}" class="tab" bindtap="bookmark">
-      <view class="tabHeader">
-        <image class="bookmark" style="display:none" src="{{bookmark}}"/>
-      </view>
+<view class="tabs">
+  <view class="tab" bindtap="goMenu">
+    <view class="tabHeader">
+      <image class="menu" src="../../assets/icons/menu.png"/>
     </view>
   </view>
+  <view class="tab">
+    <view class="tabHeader">CHENGDU</view>
+  </view>
+  <view  class="tab" bindtap="uploadPhoto">
+    <view class="tabHeader">
+    <image class="upload-photo" src="../../assets/icons/focus.png"/>
+    </view>
+  </view>
+</view>
   <!--top menu-->
 </view>
 </view>

@@ -24,13 +24,16 @@
 
 </swiper-item>
 
-<swiper-item>
+<!-- <swiper-item>
     <view class="backgroundwhite">
-      <image class="logowhite" src="../../assets/icons/zherlogowhite.jpeg"/>
-      <view class="titleblack" bindtap='goShow'>Chongqing</view>
+      <image class="logo" src="../../assets/icons/logo_zher_white.png" bindtap='goBookmarks'/>
+      <view class="titleblack" style="{{visibility}}" bindtap='goShow'>
+        <view>tap to explore</view>
+        <view>Chongqing</view>
+      </view>
       <image class="city" src="../../assets/icons/chongqing.png"/>
     </view>
-</swiper-item>
+</swiper-item> -->
 
 </swiper>
 

@@ -3,7 +3,6 @@
   background: black;
   height: 100vh;
   display: flex;
-  justify-items: center;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +12,6 @@
   background: white;
   height: 100vh;
   display: flex;
-  justify-items: center;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -43,6 +41,7 @@
   font-size: 60rpx;
   font-weight: lighter;
   margin-bottom: 400rpx;
+  text-align: center;
 }
 
 .cityPage {

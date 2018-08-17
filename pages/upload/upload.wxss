@@ -10,10 +10,23 @@
   color: white;
 }
 
+.upload-photo {
+  width: 75rpx;
+  height: 75rpx;
+}
+
 .tab {
   flex: 0 0 1%;
   text-align: center;
   padding-top: 5px;
+}
+
+.flex-item-button {
+  color: white;
+  background-color: grey;
+  padding: 55rpx;
+  margin: 40rpx;
+  text-align: center;
 }
 
 .menu {

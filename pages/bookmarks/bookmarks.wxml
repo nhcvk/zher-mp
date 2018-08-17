@@ -1,6 +1,15 @@
 <!--pages/bookmarks/bookmarks.wxml-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
-   <navigator url="../index/index">Change Location</navigator>
+<view class="nav-content">
+    <image bindtap="backToHome" class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+    <view></view>
+   <image bindtap="ChangeToIndex" class="change-location" src="{{changeIcon}}"></image>
+   <view></view>
+    <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
+    <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+    <navigator url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
+    </block> 
+    </view>
     <!-- ADD BLOCK FOR FAVORITES -->
 
 </view>
@@ -8,7 +17,7 @@
 <view class="movable" style="{{movable}}">
   <view class="background">
 
-    
+    <scroll-view class="scroll">
     <!--Favorites cards-->
     <block wx:for="{{items}}" wx:for-item ="bookmark">
       <view class="cardBackground card" style="background-image: url('{{bookmark.place.main_photo_url}}');">
@@ -16,6 +25,7 @@
         <view class="locationName">{{bookmark.place.name}}</view>
       </view>
     </block>
+    </scroll-view>
   </view>
 
   <!--top menu-->

@@ -16,6 +16,10 @@
   padding-top: 5px;
 }
 
+.card-head-left {
+  font-size: 40rpx;
+}
+
 .menu {
   padding-left: 10px;
   width: 75rpx;
@@ -36,8 +40,19 @@
   object-fit: cover;
   top: 0;
  transform: scale(1.1); 
-
 }
+
+.nav-content {
+  text-align: center;
+  color: white
+}
+
+.nav-logo {
+  height: 210rpx;
+  width: 210rpx;
+  margin-top: -50rpx
+}
+
 
 .scroll {
   position: absolute;
@@ -55,12 +70,20 @@
   font-size: 80px;
   bottom: 0;
   left: 7px;
+  padding-left: 40rpx;
   font-weight: lighter;
 }
 
 .card {
   margin: 20px;
   background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4rpx;
+}
+
+.change-location {
+  height: 40px;
+  width: 40px;
+  padding-top: 40rpx;
 }
 
 .flex-wrp {
@@ -69,14 +92,32 @@
 }
 
 .flex-item-head {
-  flex: 0 0 60px;
+  margin-bottom: 9rpx;
 }
 
 .flex-item-msg {
-  flex: 0 0 60px;
   font-size: 14px;
   text-align: left;
   margin: 7px;
+  align-items: center;
+}
+
+.local {
+  object-fit: cover;
+  width: 450rpx;
+  height: 300rpx;
+}
+
+.local-img {
+  font-size: 14px;
+  text-align: center;
+  margin: 7px;
+  align-items: center;
+}
+
+.name{
+  text-align: center;
+  font-size: 30rpx;
 }
 
 .card-head {
