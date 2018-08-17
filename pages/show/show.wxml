@@ -9,6 +9,8 @@
     <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
     <navigator url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
     </block> 
+     <view></view>
+     <image bindtap="ChangeToUpload" class="change-location" src="/assets/icons/city.png"></image>
     </view>
     <!-- ADD BLOCK FOR FAVORITES -->
 <!-- ../users/{{user_id}}/cities/1/bookmarks" -->
