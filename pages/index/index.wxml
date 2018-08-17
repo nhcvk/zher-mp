@@ -15,7 +15,7 @@
     <view class="backgroundblack">
       <image class="logo" src="../../assets/icons/logo_zher.png" bindtap='goBookmarks'/>
       <view class="titlewhite" style="{{visibility}}" bindtap='goShow'>
-        <view>tap to explore</view>
+        <view>成都</view>
         <view>Chengdu</view>
       </view>
       <image class="city" src="../../assets/icons/chengdu.png"/>
@@ -27,7 +27,7 @@
     <view class="backgroundwhite">
       <image class="logo" src="../../assets/icons/logo_zher_white.png" bindtap='goBookmarks'/>
       <view class="titleblack" style="{{visibility}}" bindtap='goShow'>
-        <view>tap to explore</view>
+      <view>重庆</view>
         <view>Chongqing</view>
       </view>
       <image class="city" src="../../assets/icons/chongqing.png"/>
