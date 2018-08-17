@@ -145,5 +145,10 @@ bookmark: function(e) {
         this.setData({
           changeIcon: "/assets/icons/change-hover.png"
     })
+  }, 
+  ChangeToUpload: function(e) {
+    wx.navigateTo({
+      url: '/pages/upload/upload'
+    })
   }
 })
