@@ -4,7 +4,10 @@
     <!-- ADD BLOCK FOR FAVORITES -->
 
 </view>
-<image  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
+
+
+<form bindsubmit="bindFormSubmit">
+<image name="main_photo_url"  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
 <!--background image-->
 <view class="movable" style="{{movable}}">
 <view class="cityswiper">
@@ -17,7 +20,7 @@
   <scroll-view scroll-y class="scroll" bindscroll="scroll">
     <view class="scroll-content">
       <view>
-       <input class="namelocation-input" name="location" placeholder="Enter title" type="text" wrap="soft" maxlength='10'/>
+       <input class="namelocation-input" name="name" placeholder="Enter title" type="text" wrap="soft" maxlength='10'/>
       </view>
       <!-- UNDER HERE IS CARD -->
       <view  class="card">
@@ -27,7 +30,7 @@
                 <view class="card-head-left">Description</view>
             </view>
           </view>
-          <input class="flex-item-msg" name="place.description`" placeholder="Enter a discription" type="text"/>
+          <input class="flex-item-msg" name="description" placeholder="Enter a discription" type="text"/>
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
@@ -65,7 +68,7 @@
           <view class="">
             <swiper indicator-dots="true" indicator-active-color='white'>
           <!-- <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo"> -->
-          <swiper-item ><image bindtap='uploadSmallPhoto' class="upload-photo" src="../../assets/icons/focus.png"/> 
+          <swiper-item ><image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-photo" src="../../assets/icons/focus.png"/> 
           <image bindtap='uploadSmallPhoto' class="upload-photo" src="{{smallImageUrl}}"/> </swiper-item>
           <!-- </block> -->
             </swiper>
@@ -83,12 +86,13 @@
             </view>
           </view>
             <view class="submit-button">
-              <view class="flex-item-button">Upload location</view>
+              <button class="flex-item-button" form-type="submit">Upload location</button>
             </view>
           </view> 
         </view>
 
   </scroll-view>
+
 
   <!--top menu-->
 <view class="tabs">
@@ -105,9 +109,10 @@
     <image class="upload-photo" src="../../assets/icons/focus.png"/>
     </view>
   </view>
+  
 </view>
   <!--top menu-->
 </view>
 </view>
-
+</form  >
 

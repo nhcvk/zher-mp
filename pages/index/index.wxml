@@ -1,7 +1,6 @@
 <!--index.wxml-->
 <swiper
   class="cityswiper"
-  indicator-dots="true" 
   autoplay="{{autoplay}}" 
   circular="{{circular}}" 
   vertical="{{vertical}}"

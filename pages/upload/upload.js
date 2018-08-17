@@ -154,6 +154,31 @@ Page({
         }
       })
     }
-  },
+  }, 
+  
+  bindFormSubmit: function (e) {
+    let page = this
+    console.log(4444444,this.data)
+    console.log("hello", e)
+    myRequest.post({
+      path: 'cities/1/places',
+      data: {
+        place: {
+          city_id: 1,
+          user_id: 1, 
+          main_photo_url: page.data.imageUrl, 
+          name: e.detail.value.name,
+          description: e.detail.value.description,
+          photo_urls: e.detail.value.photo_urls,
+          longitude: page.data.longitude,
+          latitude: page.data.latitude
+        }
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
+
+  }
 
 })
