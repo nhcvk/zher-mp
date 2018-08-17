@@ -1,10 +1,11 @@
 <!--pages/show/show.wxml-->
+<!--Side Nav: begin-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
   <view class="nav-content">
     <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
       <view></view>
-      <view class="changeIndex">
-        <image bindtap="ChangeToIndex" class="change-location" src="{{changeIcon}}"></image>
+      <view class="changeIndex" bindtap="ChangeToIndex">
+        <image src="{{changeIcon}}" class="change-location"></image>
         <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
       </view>
       <view></view>
@@ -15,19 +16,16 @@
         </block>
       </view> 
       <view></view>
-      <view class="changeIndex">
-        <image bindtap="ChangeToUpload" class="change-location" src="/assets/icons/addlocation.png"></image>
+      <view class="changeIndex" bindtap="ChangeToUpload">
+        <image class="change-location" src="/assets/icons/addlocation.png"></image>
         <view class="sideNaveSubTitle">Add location</view>
       </view>
     </view>
-    <!-- ADD BLOCK FOR FAVORITES -->
-<!-- ../users/{{user_id}}/cities/1/bookmarks" -->
-</view>
+  </view>
+<!--Side Nav: end-->
+
 <!--background image-->
 <view class="movable" style="{{movable}}">
-
-
-
 
 <!-- SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
 <swiper class="cityswiper" bindchange="pageChange">

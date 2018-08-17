@@ -9,7 +9,12 @@ Page({
     showLocation: true,
     margin: "width: 0",
     bookmark: "../../assets/icons/bookmark.png",
-    smallImageUrl: []
+    smallImageUrl: [],
+    bookmarked: {},
+    bookmark_id: {},
+    bookmarks: [],
+    city_name_array: [],
+    changeIcon: "/assets/icons/change.png"
   },
 
   uploadPhoto: function () {
@@ -179,6 +184,55 @@ Page({
       }
     })
 
-  }
+  },
+
+  bookmark: function (e) {
+    let page = this
+    console.log(e.currentTarget)
+    if (page.data.bookmarked[e.currentTarget.id] == true) {
+      myRequest.delete({
+        path: `users/${app.globalData.userId}/bookmarks/${page.data.bookmark_id[e.currentTarget.id]}`,
+        success(res) {
+          console.log(res)
+          let bookmarked = page.data.bookmarked
+          let bookmark_id = page.data.bookmark_id
+          // let city_name_array = page.data.city_name_array
+          delete bookmark_id[e.currentTarget.id]
+          delete bookmarked[e.currentTarget.id]
+
+          page.setData({
+            bookmarked,
+            bookmark_id
+          })
+        }
+      })
+    } else {
+      myRequest.post({
+        path: `users/${app.globalData.userId}/bookmarks`,
+        data: {
+          user_id: app.globalData.userId,
+          place_id: e.currentTarget.id
+        }, success(res) {
+          console.log(res)
+          let bookmarked = page.data.bookmarked
+          let bookmark_id = page.data.bookmark_id
+          bookmarked[e.currentTarget.id] = true
+          bookmark_id[e.currentTarget.id] = res.data.id
+          page.setData({
+            bookmarked,
+            bookmark_id
+          })
+        }
+      })
+    }
+  },
+  ChangeToIndex: function (e) {
+    wx.navigateTo({
+      url: '/pages/index/index'
+    }),
+      this.setData({
+        changeIcon: "/assets/icons/change-hover.png"
+      })
+  }, 
 
 })

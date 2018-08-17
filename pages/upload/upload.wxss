@@ -155,3 +155,32 @@ page {
   align-items: center;
   justify-content: center;
 }
+
+.changeIndex {
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx
+}
+
+.sideNaveSubTitle {
+  margin-top: 37rpx;
+  margin-left: 20rpx;
+  font-weight: lighter;
+}
+
+.nav-content {
+  text-align: center;
+  color: white
+}
+
+.nav-logo {
+  height: 210rpx;
+  width: 210rpx;
+  margin-top: -50rpx
+}
+
+.change-location {
+  height: 40px;
+  width: 40px;
+  padding-top: 40rpx;
+}

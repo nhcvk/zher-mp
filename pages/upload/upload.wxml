@@ -1,9 +1,28 @@
 <!--pages/upload/upload.wxml-->
+<!--Side Nav: begin-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
-   <navigator url="../index/index">Change Location</navigator>
-    <!-- ADD BLOCK FOR FAVORITES -->
+  <view class="nav-content">
+    <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+      <view></view>
+      <view class="changeIndex" bindtap="ChangeToIndex">
+        <image src="{{changeIcon}}" class="change-location"></image>
+        <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
+      </view>
+      <view></view>
+      <view class="changeIndex">
+        <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
+          <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
+        </block>
+      </view> 
+    </view>
+  </view>
+<!--Side Nav: end-->
 
-</view>
+
+<!-- <view id="mySideNav" class="sideNav" style="{{margin}}px;">
+   <navigator url="../index/index">Change Location</navigator>
+    <!-- ADD BLOCK FOR FAVORITES -->-->
 
 
 <form bindsubmit="bindFormSubmit">
@@ -115,5 +134,5 @@
   <!--top menu-->
 </view>
 </view>
-</form  >
+</form>
 
