@@ -73,12 +73,12 @@
   left: 7px;
   padding-left: 40rpx;
   font-weight: lighter;
-  padding-bottom: 20rpx;
+  padding-bottom: 27rpx;
 }
 
 .card {
   margin: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 4rpx;
 }
 
@@ -152,4 +152,16 @@
 
 .cityswiper {
   height: 100vh!important;
+}
+
+.changeIndex {
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx
+}
+
+.sideNaveSubTitle {
+  margin-top: 37rpx;
+  margin-left: 20rpx;
+  font-weight: lighter;
 }
