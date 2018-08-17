@@ -21,6 +21,10 @@ Page({
       } 
     }) 
   },
+  onLoad: function () {
+
+    this.setData({ user_id: app.globalData.userId })
+  },
   
   goMenu: function (e) {
     if (this.data.margin == "width: 0") {
@@ -36,5 +40,12 @@ Page({
       })
     }
   },
+
+  backToHome: function (e) {
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  }
+  
 
 })

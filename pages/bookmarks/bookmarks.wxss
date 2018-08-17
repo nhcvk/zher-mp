@@ -3,11 +3,24 @@
   background: black;
   height: 100vh;
   display: flex;
-  justify-items: center;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   color: white;
+}
+
+.scroll {
+  margin-top: 110rpx;
+}
+
+.nav-content {
+  text-align: center;
+  color: white
+}
+
+.nav-logo {
+  height: 210rpx;
+  width: 210rpx;
+  margin-top: -50rpx
 }
 
 .tabs {
@@ -72,6 +85,9 @@
 
 .movable {
     transition: margin-left .5s;
+      position: fixed;
+  object-fit: cover;
+  top: 0;
 }
 .sideNav {
     height: 100%; 
@@ -85,5 +101,5 @@
     padding-top: 60px;
     transition: 0.5s; 
     color: white;
-    white-space: nowrap;
+      white-space: nowrap;
 }
