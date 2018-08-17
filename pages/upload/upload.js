@@ -9,7 +9,12 @@ Page({
     showLocation: true,
     margin: "width: 0",
     bookmark: "../../assets/icons/bookmark.png",
-    smallImageUrl: []
+    smallImageUrl: [],
+    bookmarked: {},
+    bookmark_id: {},
+    bookmarks: [],
+    city_name_array: [],
+    changeIcon: "/assets/icons/change.png"
   },
 
   uploadPhoto: function () {
