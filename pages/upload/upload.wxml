@@ -20,7 +20,7 @@
   <scroll-view scroll-y class="scroll" bindscroll="scroll">
     <view class="scroll-content">
       <view>
-       <input class="namelocation-input" name="name" placeholder="Enter title" type="text" wrap="soft" maxlength='10'/>
+       <input class="namelocation-input" name="name" placeholder="name the place" type="text" wrap="soft" maxlength='10'/>
       </view>
       <!-- UNDER HERE IS CARD -->
       <view  class="card">
@@ -65,14 +65,15 @@
                 <view class="card-head-left">Photos</view>
             </view>
           </view>
-          <view class="">
-            <swiper indicator-dots="true" indicator-active-color='white'>
+
+            <swiper   indicator-dots="true" indicator-active-color='white'>
           <!-- <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo"> -->
-          <swiper-item ><image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-photo" src="../../assets/icons/focus.png"/> 
-          <image bindtap='uploadSmallPhoto' class="upload-photo" src="{{smallImageUrl}}"/> </swiper-item>
+          <swiper-item class="upload-small-photo">
+          <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+          </swiper-item>
           <!-- </block> -->
             </swiper>
-          </view>
+
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
@@ -86,7 +87,7 @@
             </view>
           </view>
             <view class="submit-button">
-              <button class="flex-item-button" form-type="submit">Upload location</button>
+              <button class="flex-item-button" form-type="submit">确认</button>
             </view>
           </view> 
         </view>
@@ -102,7 +103,7 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader">CHENGDU</view>
+    <view class="tabHeader">成都</view>
   </view>
   <view  class="tab" bindtap="uploadPhoto">
     <view class="tabHeader">
