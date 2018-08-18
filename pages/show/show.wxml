@@ -115,7 +115,7 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader"></view>
+    <view class="tabHeader distance">{{distance[place.id]}}公里</view>
   </view>
   <view id="{{place.id}}" class="tab" bindtap="bookmark">
     <view class="tabHeader">
