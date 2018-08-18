@@ -9,11 +9,9 @@ Page({
     bookmarked: {},
     bookmark_id: {},
     bookmarks: [],
-    latitude: null,
-    longitude: null, 
     city_name_array: [],
     changeIcon: "/assets/icons/change.png",
-    distance: {}
+    distance: [],
   },
 
   onLoad: function() {
@@ -38,22 +36,31 @@ Page({
         });
         let distance = page.data.distance
           page.data.items.forEach((item) => {
-            console.log(item.latitude, item.longitude, page.data.userLocation)
-            distance[item.id] = page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)
+            distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
             page.setData({
               distance
             })
-          })
-          console.log(page.data)
+          });
+          console.log(page.data.items)
+          let places = []
+          page.data.items.forEach((place, index) => {
+            places.push(Object.assign({}, place, distance[index]))
+            page.setData({ places })
+          }) 
+          // console.log(page.data) CHANGING HERE H H H H
+          const propComparator = (propName) =>
+            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName]? -1 : 1
+           page.setData ({
+             places: page.data.places.sort(propComparator('0'))
+           })
       }
     })
     myRequest.get({
       path: 'cities/1/places',
       success(res) {
-        console.log("page data", page.data)
           page.setData({ 
           items: res.data.places,
-        })
+        }) 
       } 
     }), 
     myRequest.get({
@@ -172,6 +179,5 @@ bookmark: function(e) {
 
   deg2rad: function (deg) {
     return deg * (Math.PI / 180)
-  },
-
+  }
 })

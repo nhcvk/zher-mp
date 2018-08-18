@@ -12,6 +12,7 @@ Page({
 
     console.log(111, this.data.hasUserID)
     const host = 'https://zher.wogengapp.cn/api/v1/'
+    // const host = 'http://localhost:3000/api/v1/';
     console.log('processing to login')
     wx.login({
       success: res => {
