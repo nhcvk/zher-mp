@@ -10,9 +10,9 @@
       </view>
       <view></view>
       <view class="changeIndex">
-        <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
+        <block wx:for="{{bookmarks}}" wx:for-item ="bookmark"> 
           <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
-          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
+          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{bookmark.city.name}}</navigator>
         </block>
       </view> 
       <view></view>

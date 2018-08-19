@@ -8,9 +8,9 @@ Page({
     bookmarked: {},
     bookmark_id: {},
     bookmarks: [],
-    city_name_array: [],
     changeIcon: "/assets/icons/change.png",
     distance: [],
+    bookmarked_city_array: []
   },
 
 
@@ -69,17 +69,13 @@ Page({
       success(res) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-        let city_name_array = page.data.city_name_array
         res.data.bookmarks.forEach ((bookmark) => {
           bookmark_id[bookmark.place_id] = bookmark.id
           bookmarked[bookmark.place_id] = true
-          const temp_array = [bookmark.city.name]
-          city_name_array = [...(new Set(temp_array))]
         })
         page.setData({
           bookmarked,
           bookmark_id,
-          city_name_array,
           bookmarks: res.data.bookmarks
         })
       }
@@ -122,7 +118,7 @@ bookmark: function(e) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
         let bookmarks = page.data.bookmarks
-        bookmarks.splice(e.currentTarget.id, 1)
+        bookmarks.splice(bookmarks.indexOf(e.currentTarget.id), 1)
         delete bookmark_id[e.currentTarget.id]
         delete bookmarked[e.currentTarget.id]
         page.setData({
@@ -145,14 +141,14 @@ bookmark: function(e) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
         let bookmarks = page.data.bookmarks
-        bookmarks.push(res.data)
+        bookmarks.splice(e.currentTarget.id, 0, res.data)
         bookmarked[e.currentTarget.id] = true
         bookmark_id[e.currentTarget.id] = res.data.id
         page.setData({
           bookmarked,
           bookmark_id,
-          bookmarks
-        }) 
+          bookmarks,
+        })
       }
     })
 }
