@@ -8,48 +8,64 @@ Page({
     margin: "width: 0",
     bookmarked: {},
     bookmark_id: {},
-    bookmarks: [], 
+    bookmarks: [],
     city_name_array: [],
-    changeIcon: "/assets/icons/change.png"
+    changeIcon: "/assets/icons/change.png",
+    distance: [],
   },
 
   onLoad: function() {
-
       this.setData({user_id: app.globalData.userId})
   },
 
+  
 
-  onShow: function () {
+
+  onLoad: function () {
     let page = this
+    //GET THE USER LOCATION
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        let userLocation = {
+          latitude: res.latitude,
+          longitude: res.longitude,
+        }
+        page.setData({ 
+          userLocation,
+        });
+        let distance = page.data.distance
+          page.data.items.forEach((item) => {
+            distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
+            page.setData({
+              distance
+            })
+          });
+          console.log(page.data.items)
+          let places = []
+          page.data.items.forEach((place, index) => {
+            places.push(Object.assign({}, place, distance[index]))
+            page.setData({ places })
+          }) 
+          // console.log(page.data) CHANGING HERE H H H H
+          const propComparator = (propName) =>
+            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName]? -1 : 1
+           page.setData ({
+             places: page.data.places.sort(propComparator('0'))
+           })
+      }
+    })
     myRequest.get({
       path: 'cities/1/places',
       success(res) {
-        console.log(res)
-        page.setData({ 
+          page.setData({ 
           items: res.data.places,
-        }), 
-          wx.getLocation({
-            type: 'wgs84',
-            success: function (res) {
-              let userLocation = {
-                accuracy: res.accuracy,
-                altitude: res.altitude,
-                horizontalAccuracy: res.horizontalAccuracy,
-                latitude: res.latitude,
-                longitude: res.longitude,
-                speed: res.speed,
-                verticalAccuracy: res.verticalAccuracy
-              }
-              page.setData({ userLocation })
-            }
-          })
-        console.log(55,page.data.user_id)
+        }) 
       } 
     }), 
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        console.log("MyRequestGet", res.data)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
         let city_name_array = page.data.city_name_array
@@ -100,16 +116,13 @@ pageChange: function(e) {
 
 bookmark: function(e) {
   let page = this
-  console.log(e.currentTarget)
   if (page.data.bookmarked[e.currentTarget.id] == true) {
     myRequest.delete({
       path: `users/${app.globalData.userId}/bookmarks/${page.data.bookmark_id[e.currentTarget.id]}`, 
       success(res) {
-        console.log(res)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-        // let city_name_array = page.data.city_name_array
-        delete bookmark_id[e.currentTarget.id]
+           delete bookmark_id[e.currentTarget.id]
         delete bookmarked[e.currentTarget.id]
         
         page.setData({
@@ -125,7 +138,6 @@ bookmark: function(e) {
         user_id: app.globalData.userId,
         place_id: e.currentTarget.id
       }, success(res) {
-        console.log(res)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
         bookmarked[e.currentTarget.id] = true
@@ -150,5 +162,22 @@ bookmark: function(e) {
     wx.navigateTo({
       url: '/pages/upload/upload'
     })
+  }, 
+  getDistanceFromLatLonInKm: function (lat1, lon1, lat2, lon2) {
+    let R = 6371
+    let dLat = this.deg2rad(lat2 - lat1);
+    let dLon = this.deg2rad(lon2 - lon1);
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      ;
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
+    return Number((d * 1).toFixed(1));
+  },
+
+  deg2rad: function (deg) {
+    return deg * (Math.PI / 180)
   }
 })
