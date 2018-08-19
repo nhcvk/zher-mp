@@ -1,4 +1,6 @@
 <!--index.wxml-->
+ <view class="parent">
+  <image class="logo" src="../../assets/icons/logo_zher.png" bindtap='goBookmarks'/>
 <swiper
   class="cityswiper"
   autoplay="{{autoplay}}" 
@@ -9,31 +11,19 @@
   previous-margin="{{previousMargin}}px" 
   next-margin="{{nextMargin}}px"
   height="100vh">
-
-<swiper-item>
- 
+  <block wx:for="{{cities}}" wx:for-item ="city">
+<swiper-item >
     <view class="backgroundblack">
-      <image class="logo" src="../../assets/icons/logo_zher.png" bindtap='goBookmarks'/>
-      <view class="titlewhite" style="{{visibility}}" bindtap='goShow'>
-        <view>成都</view>
-        <view>Chengdu</view>
+   
+      <view id="{{index}}"  class="titlewhite" style="{{visibility}}" bindtap='goShow'>
+        <view >{{city.name}}</view>
       </view>
-      <image class="city" src="../../assets/icons/chengdu.png"/>
+      <image class="city" src="../../assets/icons/{{city.name}}.png"/>
     </view>
-
 </swiper-item>
-
- <swiper-item>
-    <view class="backgroundwhite">
-      <image class="logo" src="../../assets/icons/logo_zher_white.png" bindtap='goBookmarks'/>
-      <view class="titleblack" style="{{visibility}}" bindtap='goShow'>
-      <view>重庆</view>
-        <view>Chongqing</view>
-      </view>
-      <image class="city" src="../../assets/icons/chongqing.png"/>
-    </view>
-</swiper-item> 
+</block>
 
 </swiper>
+</view>
 
  

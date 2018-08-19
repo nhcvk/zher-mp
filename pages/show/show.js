@@ -4,7 +4,6 @@ const myRequest = require('../../lib/request');
 Page({
   data: {
     showLocation: true, 
-    items: [], 
     margin: "width: 0",
     bookmarked: {},
     bookmark_id: {},
@@ -14,16 +13,9 @@ Page({
     distance: [],
   },
 
-  onLoad: function() {
-      this.setData({user_id: app.globalData.userId})
-  },
-
-  
-
 
   onLoad: function () {
     let page = this
-    //GET THE USER LOCATION
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
@@ -33,7 +25,9 @@ Page({
         }
         page.setData({ 
           userLocation,
+          user_id: app.globalData.userId
         });
+        console.log(page.data)
         let distance = page.data.distance
           page.data.items.forEach((item) => {
             distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
@@ -47,7 +41,6 @@ Page({
             places.push(Object.assign({}, place, distance[index]))
             page.setData({ places })
           }) 
-          // console.log(page.data) CHANGING HERE H H H H
           const propComparator = (propName) =>
             (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName]? -1 : 1
            page.setData ({
@@ -56,13 +49,21 @@ Page({
       }
     })
     myRequest.get({
-      path: 'cities/1/places',
+      path: `cities/${app.globalData.currentTarget}/places`,
       success(res) {
           page.setData({ 
           items: res.data.places,
         }) 
       } 
     }), 
+      myRequest.get({
+      path: `users/${app.globalData.userId}`,
+      success(res) {
+          page.setData({
+            currentUser: res.data
+          })
+        }
+      }),
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
@@ -78,9 +79,7 @@ Page({
         page.setData({
           bookmarked,
           bookmark_id,
-          city_name_array
-        }), 
-        page.setData({
+          city_name_array,
           bookmarks: res.data.bookmarks
         })
       }
@@ -122,12 +121,14 @@ bookmark: function(e) {
       success(res) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-           delete bookmark_id[e.currentTarget.id]
+        let bookmarks = page.data.bookmarks
+        bookmarks.splice(e.currentTarget.id, 1)
+        delete bookmark_id[e.currentTarget.id]
         delete bookmarked[e.currentTarget.id]
-        
         page.setData({
           bookmarked, 
-          bookmark_id       
+          bookmark_id ,
+          bookmarks     
         })
       }
     })
@@ -137,14 +138,20 @@ bookmark: function(e) {
       data: {
         user_id: app.globalData.userId,
         place_id: e.currentTarget.id
-      }, success(res) {
+      }, 
+        success(res) {
+          console.log(12312312, res)
+          console.log(123123123, e.currentTarget.id)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
+        let bookmarks = page.data.bookmarks
+        bookmarks.push(res.data)
         bookmarked[e.currentTarget.id] = true
         bookmark_id[e.currentTarget.id] = res.data.id
         page.setData({
           bookmarked,
-          bookmark_id
+          bookmark_id,
+          bookmarks
         }) 
       }
     })

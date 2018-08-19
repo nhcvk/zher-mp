@@ -16,11 +16,19 @@
         </block>
       </view> 
       <view></view>
-      <view class="changeIndex" bindtap="ChangeToUpload">
+
+
+      <!-- <image wx:if="{{bookmarked[place.id] === true}}"  class="bookmark" src="../../assets/icons/bookmarked.png"/>
+      <image wx:else class="bookmark"  src="../../assets/icons/bookmark.png"/>
+    </view> -->
+
+
+      <view wx:if="{{currentUser.is_local === true}}" class="changeIndex" bindtap="ChangeToUpload">
         <image class="change-location" src="/assets/icons/addlocation.png"></image>
         <view class="sideNaveSubTitle">Add location</view>
+        </view>
+        <view wx:else></view>
       </view>
-    </view>
   </view>
 <!--Side Nav: end-->
 
@@ -38,7 +46,7 @@
 <view class="scroll-content">
     <view class="namelocation">{{place.name}}</view>
     <!-- UNDER HERE IS CARD -->
-  <view  class="card">s
+  <view  class="card">
     <view class="flex-wrp">
       <view class="flex-item-head ">
         <view class="card-head">

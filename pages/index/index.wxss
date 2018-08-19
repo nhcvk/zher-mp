@@ -1,4 +1,8 @@
 /**index.wxss**/
+
+page {
+  background-color: black;
+}
 .backgroundblack {
   background: black;
   height: 100vh;
@@ -7,23 +11,22 @@
   justify-content: center;
   flex-direction: column;
 }
-
-.backgroundwhite {
-  background: white;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.parent {
+  position: relative
 }
-
 .logo {
   height: 500rpx;
   width: 500rpx;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .city {
-  width: 100vw;
+  width: 106vw;
   position: fixed;
   bottom: -147rpx;
 }
@@ -32,15 +35,6 @@
   color: white;
   font-size: 60rpx;
   font-weight: lighter;
-  margin-bottom: 400rpx;
-  text-align: center;
-}
-
-.titleblack {
-  color: black;
-  font-size: 60rpx;
-  font-weight: lighter;
-  margin-bottom: 400rpx;
   text-align: center;
 }
 
