@@ -5,7 +5,7 @@
     <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
       <view></view>
       <view class="changeIndex" bindtap="ChangeToIndex">
-        <image src="{{changeIcon}}" class="change-location"></image>
+        <image src="/assets/icons/change.png" class="change-location"></image>
         <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
       </view>
       <view></view>
@@ -13,7 +13,7 @@
         <block wx:for="{{bookmarked_city_array}}" wx:for-item ="bookmark"> 
           <view class="changeIndex">
           <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
-          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{bookmark}}</navigator>
+          <view class="sideNaveSubTitle" id="{{bookmark.id}}" bindtap="toBookmark" style="color: white" >{{bookmark.name}}</view>
           </view> 
         </block>
   
@@ -66,10 +66,11 @@
         <map   
         show-location="{{showLocation}}"
         scale="13"
-        latitude="{{userLocation.latitude}}"
-        longitude="{{userLocation.longitude}}"
+        latitude="{{ place.latitude}}"
+        longitude="{{place.longitude}}"
         markers="{{ [{ latitude: place.latitude, longitude: place.longitude}]}}"
         style="margin: auto; margin-top: 8rpx; margin-bottom: 18rpx;"
+
         ></map>
       </view>
     </view>
@@ -84,9 +85,9 @@
         </view>
       </view>
       <view class="flex-item-msg">
-        <swiper indicator-dots="true" indicator-active-color='white'>
+        <swiper indicator-dots="true" indicator-active-color='white' >
        <block  wx:for="{{place.photo_urls}}" >
-      <swiper-item > <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
+      <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
        </block>
         </swiper>
       </view>
@@ -98,7 +99,7 @@
     <view class="flex-wrp">
       <view class="flex-item-head ">
         <view class="card-head">
-            <view class="card-head-left">Local</view>
+            <view class="card-head-left">Found by</view>
         </view>
       </view>
        <view class="local-img">
