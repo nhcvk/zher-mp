@@ -1,0 +1,138 @@
+<!--pages/signup/signup.wxml-->
+<!--Side Nav: begin-->
+<view id="mySideNav" class="sideNav" style="{{margin}}px;">
+  <view class="nav-content">
+    <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+      <view></view>
+      <view class="changeIndex" bindtap="ChangeToIndex">
+        <image src="{{changeIcon}}" class="change-location"></image>
+        <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
+      </view>
+      <view></view>
+      <view class="changeIndex">
+        <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
+          <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
+        </block>
+      </view> 
+    </view>
+  </view>
+<!--Side Nav: end-->
+
+
+<!-- <view id="mySideNav" class="sideNav" style="{{margin}}px;">
+   <navigator url="../index/index">Change Location</navigator>
+    <!-- ADD BLOCK FOR FAVORITES -->-->
+
+
+<form bindsubmit="bindFormSubmit">
+<image name="main_photo_url"  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
+<!--background image-->
+<view class="movable" style="{{movable}}">
+<view class="cityswiper">
+  <image  
+    id="main_image" 
+    mode="aspectFill" 
+    style="{{filter}};"/>
+
+    <!--bottom location name-->
+  <scroll-view scroll-y class="scroll" bindscroll="scroll">
+    <view class="scroll-content">
+      <view>
+       <input class="namelocation-input" name="name" placeholder="name the place" type="text" wrap="soft" maxlength='10'/>
+      </view>
+      <!-- UNDER HERE IS CARD -->
+      <view  class="card">
+        <view class="flex-wrp">
+          <view class="flex-item-head ">
+            <view class="card-head">
+                <view class="card-head-left">Description</view>
+            </view>
+          </view>
+          <input class="flex-item-msg" name="description" placeholder="Enter a discription" type="text"/>
+        </view>
+      </view> 
+      <!-- ABOVE HERE IS CARD  -->
+        <!-- UNDER HERE IS CARD -->
+      <view  class="card" >
+        <view class="flex-wrp">
+          <view class="flex-item-head ">
+            <view class="card-head">
+                <view class="card-head-left">Map</view>
+            </view>
+          </view>
+          <view class="flex-item-card" bindtap="pinLocation">
+          <image wx:if="{{!value_location}}" class="location-icon"   src="../../assets/icons/city.png"/>
+                        <!-- <image wx:if="{{value_location}}" class="avatar"   src="../../assets/icons/location-active.jpg" ></image>  -->
+            <map
+            wx:if="{{value_location}}"   
+            show-location="{{showLocation}}"
+            scale="13"
+            latitude="{{latitude}}"
+            longitude="{{longitude}}"
+            markers="{{ [{ latitude: latitude, longitude: longitude}]}}"
+            ></map>
+          </view>
+        </view>
+      </view> 
+      <!-- ABOVE HERE IS CARD  -->
+          <!-- UNDER HERE IS CARD -->
+      <view  class="card">
+        <view class="flex-wrp">
+          <view class="flex-item-head ">
+            <view class="card-head">
+                <view class="card-head-left">Photos</view>
+            </view>
+          </view>
+
+            <swiper   indicator-dots="true" indicator-active-color='white'>
+          <!-- <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo"> -->
+          <swiper-item class="upload-small-photo">
+          <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+          </swiper-item>
+          <!-- </block> -->
+            </swiper>
+
+        </view>
+      </view> 
+      <!-- ABOVE HERE IS CARD  -->
+    </view>
+
+       <view  class="card">
+        <view class="flex-wrp">
+          <view class="flex-item-head ">
+            <view class="card-head">
+                <view class="card-head-left">Submit</view>
+            </view>
+          </view>
+            <view class="submit-button">
+              <button class="flex-item-button" form-type="submit">确认</button>
+            </view>
+          </view> 
+        </view>
+
+  </scroll-view>
+
+
+  <!--top menu-->
+<view class="tabs">
+  <view class="tab" bindtap="goMenu">
+    <view class="tabHeader">
+      <image class="menu" src="../../assets/icons/menu.png"/>
+    </view>
+  </view>
+  <view class="tab">
+    <view class="tabHeader">成都</view>
+  </view>
+  <view  class="tab" bindtap="uploadPhoto">
+    <view class="tabHeader">
+    <image class="upload-photo" src="../../assets/icons/focus.png"/>
+    </view>
+  </view>
+  
+</view>
+  <!--top menu-->
+</view>
+</view>
+</form>
+

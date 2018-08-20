@@ -1,90 +1,143 @@
 <!--pages/profile/profile.wxml-->
+<!--Side Nav: begin-->
+<view id="mySideNav" class="sideNav" style="{{margin}}px;">
+  <view class="nav-content">
+    <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+      <view></view>
+      <view class="changeIndex" bindtap="ChangeToIndex">
+        <image src="{{changeIcon}}" class="change-location"></image>
+        <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
+      </view>
+      <view></view>
+      <view class="changeIndex">
+        <block wx:for="{{bookmarks}}" wx:for-item ="bookmark"> 
+          <image class="change-location"          src="/assets/icons/bookmarked.png" style=""></image>
+          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white;" >{{bookmark.city.name}}</navigator>
+        </block>
+      </view> 
+      <view></view>
+
+
+      <!-- <image wx:if="{{bookmarked[place.id] === true}}"  class="bookmark" src="../../assets/icons/bookmarked.png"/>
+      <image wx:else class="bookmark"  src="../../assets/icons/bookmark.png"/>
+    </view> -->
+
+
+      <view wx:if="{{currentUser.is_local === true}}" class="changeIndex" bindtap="ChangeToUpload">
+        <image class="change-location" src="/assets/icons/addlocation.png"></image>
+        <view class="sideNaveSubTitle">Add location</view>
+        </view>
+        <view wx:else></view>
+      </view>
+  </view>
+<!--Side Nav: end-->
 
 <!--background image-->
+<view class="movable" style="{{movable}}">
 
-<view 
-  class="banner" 
-  style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.1) 50%), url('/assets/images/angkor.jpg');">
 
-</view>
 
-<!--top menu-->
+<image  id="main_image" mode="aspectFill" src="../../assets/images/jiuyangqiao.jpg" style="filter: blur(10rpx);"/>
+<!--bottom location name-->
+<scroll-view scroll-y class="scroll" bindscroll="scroll">
+<view class="scroll-content">
+    <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">Who am I</view>
+        </view>
+      </view>
+      <view class="user-description">
+        <image class="avatar" mode="aspectFill" src="{{user.avatar_url}}"/>
+        <view class="flex-item-msg-description">
+          {{user.biography}}
+        </view>
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+     <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">My locations</view>
+        </view>
+      </view>
+      <view class="flex-item-msg">
+        <block wx:for="{{items}}" wx:for-item ="user">
+          <view class="cardBackground card" style="background-image: url('{{user.main_photo_url}}');">
+            <view class="locationDistance">1.5km</view>
+            <view class="locationName">{{user.name}}</view>
+          </view>
+        </block>
+        <!-- <map   
+        show-location="{{showLocation}}"
+        scale="13"
+        latitude="{{userLocation.latitude}}"
+        longitude="{{userLocation.longitude}}"
+        markers="{{ [{ latitude: place.latitude, longitude: place.longitude}]}}"
+        style="margin: auto; margin-top: 8rpx; margin-bottom: 18rpx;"
+        ></map> -->
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+      <!-- UNDER HERE IS CARD -->
+  <view  class="card">
+    <view class="flex-wrp">
+      <view class="flex-item-head ">
+        <view class="card-head">
+            <view class="card-head-left">Contact</view>
+        </view>
+      </view>
+      <view class="flex-item-msg-contact">
+        <view class="sub-contact">
+          <image class="contact-logo" src="../../assets/icons/phone.png"/>
+          <view>{{user.phone_number}}</view>
+        </view>
+        <view class="sub-contact">
+          <image class="contact-logo" src="../../assets/icons/wechat.png"/>
+          <view>{{user.wechat_id}}</view>
+        </view>
+        <view class="sub-contact">
+          <image class="contact-logo" src="../../assets/icons/mail.png"/>
+          <view>{{user.email}}</view>
+        </view>
+        <view class="sub-contact">
+          <image class="contact-logo" src="../../assets/icons/house.png"/>
+          <view>{{user.website}}</view>
+        </view>
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+  </view>
+</scroll-view>
+
 <view class="tabs">
   <view class="tab" bindtap="goMenu">
     <view class="tabHeader">
-      <image class="menu" src="../../assets/icons/menu.png"/>
+      <image class="menu" src="/assets/icons/menu.png"/>
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader">1.5 km</view>
+    <view class="tabHeader distance">{{user.name}}</view>
   </view>
   <view class="tab" bindtap="bookmark">
     <view class="tabHeader">
-      <image class="bookmark" src="../../assets/icons/bookmark.png"/>
     </view>
   </view>
+</view>
+<!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
+<!--top menu-->
+
 </view>
 <!--top menu-->
 
-<!--bottom location name-->
-<view class="namelocation">Taikooli</view>
-<!--bottom location name-->
 
-<!--ADS: CARDDDDDDD SECTION  -->
-<view  class="card">
-  <view class="flex-wrp">
-
-    <!-- HEAD PART  -->
-    <view class="flex-item-head ">
-      <view class="card-head">
-          <!-- HEAD LEFT (avatar) -->
-          <view class="card-head-left">
-              <image class="avatar" src='http://ac-gjevwccm.clouddn.com/8f4d4b771ceaf659917e'></image>
-          </view>
-          <!-- HEAD RIGHT (name + discount)  -->
-          <view class="card-head-right">
-            <view class="card-head-between-name-discount">
-              <!-- FOR NAME AND LOCATION  -->
-              <view class='flex-item-name'> 
-                <view class='flex-for-name-time'>
-                  <view class='username-font-size-normal'>惠优宝</view>
-                  <view class='detail-font-head'>
-                      Hui You Bao
-                      
-                  </view>
-                </view>  
-              </view>
-              <!-- FOR NAME AND LOCATION  -->
-
-              
-            </view>
-         </view>
-         <!-- HEAD RIGHT (name + discount)  -->
-      </view>
-    </view>
-    <!-- HEAD PART  -->
-
-    <!--discription + price + location  -->
-    
-    <view class="flex-item-msg">
-      <block>拍照上传，即刻分享折扣价！</block>
-    
-    </view>
-
-    <view class="flex-item-location"></view>
-    
-    <!--discription + price + location  -->
-
-    <!-- HEAD PART  -->
-
-    <!-- Image PART  -->
-    <!-- <view class="flex-item-pic " style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('http://ac-gjevwccm.clouddn.com/8f4d4b771ceaf659917e')" data-index="{{itemsIndex}}"></view> -->
-    <!-- Image PART  -->
-
-    
-  </view>
-</view>
-<!--ADS: CARDDDDDDD SECTION  -->
 
 
 
