@@ -1,6 +1,9 @@
 // pages/show/show.js
 const app = getApp()
 const myRequest = require('../../lib/request');
+
+
+
 Page({
   data: {
     showLocation: true, 
@@ -78,6 +81,8 @@ Page({
           bookmark_id,
           bookmarks: res.data.bookmarks
         })
+        page.addBookmarksToGlobalData()
+        page.removeDups()
       }
     })
   },
@@ -126,6 +131,8 @@ bookmark: function(e) {
           bookmark_id ,
           bookmarks     
         })
+        page.addBookmarksToGlobalData()
+        page.removeDups()
       }
     })
    } else {
@@ -136,8 +143,6 @@ bookmark: function(e) {
         place_id: e.currentTarget.id
       }, 
         success(res) {
-          console.log(12312312, res)
-          console.log(123123123, e.currentTarget.id)
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
         let bookmarks = page.data.bookmarks
@@ -149,6 +154,8 @@ bookmark: function(e) {
           bookmark_id,
           bookmarks,
         })
+        page.addBookmarksToGlobalData()
+        page.removeDups()
       }
     })
 }
@@ -182,5 +189,49 @@ bookmark: function(e) {
 
   deg2rad: function (deg) {
     return deg * (Math.PI / 180)
-  }
+  },
+
+  addBookmarksToGlobalData: function () {
+    let page = this
+    app.globalData.bookmarks = page.data.bookmarks
+    app.globalData.bookmarked = page.data.bookmarked
+    app.globalData.bookmark_id = page.data.bookmark_id
+    console.log("GLOBAL DATA", app.globalData)
+  }, 
+
+  removeDups: function () {
+    let page = this
+    let bookmarked_city_array = page.data.bookmarked_city_array
+    if (page.data.bookmarks.length > 0)  {
+      let bookmarked_city_array = page.data.bookmarked_city_array
+      let temp_array = []
+      page.data.bookmarks.forEach((bookmark) => {
+        temp_array.push(bookmark.city.name)
+        bookmarked_city_array = [...new Set(temp_array)]
+        this.setData({
+          bookmarked_city_array
+        })
+      }) 
+    } else {
+      setTimeout(function(){
+        const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
+        bookmarked_city_array.splice(index, 1)
+        page.setData({
+          bookmarked_city_array
+        })
+      }, 20)      }
+    app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
+    }, 
+    
+  previewImage: function (e) {
+    let page = this
+    console.log(3333,e)
+    setTimeout(function () {
+      wx.previewImage({
+        current: page.data.places[e.currentTarget.dataset.placeIndex].photo_urls[e.currentTarget.dataset.imageIndex],
+        urls: page.data.places[e.currentTarget.dataset.placeIndex].photo_urls
+      });
+
+    }, 50)
+  },   
 })
