@@ -25,6 +25,7 @@ Page({
         page.setData({
           items: printed
         })
+        console.log("GLOBAL", page.data)
       } 
     }) 
     myRequest.get({
@@ -43,7 +44,7 @@ Page({
       distance.push([page.getDistanceFromLatLonInKm(item.place.latitude, item.place.longitude, app.globalData.userLocation.latitude, app.globalData.userLocation.longitude)])
       page.setData({
         distance,
-        bookmarked: [app.globalData.bookmarked],
+        bookmarked: app.globalData.bookmarked,
         bookmarked_city_array: app.globalData.bookmarked_city_array,
         bookmark_id: app.globalData.bookmark_id
       })
@@ -53,6 +54,11 @@ Page({
     page.data.items.forEach((place, index) => {
       places.push(Object.assign({}, place, distance[index]))
       page.setData({ places })
+      const propComparator = (propName) =>
+        (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
+      page.setData({
+        places: page.data.places.sort(propComparator('0'))
+      })
     }) 
     }, 100)
   },
@@ -73,7 +79,7 @@ Page({
     }
   },
 
-  backToHome: function (e) {
+  ChangeToIndex: function (e) {
     wx.redirectTo({
       url: '../index/index',
     })
@@ -98,11 +104,17 @@ Page({
   },
 
     toBookmark: function (e) {
-    console.log(e)
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
     wx.navigateTo({
       url: '../bookmarks/bookmarks',
     })
+  },
+
+  toShow: function(e) {
+  app.globalData.showTarget = parseInt(e.currentTarget.id)
+  wx.navigateTo({
+    url: '../places/places',
+  })
   }
 
 })

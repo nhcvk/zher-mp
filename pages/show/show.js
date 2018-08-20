@@ -162,10 +162,7 @@ bookmark: function(e) {
   ChangeToIndex: function (e) {
       wx.navigateTo({
         url: '/pages/index/index'
-      }), 
-        this.setData({
-          changeIcon: "/assets/icons/change-hover.png"
-    })
+      })
   }, 
   ChangeToUpload: function(e) {
     wx.navigateTo({
