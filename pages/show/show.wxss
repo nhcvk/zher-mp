@@ -1,19 +1,20 @@
 /* pages/show/show.wxss */
 /* Banner Component */
+ page {
+  background-color: #111
+} 
 .tabs {
-   position: fixed; 
-  top:0;
-  width: 100%;
-  flex: 0 0 auto;
+  position: fixed; 
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   color: white;
 }
 
 .tab {
-  flex: 0 0 1%;
   text-align: center;
   padding-top: 5px;
+  flex-wrap: nowrap;
 }
 
 .card-head-left {
@@ -35,7 +36,6 @@
   text-align: center;
   height: 100vh;
   width: 100vw;
-  /* if you have a 70px navbar => height: calc(100vh - 70px); */
   position: fixed;
   object-fit: cover;
   top: 0;
@@ -48,7 +48,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(17, 14, 6, 0.37);
+    background-color: rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
@@ -59,7 +59,7 @@
 
 .nav-content {
   text-align: center;
-  color: white
+  color: white;
 }
 
 .nav-logo {
@@ -97,9 +97,10 @@
 }
 
 .change-location {
-  height: 40px;
-  width: 40px;
+  height: 60rpx;
+  width: 60rpx;
   padding-top: 40rpx;
+  min-width: 60rpx;
 }
 
 .flex-wrp {
@@ -161,7 +162,7 @@
     padding-top: 60px;
     transition: 0.5s; 
     color: white;
-      white-space: nowrap;
+    white-space: nowrap;
 }
 
 .cityswiper {
@@ -171,7 +172,8 @@
 .changeIndex {
   display: flex;
   align-items: center;
-  margin-left: 20rpx
+  margin-left: 20rpx;
+    padding-bottom: 34rpx;
 }
 
 .sideNaveSubTitle {
