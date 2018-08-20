@@ -1,28 +1,39 @@
 <!--pages/bookmarks/bookmarks.wxml-->
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
-<view class="nav-content">
-    <image bindtap="backToHome" class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
-    <view></view>
-   <image bindtap="ChangeToIndex" class="change-location" src="{{changeIcon}}"></image>
-   <view></view>
-    <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
-    <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
-    <navigator url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
-    </block> 
-    </view>
-    <!-- ADD BLOCK FOR FAVORITES -->
-
-</view>
+  <view class="nav-content">
+    <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+      <view></view>
+      <view class="changeIndex" bindtap="ChangeToIndex">
+        <image src="/assets/icons/change.png" class="change-location"></image>
+        <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
+      </view>
+      <view></view>
+ 
+        <block wx:for="{{bookmarked_city_array}}" wx:for-item ="bookmark"> 
+          <view class="changeIndex">
+          <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+          <view class="sideNaveSubTitle" id="{{bookmark.id}}" bindtap="toBookmark" style="color: white" >{{bookmark.name}}</view>
+          </view> 
+        </block>
+  
+      <view></view>
+      <view wx:if="{{currentUser.is_local === true}}" class="changeIndex" bindtap="ChangeToUpload">
+        <image class="change-location" src="/assets/icons/addlocation.png"></image>
+        <view class="sideNaveSubTitle">Add location</view>
+        </view>
+        <view wx:else></view>
+      </view>
+  </view>
 <!--background image-->
 <view class="movable" style="{{movable}}">
   <view class="background">
 
     <scroll-view class="scroll">
     <!--Favorites cards-->
-    <block wx:for="{{items}}" wx:for-item ="bookmark">
-      <view class="cardBackground card" style="background-image: url('{{bookmark.place.main_photo_url}}');">
-        <view class="locationDistance">1.5km</view>
-        <view class="locationName">{{bookmark.place.name}}</view>
+    <block wx:for="{{places}}" wx:for-item ="place">
+      <view class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
+        <view class="locationDistance">{{place["0"]}}公里</view>
+        <view class="locationName">{{place.place.name}}</view>
       </view>
     </block>
     </scroll-view>
@@ -37,7 +48,7 @@
     </view>
     <view class="tab">
       <view class="tabHeader">
-        <view class="cityName">Chengdu</view>
+        <view class="cityName">{{items[0].city.name}}</view>
       </view>
     </view>
     <view class="tab" bindtap="bookmark">

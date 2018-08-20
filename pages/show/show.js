@@ -11,7 +11,6 @@ Page({
     bookmarked: {},
     bookmark_id: {},
     bookmarks: [],
-    changeIcon: "/assets/icons/change.png",
     distance: [],
     bookmarked_city_array: []
   },
@@ -201,27 +200,33 @@ bookmark: function(e) {
 
   removeDups: function () {
     let page = this
-    let bookmarked_city_array = page.data.bookmarked_city_array
-    if (page.data.bookmarks.length > 0)  {
+    setTimeout(function () {
       let bookmarked_city_array = page.data.bookmarked_city_array
-      let temp_array = []
-      page.data.bookmarks.forEach((bookmark) => {
-        temp_array.push(bookmark.city.name)
-        bookmarked_city_array = [...new Set(temp_array)]
-        this.setData({
-          bookmarked_city_array
-        })
-      }) 
-    } else {
-      setTimeout(function(){
-        const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
-        bookmarked_city_array.splice(index, 1)
+      if (page.data.bookmarks.length > 0)  {
+        bookmarked_city_array = []
+        page.data.bookmarks.forEach((bookmark) => {
+          let temp_array = []
+          let temp_object = {
+                id: bookmark.place.city_id,
+                name: bookmark.city.name
+                }
+            temp_array.push(temp_object)
+            bookmarked_city_array = [...new Set(temp_array)];
+
+        }) 
         page.setData({
           bookmarked_city_array
         })
-      }, 20)      }
-    app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
-    }, 
+      } else {
+          const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
+          bookmarked_city_array.splice(index, 1)
+          page.setData({
+            bookmarked_city_array
+          })
+        }
+      app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
+    }, 500) 
+      }, 
     
   previewImage: function (e) {
     let page = this
@@ -234,4 +239,17 @@ bookmark: function(e) {
 
     }, 50)
   },   
+  toBookmark: function (e) {
+    console.log(e)
+    app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
+    wx.navigateTo({
+      url: '../bookmarks/bookmarks',
+    })
+  }, 
+
+  backToHome: function (e) {
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  },
 })
