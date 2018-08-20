@@ -20,12 +20,26 @@ Page({
           cities: res.data.cities
         })
       }
-    })
+    }), 
+        wx.getLocation({
+          type: 'wgs84',
+          success: function (res) {
+            let userLocation = {
+              latitude: res.latitude,
+              longitude: res.longitude,
+            }
+            page.setData({
+              userLocation,
+            });
+            app.globalData.userLocation = userLocation            
+          }
+
+        })
 
     
     console.log(111, this.data.hasUserID)
-    const host = 'https://zher.wogengapp.cn/api/v1/'
-    // const host = 'http://localhost:3000/api/v1/';
+    // const host = 'https://zher.wogengapp.cn/api/v1/'
+    const host = 'http://localhost:3000/api/v1/';
     console.log('processing to login')
     wx.login({
       success: res => {

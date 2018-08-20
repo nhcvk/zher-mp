@@ -11,5 +11,20 @@ App({
   globalData: {
     
   },
-
-})  
+  onLoad: function () {
+    let page = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        let userLocation = {
+          latitude: res.latitude,
+          longitude: res.longitude,
+        }
+        page.setData({
+          userLocation,
+          user_id: app.globalData.userId
+        });
+      }
+    })  
+  }
+})
