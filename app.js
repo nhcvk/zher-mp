@@ -8,6 +8,8 @@ AV.init({
 });
 
 App({
-  globalData: {},
+  globalData: {
+    
+  },
 
 })  
