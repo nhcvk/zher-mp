@@ -57,8 +57,9 @@ page {
 
 .cityName {
   font-weight: lighter;
-  font-size: 60rpx;
+  font-size: 50rpx;
   color: white;
+  white-space: nowrap;
 }
 
 /* .card {
@@ -124,13 +125,6 @@ page {
       white-space: nowrap;
 }
 
-.changeIndex {
-  display: flex;
-  align-items: center;
-  margin-left: 20rpx;
-    padding-bottom: 34rpx;
-}
-
 .change-location {
   height: 60rpx;
   width: 60rpx;
@@ -139,8 +133,23 @@ page {
 }
 
 
+.changeIndex {
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+  padding-bottom: 34rpx;
+  border: none!important
+}
+
 .sideNaveSubTitle {
   margin-top: 37rpx;
   margin-left: 20rpx;
   font-weight: lighter;
+  color: white;
+}
+
+button {
+  position: absolute;
+  margin-left: -10rpx!important;
+  margin-top: -20rpx!important;
 }

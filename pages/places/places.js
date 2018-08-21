@@ -39,7 +39,7 @@ Page({
           bookmarked_city_array: app.globalData.bookmarked_city_array,
           bookmark_id: app.globalData.bookmark_id
         })
-    }, 100)
+    }, 200)
   },
   
 
@@ -116,6 +116,25 @@ Page({
       filter: `filter: blur(${e.detail.scrollTop / 60}rpx);`
     })
   }, 
-
+  becomeLocal: function (e) {
+    let page = this
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res)
+        let name = res.userInfo.nickName
+        let avatar_url = res.userInfo.avatarUrl
+        myRequest.put({
+          path: `users/${page.data.currentUser.id}`,
+          data: {
+            name: name,
+            avatar_url: avatar_url
+          }
+        })
+        wx.redirectTo({
+          url: '../signup/signup',
+        })
+      }
+    })
+  }
 })
          

@@ -31,6 +31,7 @@ Page({
         });
         console.log(page.data)
         let distance = page.data.distance
+        setTimeout(function () {
           page.data.items.forEach((item) => {
             distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
             page.setData({
@@ -42,12 +43,13 @@ Page({
           page.data.items.forEach((place, index) => {
             places.push(Object.assign({}, place, distance[index]))
             page.setData({ places })
-          }) 
+          })
           const propComparator = (propName) =>
-            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName]? -1 : 1
-           page.setData ({
-             places: page.data.places.sort(propComparator('0'))
-           })
+            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
+          page.setData({
+            places: page.data.places.sort(propComparator('0'))
+          })}, 600)
+
       }
     })
     myRequest.get({
@@ -249,4 +251,25 @@ bookmark: function(e) {
       url: '../index/index',
     })
   },
+  becomeLocal: function (e) {
+    let page = this
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res)
+        let name = res.userInfo.nickName
+        let avatar_url = res.userInfo.avatarUrl
+        myRequest.put({
+          path: `users/${page.data.currentUser.id}`,
+          data: {
+            name: name,
+            avatar_url: avatar_url
+          }
+        })
+        wx.redirectTo({
+          url: '../signup/signup',
+        })
+      }
+    })
+  }
 })
+

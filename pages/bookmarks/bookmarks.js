@@ -23,7 +23,10 @@ Page({
             } 
         })
         page.setData({
-          items: printed
+          items: printed,
+          bookmarked: app.globalData.bookmarked,
+          bookmarked_city_array: app.globalData.bookmarked_city_array,
+          bookmark_id: app.globalData.bookmark_id
         })
         console.log("GLOBAL", page.data)
       } 
@@ -43,10 +46,7 @@ Page({
       console.log(123123, item)
       distance.push([page.getDistanceFromLatLonInKm(item.place.latitude, item.place.longitude, app.globalData.userLocation.latitude, app.globalData.userLocation.longitude)])
       page.setData({
-        distance,
-        bookmarked: app.globalData.bookmarked,
-        bookmarked_city_array: app.globalData.bookmarked_city_array,
-        bookmark_id: app.globalData.bookmark_id
+        distance
       })
     });
     console.log(page.data.items)
@@ -115,6 +115,27 @@ Page({
   wx.navigateTo({
     url: '../places/places',
   })
+  }, 
+
+  becomeLocal: function (e) {
+    let page = this
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res)
+        let name = res.userInfo.nickName
+        let avatar_url = res.userInfo.avatarUrl
+        myRequest.put({
+          path: `users/${page.data.currentUser.id}`,
+          data: {
+            name: name,
+            avatar_url: avatar_url
+          }
+        })
+        wx.redirectTo({
+          url: '../signup/signup',
+        })
+      }
+    })
   }
 
 })

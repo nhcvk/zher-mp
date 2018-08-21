@@ -22,7 +22,9 @@
         <image class="change-location" src="/assets/icons/addlocation.png"></image>
         <view class="sideNaveSubTitle">Add location</view>
         </view>
-        <view wx:else></view>
+        <button wx:else plain="true" class="changeIndex" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="becomeLocal">
+          <image class="change-location" src="/assets/icons/guide.png"></image><view class="sideNaveSubTitle">Become a local</view></button>
+        
       </view>
   </view>
 <!--Side Nav: end-->
