@@ -26,8 +26,8 @@ page {
 .upload-small-photo {
   width: 75rpx;
   height: 75rpx;
-  margin-left: 150rpx;
-  margin-top: 50rpx;
+  /* margin-left: 150rpx;
+  margin-top: 50rpx; */
 }
 
 .tab {
@@ -74,7 +74,7 @@ page {
 }
 
 .scroll-content {
-  margin-top: 85vh;
+  margin-top: 30vh;
 }
 
 .namelocation {
@@ -145,8 +145,8 @@ page {
 }
 
 .location-icon {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   margin: 50rpx;
 }
 
@@ -159,7 +159,7 @@ page {
 .changeIndex {
   display: flex;
   align-items: center;
-  margin-left: 20rpx
+  margin-left: 20rpx;
 }
 
 .sideNaveSubTitle {
@@ -176,11 +176,36 @@ page {
 .nav-logo {
   height: 210rpx;
   width: 210rpx;
-  margin-top: -50rpx
+  margin-top: -50rpx;
 }
 
 .change-location {
   height: 40px;
   width: 40px;
   padding-top: 40rpx;
+}
+
+.swiper-item-add-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.preview-small-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-main-image {
+  font-size: 50rpx;
+  font-weight: lighter;
+  /* height: 100px; */
+  text-align: center;
+  color: white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

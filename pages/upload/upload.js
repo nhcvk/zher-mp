@@ -14,7 +14,9 @@ Page({
     bookmark_id: {},
     bookmarks: [],
     city_name_array: [],
-    changeIcon: "/assets/icons/change.png"
+    imageUrl: [],
+    changeIcon: "/assets/icons/change.png",
+    myCurrent: 1
   },
 
   uploadPhoto: function () {
@@ -22,9 +24,9 @@ Page({
     console.log("that >> ")
     console.log(that)
     console.log(that.data.is_take_photo)
-    if (!that.data.is_take_photo) {
-      // Mark as already take picture
-      that.data.is_take_photo = true
+    // if (!that.data.is_take_photo) {
+    //   // Mark as already take picture
+    //   that.data.is_take_photo = true
 
       wx.chooseImage({
         count: 1,
@@ -64,7 +66,7 @@ Page({
           // ######LEANCLOUD PART --- SEND IMG
         }
       }) 
-    }
+    // }
   },
 
   scroll: function (e) {
@@ -108,57 +110,64 @@ Page({
       }
     })
   }, 
-
+  mySwiperChange: function(e) {
+    console.log(33333333,"My Swiper Change")
+  },
 
   uploadSmallPhoto: function () {
     var that = this
+    let myImages = []
     console.log("that >> ")
     console.log(that)
     console.log(that.data.is_take_photo)
-    if (!that.data.is_take_photo) {
-      // Mark as already take picture
-      that.data.is_take_photo = true
+    // if (!that.data.is_take_photo) {
+    //   // Mark as already take picture
+    //   that.data.is_take_photo = true
 
       wx.chooseImage({
-        count: 1,
+        count: 3,
         sizeType: ['compressed'],
         sourceType: ['camera', 'album'],
         success: function (res) {
-          var tempFilePath = res.tempFilePaths[0]
+          
 
-          console.log("Temp file path >>")
-          console.log(tempFilePath)
-          that.setData({
-            is_sending: true,
-            imageSrc: tempFilePath
-          })
-          console.log("Have Image >>")
-          console.log(that.data.haveImage)
-          // console.log(that.data.imgSrc)
+          
+          let tempFilePaths = res.tempFilePaths;
+          console.log(55, res.tempFilePaths)
 
-          // #####LEANCLOUD PART --- SEND IMG
-          console.log("Processing send img to LeanCloud >>")
-          new AV.File('file-name', {
+          let tempFilePathsLength = tempFilePaths.length;
+          console.log(66, tempFilePathsLength)
+
+          // let tempFilePathsFirst = tempFilePaths[0] 
+          // let tempFilePathsSecond = tempFilePaths[1] 
+          // let tempFilePathsThird = tempFilePaths[2] 
+
+          // app.globalData.pictures = tempFilePaths
+          // console.log(3443434, app.globalData.pictures)
+          console.log(3443434, that.data.smallImageUrl)
+
+
+
+          res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
             blob: {
               uri: tempFilePath,
             },
-          }).save().then(
-            file => {
-              console.log("Yeah..This is img url in LeanCloud >>")
-              console.log(that)
-              console.log(file.url())
-              let image = file.url()
-              that.setData({
-                is_sending: false,
-                haveImage: true,
-                smallImageUrl: [image]
+          }).save()).reduce(
+            (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+            AV.Promise.resolve([])
+          ).then(function (files) {
+              files.map(file => {
+                myImages.push(file.url())
               })
-            }
-            ).catch(console.error);
-          // ######LEANCLOUD PART --- SEND IMG
+              that.setData({smallImageUrl : myImages})
+              console.log(3333, that.data.smallImageUrl)
+              that.setData({
+              myCurrent: 0
+            })
+          })
         }
       })
-    }
+    
   }, 
   
   bindFormSubmit: function (e) {
@@ -166,8 +175,9 @@ Page({
     console.log(4444444,this.data)
     console.log("hello", e)
     myRequest.post({
-      path: 'cities/1/places',
-      data: {
+      // path: `cities/${app.globalData.currentTarget}/places`,
+      path: `cities/1/places`,
+      data: { 
         place: {
           city_id: 1,
           user_id: 1, 
