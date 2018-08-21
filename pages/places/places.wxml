@@ -17,12 +17,13 @@
           </view> 
         </block>
   
-      <view></view>
+            <view></view>
       <view wx:if="{{currentUser.is_local === true}}" class="changeIndex" bindtap="ChangeToUpload">
         <image class="change-location" src="/assets/icons/addlocation.png"></image>
         <view class="sideNaveSubTitle">Add location</view>
         </view>
-        <view wx:else></view>
+        <button wx:else plain="true" class="changeIndex" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="becomeLocal">
+          <image class="change-location" src="/assets/icons/guide.png"></image><view class="sideNaveSubTitle">Become a local</view></button>
       </view>
   </view>
 <!--Side Nav: end-->
@@ -96,7 +97,7 @@
     <view class="flex-wrp">
       <view class="flex-item-head ">
         <view class="card-head">
-            <view class="card-head-left">Found by</view>
+            <view class="card-head-left">Local</view>
         </view>
       </view>
        <view class="local-img">

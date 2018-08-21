@@ -1,172 +1,48 @@
 /* pages/signup/signup.wxss */
 page {
-  background-color: #111;
+  background-color: black;
 }
 
-
-.tabs {
-   position: fixed; 
-  top:0;
-  width: 100%;
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: space-between;
-  color: white;
-}
-
-.upload-photo {
-  width: 75rpx;
-  height: 75rpx;
-  margin-right: 10px;
-}
-
-.upload-card {
-  display: flex;
-}
-
-.upload-small-photo {
-  width: 75rpx;
-  height: 75rpx;
-  margin-left: 150rpx;
-  margin-top: 50rpx;
-}
-
-.tab {
-  text-align: center;
-  padding-top: 5px;
-}
-
-.flex-item-button {
-  color: white;
-  background-color: grey;
-  margin: 40rpx;
-  text-align: center;
-}
-
-.menu {
-  padding-left: 10px;
-  width: 75rpx;
-  height: 75rpx;
-}
-
-.bookmark {
-  width: 75rpx;
-  height: 75rpx;
-}
-
-#main_image {
-  text-align: center;
-  height: 100vh;
-  width: 100vw;
-  /* if you have a 70px navbar => height: calc(100vh - 70px); */
-  position: fixed;
-  object-fit: cover;
-  top: 0;
- transform: scale(1.1); 
-
-}
-
-.scroll {
-  position: absolute;
-  overflow: scroll; 
-  width: 100vw;
-  height: 100vh;
-  color: white;
-}
-
-.scroll-content {
-  margin-top: 85vh;
-}
-
-.namelocation {
-  font-size: 80px;
-  bottom: 0;
-  left: 7px;
-  font-weight: lighter;
-}
-
-.namelocation-input {
-  font-size: 50rpx;
-  font-weight: lighter;
-  height: 100px;
-  text-align: center
-  }
 
 .card {
   margin: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4rpx;
 }
-
 .flex-wrp {
   display: flex;
   flex-direction: column;
 }
 
 .flex-item-head {
-  flex: 0 0 auto;
+  margin-bottom: 9rpx;
 }
 
 .flex-item-msg {
-  flex: 0 0 auto;
   font-size: 14px;
   text-align: left;
   margin: 7px;
+  align-items: center;
+  margin-left: 150rpx
 }
-
-.card-head {
+.background {
+  background: black;
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 5px;
-  border-bottom: solid;
-  border-bottom-color: white;
-  border-bottom-width: 1px;
+  color: white;
 }
 
-.movable {
-    transition: margin-left .5s;
-}
-.sideNav {
-    height: 100%; 
-    width: 0; 
-    position: fixed; 
-    z-index: 1; 
-    top: 0; 
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden; 
-    padding-top: 60px;
-    transition: 0.5s; 
-    color: white;
-    white-space: nowrap;
+.scroll {
+  margin-top: 110rpx;
 }
 
-.cityswiper {
-  height: 100vh!important;
-}
-
-.location-icon {
-  width: 25px;
-  height: 25px;
-  margin: 50rpx;
-}
-
-.flex-item-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.changeIndex {
-  display: flex;
-  align-items: center;
-  margin-left: 20rpx
-}
-
-.sideNaveSubTitle {
-  margin-top: 37rpx;
-  margin-left: 20rpx;
-  font-weight: lighter;
+.no-bookmarks {
+  background-color: black;
+  position: absolute;
+  left: 174rpx;
+  top: 500rpx;
+  white-space: nowrap;
 }
 
 .nav-content {
@@ -180,8 +56,124 @@ page {
   margin-top: -50rpx
 }
 
+.tabs {
+  position: fixed;
+  top:0;
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 0 0 1%;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.menu {
+  padding-left: 35rpx;
+  width: 75rpx;
+  height: 75rpx;
+  position: absolute;
+}
+
+.cityName {
+  font-weight: lighter;
+  font-size: 50rpx;
+  color: white;
+  white-space: nowrap;
+}
+
+/* .card {
+  width: 100vw;
+  height: 15vh;
+  padding-top: 10rpx;
+  font-weight: lighter;
+  position: relative;
+} */
+
+.cardBackground {
+  width: 100vw;
+  /* height: 15vh; */
+  font-weight: lighter;
+  position: relative;
+  height: 225rpx;
+  background-position: center;
+  background-size: 100vw;
+  margin: 2rpx;
+}
+
+
+
+.locationDistance {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 60rpx;
+
+}
+
+.locationName {
+  position: absolute;
+  bottom: 0;
+  left: 15rpx;
+  font-size: 60rpx;
+}
+
+.nav-logo {
+  height: 210rpx;
+  width: 210rpx;
+  margin-top: -50rpx
+}
+
+.movable {
+ transition: margin-left .5s;
+  position: fixed;
+  object-fit: cover;
+  top: 0;
+
+}
+.sideNav {
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden; 
+    padding-top: 60px;
+    transition: 0.5s; 
+    color: white;
+      white-space: nowrap;
+}
+
 .change-location {
-  height: 40px;
-  width: 40px;
+  height: 60rpx;
+  width: 60rpx;
   padding-top: 40rpx;
+  min-width: 60rpx;
+}
+
+
+.changeIndex {
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+  padding-bottom: 34rpx;
+  border: none!important
+}
+
+.sideNaveSubTitle {
+  margin-top: 37rpx;
+  margin-left: 20rpx;
+  font-weight: lighter;
+  color: white;
+}
+
+button {
+  position: absolute;
+  margin-left: -10rpx!important;
+  margin-top: -20rpx!important;
 }
