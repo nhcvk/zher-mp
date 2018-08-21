@@ -60,7 +60,7 @@ Page({
         places: page.data.places.sort(propComparator('0'))
       })
     }) 
-    }, 100)
+    }, 500)
   },
   
   

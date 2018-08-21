@@ -11,8 +11,8 @@ page {
   color: white;
 }
 
-.scroll {
-  margin-top: 110rpx;
+.scroll-content {
+  margin-top: 10vh;
 }
 
 .no-bookmarks {

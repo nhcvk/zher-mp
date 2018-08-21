@@ -115,7 +115,6 @@ Page({
       // console.log(this.data.cities)
       app.globalData.currentTarget = this.data.cities[e.currentTarget.id].id
       app.globalData.currentUser =this.data.currentUser
-      console.log(1312341, app.globalData)
       wx.navigateTo({
         url: `/pages/show/show`
       })
