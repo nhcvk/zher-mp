@@ -7,7 +7,13 @@ Page({
   data: {
     hasUserID: false,
     visibility: "visibility: hidden",
-    cities: []
+    cities: [],
+    distance: [],
+    margin: "width: 0",
+    bookmarked: {},
+    bookmark_id: {},
+    bookmarks: [],
+    bookmarked_city_array: []
   },
 
   onLoad: function () {
@@ -20,7 +26,8 @@ Page({
           cities: res.data.cities
         })
       }
-    }), 
+    }),
+    
         wx.getLocation({
           type: 'wgs84',
           success: function (res) {
@@ -38,8 +45,8 @@ Page({
 
     
     console.log(111, this.data.hasUserID)
-    // const host = 'https://zher.wogengapp.cn/api/v1/'
-    const host = 'http://localhost:3000/api/v1/';
+    const host = 'https://zher.wogengapp.cn/api/v1/'
+    // const host = 'http://localhost:3000/api/v1/';
     console.log('processing to login')
     wx.login({
       success: res => {
@@ -56,7 +63,34 @@ Page({
             console.log(888, app.globalData.userId)
             this.setData ({
               hasUserID: true
-            })
+            })  
+              myRequest.get({
+                path: `users/${app.globalData.userId}`,
+                success(res) {
+                  page.setData({
+                    currentUser: res.data
+                  })
+                  myRequest.get({
+                    path: `users/${app.globalData.userId}/bookmarks`,
+                    success(res) {
+                      let bookmarked = page.data.bookmarked
+                      let bookmark_id = page.data.bookmark_id
+                      res.data.bookmarks.forEach((bookmark) => {
+                        console.log(1111, bookmark)
+                        bookmark_id[bookmark.place_id] = bookmark.id
+                        bookmarked[bookmark.place_id] = true
+                      })
+                      page.setData({
+                        bookmarked,
+                        bookmark_id,
+                        bookmarks: res.data.bookmarks
+                      })
+                      page.addBookmarksToGlobalData()
+                      page.removeDups()
+                    }
+                  })
+                }
+              })
             let page = this
             // console.log(page.data.currentPage)
             page.setData({
@@ -68,6 +102,8 @@ Page({
       }
     })
   },
+
+
 
   globalData: {},
 
@@ -87,34 +123,65 @@ Page({
     }
   },
 
-  goBookmarks: function (e) {
+  getDistanceFromLatLonInKm: function (lat1, lon1, lat2, lon2) {
+    let R = 6371
+    let dLat = this.deg2rad(lat2 - lat1);
+    let dLon = this.deg2rad(lon2 - lon1);
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      ;
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
+    return Number((d * 1).toFixed(1));
+  },
+
+  deg2rad: function (deg) {
+    return deg * (Math.PI / 180)
+  },
+
+  addBookmarksToGlobalData: function () {
+    let page = this
+    app.globalData.bookmarks = page.data.bookmarks
+    app.globalData.bookmarked = page.data.bookmarked
+    app.globalData.bookmark_id = page.data.bookmark_id
+    console.log("GLOBAL DATA", app.globalData)
+  }, 
+  toBookmark: function (e) {
+    console.log(e)
+    app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
     wx.navigateTo({
-      url: '/pages/bookmarks/bookmarks'
+      url: '../bookmarks/bookmarks',
     })
-  },
+  }, 
+  removeDups: function () {
+    let page = this
+    setTimeout(function () {
+      let bookmarked_city_array = page.data.bookmarked_city_array
+      if (page.data.bookmarks.length > 0) {
+        bookmarked_city_array = []
+        page.data.bookmarks.forEach((bookmark) => {
+          let temp_array = []
+          let temp_object = {
+            id: bookmark.place.city_id,
+            name: bookmark.city.name
+          }
+          temp_array.push(temp_object)
+          bookmarked_city_array = [...new Set(temp_array)];
 
-  goMenu: function (e) {
-    if (this.data.margin == "width: 0") {
-      this.setData({
-        margin: "width: 250",
-        movable: "margin-left: 250px"
-      })
-    }
-    else {
-      this.setData({
-        margin: "width: 0",
-        movable: "margin-left: 0px"
-      })
-    }
-  },
-
-  // loadCities: function (request, callback) {
-  //     request()
-  //     callback()
-  // },
-
-
-
-
-
+        })
+        page.setData({
+          bookmarked_city_array
+        })
+      } else {
+        const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
+        bookmarked_city_array.splice(index, 1)
+        page.setData({
+          bookmarked_city_array
+        })
+      }
+      app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
+    }, 500)
+  }, 
 })

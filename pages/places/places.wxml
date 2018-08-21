@@ -31,9 +31,6 @@
 <view class="movable" style="{{movable}}">
 
 <!-- SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
-<swiper class="cityswiper" bindchange="pageChange">
-<block wx:for="{{places}}" wx:for-item ="place" wx:for-index="placeIndex">
-<swiper-item >
 
 <image  id="main_image" mode="aspectFill" src="{{place.main_photo_url}}" style="{{filter}};"/>
 <!--bottom location name-->
@@ -64,7 +61,7 @@
       </view>
       <view class="flex-item-msg">
         <map   
-        show-location="{{showLocation}}"
+        show-location="true"
         scale="13"
         latitude="{{ place.latitude}}"
         longitude="{{place.longitude}}"
@@ -99,7 +96,7 @@
     <view class="flex-wrp">
       <view class="flex-item-head ">
         <view class="card-head">
-            <view class="card-head-left">Local</view>
+            <view class="card-head-left">Found by</view>
         </view>
       </view>
        <view class="local-img">
@@ -119,18 +116,14 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader distance">{{place["0"]}}公里</view>
+    <view class="tabHeader distance">{{distance}}公里</view>
   </view>
   <view id="{{place.id}}" class="tab" bindtap="bookmark">
     <view class="tabHeader">
-    <image wx:if="{{bookmarked[place.id] === true}}"  class="bookmark" src="../../assets/icons/bookmarked.png"/>
-      <image wx:else class="bookmark"  src="../../assets/icons/bookmark.png"/>
+    <view class="bookmark"/>
     </view>
   </view>
 </view>
-</swiper-item>
-</block>
-</swiper>
 <!-- NO SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
 <!--top menu-->
 
