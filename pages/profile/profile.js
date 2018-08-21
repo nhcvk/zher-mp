@@ -1,6 +1,7 @@
 // pages/profile/profile.js
-const app = getApp()
+const app = getApp();
 const myRequest = require('../../lib/request');
+
 Page({
   data: {
     showLocation: true,
@@ -82,36 +83,37 @@ Page({
   //     })
   // },
 
-  onLoad: function () {
-    let page = this
-    myRequest.get({
-      path: 'users/2',
-      success(res) {
-        console.log("123123", res)
-        page.setData({
-          user: res.data
-        })
-        console.log(1232131, page.data.user)
-      } 
-    })
-      setTimeout(function(){
-        myRequest.get({
-        path: `cities/${page.data.user.city_id}/places`,
-      success(res) {
-        let printed = []
-        console.log("RES", res)
-        res.data.places.forEach((result) => {
-          if (page.data.user.id === result.user_id)
-            printed.push(result)
-        })
-        page.setData({
-          items: printed
-        })
+  // onLoad: function () {
+  //   let page = this
+  //   myRequest.get({
+  //     path: `users/${app.globalData.userId}`,
+  //     success(res) {
+  //       console.log("123123", res)
+  //       page.setData({
+  //         user: res.data
+  //       })
+  //       console.log(1232131, page.data.user)
+  //     } 
+  //   })
+  //   setTimeout(function(){
+  //       myRequest.get({
+  //         path: `users/${app.globalData.userId}/cities/${app.globalData.currentUser.city_id}`
+  //       // path: `cities/${page.data.user.city_id}/places`,
+  //     success(res) {
+  //       let printed = []
+  //       console.log("RES", res)
+  //       res.data.places.forEach((result) => {
+  //         if (page.data.user.id === result.user_id)
+  //           printed.push(result)
+  //       })
+  //       page.setData({
+  //         items: printed
+  //       })
         
-      }
-      })
-    }, 500)
-  },
+  //     }
+  //     })
+  //   }, 500)
+  // },
 
   // scroll: function (e) {
   //   this.setData({

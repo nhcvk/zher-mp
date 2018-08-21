@@ -3,21 +3,53 @@
 <view id="mySideNav" class="sideNav" style="{{margin}}px;">
   <view class="nav-content">
     <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
-      <view></view>
-      <view class="changeIndex" bindtap="ChangeToIndex">
-        <image src="{{changeIcon}}" class="change-location"></image>
-        <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
-      </view>
-      <view></view>
-      <view class="changeIndex">
-        <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
-          <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
-          <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
-        </block>
-      </view> 
+    <view></view>
+    <view class="changeIndex" bindtap="ChangeToIndex">
+      <image src="/assets/icons/change.png" class="change-location"></image>
+      <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
     </view>
+    <view></view>
+ 
+    <block wx:for="{{bookmarked_city_array}}" wx:for-item ="bookmark"> 
+      <view class="changeIndex">
+        <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+        <view class="sideNaveSubTitle" id="{{bookmark.id}}" bindtap="toBookmark" style="color: white" >{{bookmark.name}}</view>
+      </view> 
+    </block>
+  
+    <view></view>
+    <view wx:if="{{currentUser.is_local === true}}" class="changeIndex" bindtap="ChangeToUpload">
+      <image class="change-location" src="/assets/icons/addlocation.png"></image>
+      <view class="sideNaveSubTitle">Add location</view>
+    </view>
+    <button wx:else plain="true" class="changeIndex" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="becomeLocal">
+      <image class="change-location" src="/assets/icons/guide.png"></image>
+      <view class="sideNaveSubTitle">Become a local</view>
+    </button>    
   </view>
+</view>
 <!--Side Nav: end-->
+
+
+<!--OLD Side Nav: begin-->
+<!-- <view id="mySideNav" class="sideNav" style="{{margin}}px;">
+  <view class="nav-content">
+    <image class="nav-logo" src="/assets/icons/logo_zher_nav.png"></image>
+    <view></view>
+    <view class="changeIndex" bindtap="ChangeToIndex">
+      <image src="{{changeIcon}}" class="change-location"></image>
+      <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
+    </view>
+    <view></view>
+    <view class="changeIndex">
+      <block wx:for="{{city_name_array}}" wx:for-item ="city_bookmark"> 
+        <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
+        <navigator class="sideNaveSubTitle" url="../bookmarks/bookmarks" style="color: white" >{{city_bookmark}}</navigator>
+      </block>
+    </view> 
+  </view>
+</view> -->
+<!--OLD Side Nav: end-->
 
 
 <!-- <view id="mySideNav" class="sideNav" style="{{margin}}px;">
@@ -130,7 +162,7 @@
                 </block>
                   <swiper-item class="swiper-item-add-photo">
                     <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/>
-                    <view>use different photo's</view> 
+                    <view>use different photos</view> 
                   </swiper-item>
                 
               </swiper>
