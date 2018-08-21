@@ -22,9 +22,9 @@ Page({
     console.log("that >> ")
     console.log(that)
     console.log(that.data.is_take_photo)
-    if (!that.data.is_take_photo) {
-      // Mark as already take picture
-      that.data.is_take_photo = true
+    // if (!that.data.is_take_photo) {
+    //   // Mark as already take picture
+    //   that.data.is_take_photo = true
 
       wx.chooseImage({
         count: 1,
@@ -64,7 +64,7 @@ Page({
           // ######LEANCLOUD PART --- SEND IMG
         }
       }) 
-    }
+    // }
   },
 
   scroll: function (e) {
@@ -120,46 +120,95 @@ Page({
       that.data.is_take_photo = true
 
       wx.chooseImage({
-        count: 1,
+        count: 3,
         sizeType: ['compressed'],
         sourceType: ['camera', 'album'],
         success: function (res) {
-          var tempFilePath = res.tempFilePaths[0]
+          
 
-          console.log("Temp file path >>")
-          console.log(tempFilePath)
-          that.setData({
-            is_sending: true,
-            imageSrc: tempFilePath
-          })
-          console.log("Have Image >>")
-          console.log(that.data.haveImage)
-          // console.log(that.data.imgSrc)
+          
+          let tempFilePaths = res.tempFilePaths;
+          console.log(55, res.tempFilePaths)
 
-          // #####LEANCLOUD PART --- SEND IMG
-          console.log("Processing send img to LeanCloud >>")
-          new AV.File('file-name', {
+          let tempFilePathsLength = tempFilePaths.length;
+          console.log(66, tempFilePathsLength)
+
+          // let tempFilePathsFirst = tempFilePaths[0] 
+          // let tempFilePathsSecond = tempFilePaths[1] 
+          // let tempFilePathsThird = tempFilePaths[2] 
+
+          // app.globalData.pictures = tempFilePaths
+          // console.log(3443434, app.globalData.pictures)
+          console.log(3443434, that.data.smallImageUrl)
+
+
+
+          res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
             blob: {
               uri: tempFilePath,
             },
-          }).save().then(
-            file => {
-              console.log("Yeah..This is img url in LeanCloud >>")
-              console.log(that)
-              console.log(file.url())
-              let image = file.url()
-              that.setData({
-                is_sending: false,
-                haveImage: true,
-                smallImageUrl: [image]
-              })
-            }
-            ).catch(console.error);
-          // ######LEANCLOUD PART --- SEND IMG
+          }).save()).reduce(
+            (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+            AV.Promise.resolve([])
+          ).then(function (files) {
+      
+            // let smallImageUrl = []
+            files.map(file => {
+              // file.url()
+              smallImageUrl.push(file.url())
+              // that.setData({
+              //   smallImageUrl: file.url()
+              // })
+            // app.globalData.pictures = smallImageUrl
+            // console.log(44444, app.globalData.pictures)
+          }).catch(console.error);
+
+          console.log(454545, files.map(file => file.url()))
+
+    
+          })
         }
       })
     }
   }, 
+
+
+          // var tempFilePath = res.tempFilePaths[0]
+
+          // console.log("Temp file path >>")
+          // console.log(tempFilePath)
+          // that.setData({
+          //   is_sending: true,
+          //   imageSrc: tempFilePath
+          // })
+          // console.log("Have Image >>")
+          // console.log(that.data.haveImage)
+          // // console.log(that.data.imgSrc)
+
+          // // #####LEANCLOUD PART --- SEND IMG
+          // console.log("Processing send img to LeanCloud >>")
+          // new AV.File('file-name', {
+          //   blob: {
+          //     uri: tempFilePath,
+          //   },
+          // }).save().then(
+          //   file => {
+          //     console.log("Yeah..This is img url in LeanCloud >>")
+          //     console.log(that)
+          //     console.log(file.url())
+          //     let image = file.url()
+          //     that.setData({
+          //       is_sending: false,
+          //       haveImage: true,
+          //       smallImageUrl: [image]
+          //     })
+          //   }
+          //   ).catch(console.error);
+          // // ######LEANCLOUD PART --- SEND IMG
+  //       }
+  //     })
+  //   }
+  // }, 
   
   bindFormSubmit: function (e) {
     let page = this
