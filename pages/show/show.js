@@ -312,11 +312,9 @@ bookmark: function(e) {
                     place: { photo_urls: photo_url }
                   } 
                 })
-                setTimeout(function () {
                     that.setData ({
                       photo_urls: photo_url
                 })
-                }, 3000)
                 console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls)
                 
               }, 30)

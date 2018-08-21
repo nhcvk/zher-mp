@@ -67,9 +67,11 @@ Page({
               myRequest.get({
                 path: `users/${app.globalData.userId}`,
                 success(res) {
+                  console.log(12313241321243312123443, res)
                   page.setData({
                     currentUser: res.data
                   })
+      
                   myRequest.get({
                     path: `users/${app.globalData.userId}/bookmarks`,
                     success(res) {
@@ -112,7 +114,8 @@ Page({
       // console.log(789, this.data.hasUserID)
       // console.log(this.data.cities)
       app.globalData.currentTarget = this.data.cities[e.currentTarget.id].id
-      console.log(app.globalData)
+      app.globalData.currentUser =this.data.currentUser
+      console.log(1312341, app.globalData)
       wx.navigateTo({
         url: `/pages/show/show`
       })

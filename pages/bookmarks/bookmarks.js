@@ -21,7 +21,7 @@ Page({
             if (app.globalData.bookmarkTarget === result.place.city_id || app.globalData.currentTarget === result.place.city_id ) {
               printed.push(result)
             } 
-        })
+        }), 
         page.setData({
           items: printed,
           bookmarked: app.globalData.bookmarked,
