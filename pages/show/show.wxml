@@ -91,6 +91,11 @@
        <block  wx:for="{{place.photo_urls}}" >
       <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
        </block>
+       <form bindsubmit="bindFormSubmit">
+            <swiper-item   class="preview-small-photo" style="text-align: center">
+              <image name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+         </swiper-item>
+         </form>
         </swiper>
       </view>
     </view>

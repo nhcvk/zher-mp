@@ -1,6 +1,7 @@
 // pages/show/show.js
 const app = getApp()
 const myRequest = require('../../lib/request');
+const AV = require('../../utils/av-weapp-min.js')
 
 
 
@@ -43,6 +44,7 @@ Page({
           page.data.items.forEach((place, index) => {
             places.push(Object.assign({}, place, distance[index]))
             page.setData({ places })
+            page.data
           })
           const propComparator = (propName) =>
             (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
@@ -270,6 +272,57 @@ bookmark: function(e) {
         })
       }
     })
-  }
+  },
+
+  uploadSmallPhoto: function (e) {
+    let that = this
+    let myImages = []
+    console.log("that >> ")
+      wx.chooseImage({
+        count: 3,
+        sizeType: ['compressed'],
+        sourceType: ['camera', 'album'],
+        success: function (res) {
+          let tempFilePaths = res.tempFilePaths;
+         console.log(res.tempFilePaths)
+          let tempFilePathsLength = tempFilePaths.length;
+          res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
+            blob: {
+              uri: tempFilePath,
+            },
+          }).save()).reduce(
+            (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+            AV.Promise.resolve([])
+            ).then(function (files) {
+              files.map(file => {
+                myImages.push(file.url())
+              })
+              that.setData({ smallImageUrl: myImages })
+              console.log(e) 
+              let photo_url = that.data.places[e.currentTarget.dataset.imageId].photo_urls
+              console.log("Hello I am here", e.currentTarget)
+              setTimeout(function () {
+                that.data.smallImageUrl.forEach((image) => {
+                  photo_url.push(image)
+                })
+                console.log(22222, photo_url)
+                myRequest.put({
+                  path: `cities/${app.globalData.currentTarget}/places/${e.currentTarget.dataset.placeId}`,
+                  data: {
+                    place: { photo_urls: photo_url }
+                  } 
+                })
+                setTimeout(function () {
+                    that.setData ({
+                      photo_urls: photo_url
+                })
+                }, 3000)
+                console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls)
+                
+              }, 30)
+            })
+        }
+      })
+  }, 
 })
 
