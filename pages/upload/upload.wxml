@@ -26,21 +26,41 @@
 
 
 <form bindsubmit="bindFormSubmit">
-<image name="main_photo_url"  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
-<!--background image-->
+
 <view class="movable" style="{{movable}}">
 <view class="cityswiper">
-  <image  
-    id="main_image" 
-    mode="aspectFill" 
-    style="{{filter}};"/>
+
+
+<!-- IF HAVE main photo-->
+<block wx:if="{{imageUrl.length > 0}}">
+  <image name="main_photo_url"  id="main_image" mode="aspectFill" src="{{imageUrl}}" style="{{filter}};"/>
+</block>
 
     <!--bottom location name-->
   <scroll-view scroll-y class="scroll" bindscroll="scroll">
     <view class="scroll-content">
-      <view>
-       <input class="namelocation-input" name="name" placeholder="name the place" type="text" wrap="soft" maxlength='10'/>
+
+      <!--Under is upload main image button-->
+      <view class="card" style='background-color: #111 ;'>
+        <view class="flex-item-card">
+          <block wx:if="{{imageUrl.length == 0}}">
+            <view class="add-main-image" bindtap="uploadPhoto">
+              <image class="upload-photo" src="../../assets/icons/focus.png"/>
+              <view>upload cover photo</view>
+              <view>in portret view</view>
+            </view>
+          </block>
+        </view>
+      </view> 
+      <!-- above is upload main image button-->
+
+      <!--Under is add place name input-->
+      <view style='padding-top:400rpx;'>
+        <input class="namelocation-input" name="name" placeholder="type the name of place" type="text" wrap="soft" maxlength='10'/>
       </view>
+      <!--above is add place name input-->
+   
+
       <!-- UNDER HERE IS CARD -->
       <view  class="card">
         <view class="flex-wrp">
@@ -53,6 +73,7 @@
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
+
         <!-- UNDER HERE IS CARD -->
       <view  class="card" >
         <view class="flex-wrp">
@@ -62,8 +83,7 @@
             </view>
           </view>
           <view class="flex-item-card" bindtap="pinLocation">
-          <image wx:if="{{!value_location}}" class="location-icon"   src="../../assets/icons/city.png"/>
-                        <!-- <image wx:if="{{value_location}}" class="avatar"   src="../../assets/icons/location-active.jpg" ></image>  -->
+          <image wx:if="{{!value_location}}" class="location-icon"   src="../../assets/icons/addmap.png"/>
             <map
             wx:if="{{value_location}}"   
             show-location="{{showLocation}}"
@@ -71,12 +91,14 @@
             latitude="{{latitude}}"
             longitude="{{longitude}}"
             markers="{{ [{ latitude: latitude, longitude: longitude}]}}"
+            style="margin: auto; margin-top: 8rpx; margin-bottom: 18rpx;"
             ></map>
           </view>
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
-          <!-- UNDER HERE IS CARD -->
+
+      <!-- UNDER HERE IS CARD -->
       <view  class="card">
         <view class="flex-wrp">
           <view class="flex-item-head ">
@@ -84,15 +106,39 @@
                 <view class="card-head-left">Photos</view>
             </view>
           </view>
+          <view class="flex-item-msg">
+          <!-- -->
+            <!-- <swiper   indicator-dots="true" indicator-active-color='white'> -->
 
-            <swiper   indicator-dots="true" indicator-active-color='white'>
-          <!-- <block  wx:for="{{place.photo_urls}}" wx:for-item ="photo"> -->
-          <swiper-item class="upload-small-photo">
-          <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/> 
-          </swiper-item>
-          <!-- </block> -->
-            </swiper>
+              <!-- UNDER: Condition : No SmallImage  .. show add images button-->
+              <block wx:if="{{smallImageUrl.length == 0}}" >
+              <swiper   indicator-dots="false" indicator-active-color='white'>
+                  <swiper-item class="swiper-item-add-photo">
+                    <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+                  </swiper-item>
+              </swiper>
+              </block>
+              <!--ABOVE: Condition : No SmallImage  .. show add images button-->
 
+              <!--UNDER: Condition : SmallImage > 0  .. show images-->
+              <block wx:if="{{smallImageUrl.length > 0}}">
+              <swiper  current="{{myCurrent}}" indicator-dots="true" indicator-active-color='white' bindchange="mySwiperChange">
+                <block wx:for="{{smallImageUrl}}" wx:for-item ="photo">
+                  <swiper-item class="preview-small-photo" style="text-align: center">
+                    <image name="photo_urls" src="{{photo}}" mode="aspectFill" style="text-align: center"/> 
+                  </swiper-item>
+                </block>
+                  <swiper-item class="swiper-item-add-photo">
+                    <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/>
+                    <view>use different photo's</view> 
+                  </swiper-item>
+                
+              </swiper>
+              </block>
+              <!--ABOVE: Condition : SmallImage > 0  .. show images-->
+              
+            <!-- </swiper> -->
+          </view>
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
@@ -127,12 +173,13 @@
   <view  class="tab" bindtap="uploadPhoto">
     <view class="tabHeader">
     <image class="upload-photo" src="../../assets/icons/focus.png"/>
-    </view>
   </view>
+</view>
   
 </view>
   <!--top menu-->
 </view>
 </view>
+
 </form>
 

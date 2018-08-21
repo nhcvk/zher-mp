@@ -14,7 +14,9 @@ Page({
     bookmark_id: {},
     bookmarks: [],
     city_name_array: [],
-    changeIcon: "/assets/icons/change.png"
+    imageUrl: [],
+    changeIcon: "/assets/icons/change.png",
+    myCurrent: 1
   },
 
   uploadPhoto: function () {
@@ -108,16 +110,19 @@ Page({
       }
     })
   }, 
-
+  mySwiperChange: function(e) {
+    console.log(33333333,"My Swiper Change")
+  },
 
   uploadSmallPhoto: function () {
     var that = this
+    let myImages = []
     console.log("that >> ")
     console.log(that)
     console.log(that.data.is_take_photo)
-    if (!that.data.is_take_photo) {
-      // Mark as already take picture
-      that.data.is_take_photo = true
+    // if (!that.data.is_take_photo) {
+    //   // Mark as already take picture
+    //   that.data.is_take_photo = true
 
       wx.chooseImage({
         count: 3,
@@ -151,72 +156,28 @@ Page({
             (m, p) => m.then(v => AV.Promise.all([...v, p()])),
             AV.Promise.resolve([])
           ).then(function (files) {
-      
-            // let smallImageUrl = []
-            files.map(file => {
-              // file.url()
-              smallImageUrl.push(file.url())
-              // that.setData({
-              //   smallImageUrl: file.url()
-              // })
-            // app.globalData.pictures = smallImageUrl
-            // console.log(44444, app.globalData.pictures)
-          }).catch(console.error);
-
-          console.log(454545, files.map(file => file.url()))
-
-    
+              files.map(file => {
+                myImages.push(file.url())
+              })
+              that.setData({smallImageUrl : myImages})
+              console.log(3333, that.data.smallImageUrl)
+              that.setData({
+              myCurrent: 0
+            })
           })
         }
       })
-    }
+    
   }, 
-
-
-          // var tempFilePath = res.tempFilePaths[0]
-
-          // console.log("Temp file path >>")
-          // console.log(tempFilePath)
-          // that.setData({
-          //   is_sending: true,
-          //   imageSrc: tempFilePath
-          // })
-          // console.log("Have Image >>")
-          // console.log(that.data.haveImage)
-          // // console.log(that.data.imgSrc)
-
-          // // #####LEANCLOUD PART --- SEND IMG
-          // console.log("Processing send img to LeanCloud >>")
-          // new AV.File('file-name', {
-          //   blob: {
-          //     uri: tempFilePath,
-          //   },
-          // }).save().then(
-          //   file => {
-          //     console.log("Yeah..This is img url in LeanCloud >>")
-          //     console.log(that)
-          //     console.log(file.url())
-          //     let image = file.url()
-          //     that.setData({
-          //       is_sending: false,
-          //       haveImage: true,
-          //       smallImageUrl: [image]
-          //     })
-          //   }
-          //   ).catch(console.error);
-          // // ######LEANCLOUD PART --- SEND IMG
-  //       }
-  //     })
-  //   }
-  // }, 
   
   bindFormSubmit: function (e) {
     let page = this
     console.log(4444444,this.data)
     console.log("hello", e)
     myRequest.post({
-      path: 'cities/1/places',
-      data: {
+      // path: `cities/${app.globalData.currentTarget}/places`,
+      path: `cities/1/places`,
+      data: { 
         place: {
           city_id: 1,
           user_id: 1, 
