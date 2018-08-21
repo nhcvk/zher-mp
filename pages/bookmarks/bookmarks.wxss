@@ -1,4 +1,7 @@
 /* pages/bookmarks/bookmarks.wxss */
+page {
+  background-color: black;
+}
 .background {
   background: black;
   height: 100vh;
@@ -10,6 +13,14 @@
 
 .scroll {
   margin-top: 110rpx;
+}
+
+.no-bookmarks {
+  background-color: black;
+  position: absolute;
+  left: 174rpx;
+  top: 500rpx;
+  white-space: nowrap;
 }
 
 .nav-content {

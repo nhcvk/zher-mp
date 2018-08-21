@@ -8,7 +8,8 @@
     "pages/profile/profile",
     "pages/upload/upload",
     "pages/edit/edit",
-    "pages/signup/signup"
+    "pages/signup/signup",
+    "pages/places/places"
   ],
   "window":{
     "backgroundTextStyle":"light",

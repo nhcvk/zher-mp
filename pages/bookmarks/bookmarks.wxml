@@ -27,16 +27,19 @@
 <!--background image-->
 <view class="movable" style="{{movable}}">
   <view class="background">
+     <view wx:if="{{items.length > 0}}"> 
 
     <scroll-view class="scroll">
     <!--Favorites cards-->
     <block wx:for="{{places}}" wx:for-item ="place">
-      <view class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
+      <view bindtap="toShow" id="{{place.place_id}}"class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
         <view class="locationDistance">{{place["0"]}}公里</view>
         <view class="locationName">{{place.place.name}}</view>
       </view>
     </block>
     </scroll-view>
+       </view>
+       <view class="no-bookmarks" wx:else>NO BOOKMARKS YET</view> 
   </view>
 
   <!--top menu-->
@@ -57,5 +60,6 @@
     </view>
   </view>
   <!--top menu-->
+
 
 </view>

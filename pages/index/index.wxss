@@ -18,13 +18,20 @@ page {
   height: 500rpx;
   width: 500rpx;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
 }
 
+.logo-inside {
+  height: 500rpx;
+  width: 500rpx;
+  padding-left: 100vw;
+  z-index: 1;
+  background-color: transparent;
+}
 .city {
   width: 106vw;
   position: fixed;
@@ -36,6 +43,7 @@ page {
   font-size: 60rpx;
   font-weight: lighter;
   text-align: center;
+  padding-bottom: 80%;
 }
 
 .cityPage {
