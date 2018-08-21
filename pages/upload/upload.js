@@ -159,7 +159,8 @@ Page({
               files.map(file => {
                 myImages.push(file.url())
               })
-              that.setData({smallImageUrl : myImages})
+              that.setData({
+                smallImageUrl : myImages})
               console.log(3333, that.data.smallImageUrl)
               that.setData({
               myCurrent: 0
@@ -174,17 +175,19 @@ Page({
     let page = this
     console.log(4444444,this.data)
     console.log("hello", e)
+    console.log("result", app.globalData)
     myRequest.post({
       // path: `cities/${app.globalData.currentTarget}/places`,
       path: `cities/1/places`,
       data: { 
         place: {
-          city_id: 1,
-          user_id: 1, 
+          city_id: app.globalData.city,
+          user_id: app.globalData.userId, 
           main_photo_url: page.data.imageUrl, 
           name: e.detail.value.name,
           description: e.detail.value.description,
-          photo_urls: e.detail.value.photo_urls,
+          photo_urls: page.data.smallImageUrl,
+          // photo_urls: e.detail.value.photo_urls,
           longitude: page.data.longitude,
           latitude: page.data.latitude
         }
