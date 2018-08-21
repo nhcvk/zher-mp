@@ -188,3 +188,23 @@ button {
   margin-left: -10rpx!important;
   margin-top: -20rpx!important;
 }
+
+.swiper-item-add-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.preview-small-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-small-photo {
+  width: 75rpx;
+  height: 75rpx;
+  /* margin-left: 150rpx;
+  margin-top: 50rpx; */
+}

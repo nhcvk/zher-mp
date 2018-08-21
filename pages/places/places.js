@@ -1,5 +1,6 @@
 const app = getApp()
 const myRequest = require('../../lib/request');
+const AV = require('../../utils/av-weapp-min.js')
 
 Page({
 
@@ -135,6 +136,61 @@ Page({
         })
       }
     })
-  }
+  },
+  uploadSmallPhoto: function (e) {
+    let that = this
+    let myImages = []
+    console.log("that >> ")
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['compressed'],
+      sourceType: ['camera', 'album'],
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths;
+        console.log(res.tempFilePaths)
+        let tempFilePathsLength = tempFilePaths.length;
+        res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
+          blob: {
+            uri: tempFilePath,
+          },
+        }).save()).reduce(
+          (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+          AV.Promise.resolve([])
+          ).then(function (files) {
+            files.map(file => {
+              myImages.push(file.url())
+            })
+            that.setData({ smallImageUrl: myImages })
+            console.log(e)
+            let photo_url = that.data.place.photo_urls
+            setTimeout(function () {
+              that.data.smallImageUrl.forEach((image) => {
+                photo_url.push(image)
+              })
+              console.log(22222, photo_url)
+              console.log(that.data.place.photo_urls)
+              myRequest.put({
+                path: `cities/${app.globalData.currentTarget}/places/${that.data.place.id}`,
+                data: {
+                  place: { photo_urls: photo_url }
+                }
+              })
+              that.setData({
+                photo_urls: photo_url
+              })
+              console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls)
+            }, 30),
+              wx.showToast({
+                title: '好'
+              })
+            setTimeout(function () {
+              wx.reLaunch({
+                url: '/pages/places/places',
+              })
+            }, 500)
+          })
+      }
+    })
+  }, 
 })
          

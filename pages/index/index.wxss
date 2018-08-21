@@ -35,7 +35,7 @@ page {
 .city {
   width: 106vw;
   position: fixed;
-  bottom: -147rpx;
+  bottom: -150rpx;
 }
 
 .titlewhite {
@@ -43,7 +43,7 @@ page {
   font-size: 60rpx;
   font-weight: lighter;
   text-align: center;
-  padding-bottom: 80%;
+  padding-bottom: 130%;
 }
 
 .cityPage {
@@ -52,7 +52,7 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 200rpx;
   box-sizing: border-box;
 }
 

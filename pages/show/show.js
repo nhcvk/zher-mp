@@ -13,7 +13,8 @@ Page({
     bookmark_id: {},
     bookmarks: [],
     distance: [],
-    bookmarked_city_array: []
+    bookmarked_city_array: [],
+    current : 0
   },
 
 
@@ -50,7 +51,7 @@ Page({
             (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
           page.setData({
             places: page.data.places.sort(propComparator('0'))
-          })}, 600)
+          })}, 10)
 
       }
     })
@@ -112,8 +113,12 @@ goMenu: function(e) {
 },
 
 pageChange: function(e) {
+  let current = e.detail.current
+  console.log(e)
+  
   this.setData({
     filter: "filter: blur(0px);", 
+    current: current
   })
 },
 
@@ -315,12 +320,31 @@ bookmark: function(e) {
                     that.setData ({
                       photo_urls: photo_url
                 })
-                console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls)
-                
-              }, 30)
-            })
+                console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls) 
+              }, 30),
+                wx.showToast({
+                title: '好'
+                })
+                setTimeout(function () {
+                  wx.reLaunch({
+                    url: '/pages/show/show',
+                  })
+                }, 500)
+             })
         }
       })
   }, 
-})
+
+  goToMap: function(e) {
+    console.log(e)
+    app.globalData.placeLatitude = e.currentTarget.dataset.latitude
+    app.globalData.placeLongitude = e.currentTarget.dataset.longitude
+    console.log(app.globalData)
+    setTimeout(function () {
+      wx.redirectTo({
+        url: '/pages/map/map',
+      })}, 50)
+    
+  }
+ })
 

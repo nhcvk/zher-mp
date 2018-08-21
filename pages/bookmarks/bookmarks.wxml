@@ -8,7 +8,7 @@
         <view class="sideNaveSubTitle" style="color: yellow">Change city</view>
       </view>
       <view></view>
- 
+
         <block wx:for="{{bookmarked_city_array}}" wx:for-item ="bookmark"> 
           <view class="changeIndex">
           <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
@@ -26,19 +26,21 @@
       </view>
   </view>
 <!--background image-->
+
 <view class="movable" style="{{movable}}">
+<scroll-view scroll-y class="scroll">
+<view class="scroll-content">
   <view class="background">
       <view wx:if="{{items.length > 0}}">  
 
-    <scroll-view class="scroll">
     <!-- Favorites cards -->
+
     <block wx:for="{{places}}" wx:for-item ="place">
       <view bindtap="toShow" id="{{place.place_id}}"class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
         <view class="locationDistance">{{place["0"]}}公里</view>
         <view class="locationName">{{place.place.name}}</view>
       </view>
     </block>
-    </scroll-view>
         </view>
        <view class="no-bookmarks" wx:else>NO BOOKMARKS YET</view>  
   </view>
@@ -61,6 +63,7 @@
     </view>
   </view>
   <!--top menu-->
-
+  </view>
+</scroll-view>
 
 </view>

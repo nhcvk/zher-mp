@@ -121,8 +121,9 @@
 
 .local {
   object-fit: cover;
-  width: 450rpx;
-  height: 300rpx;
+  width: 326rpx;
+  height: 218rpx;
+  border-radius: 2rpx;
 }
 
 .local-img {
@@ -188,4 +189,71 @@ button {
   position: absolute;
   margin-left: -10rpx!important;
   margin-top: -20rpx!important;
+}
+.swiper-item-add-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.preview-small-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-small-photo {
+  width: 75rpx;
+  height: 75rpx;
+  /* margin-left: 150rpx;
+  margin-top: 50rpx; */
+}
+
+.map {
+  height: 100rpx;
+  text-align: center;
+  position: relative;
+}
+
+.map-icon {
+  height: 200rpx;
+  width: 200rpx;
+}
+
+.card-map {
+  margin: 20px;
+  border-radius: 4rpx;
+}
+
+.flex-wrp {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-item-head {
+  margin-bottom: 9rpx;
+}
+
+.flex-item-msg {
+  font-size: 14px;
+  text-align: left;
+  margin: 7px;
+  align-items: center;
+}
+
+.card-local {
+  margin: 180rpx;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4rpx;
+  margin-top: 150rpx;
+}
+
+.flex-wrp-local {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-item-head-local {
+  margin-bottom: 9rpx;
 }
