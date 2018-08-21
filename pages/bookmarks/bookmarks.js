@@ -18,7 +18,7 @@ Page({
       success(res) {
         let printed = []
         res.data.bookmarks.forEach ((result) => {
-            if (app.globalData.bookmarkTarget === result.place.city_id) {
+            if (app.globalData.bookmarkTarget === result.place.city_id || app.globalData.currentTarget === result.place.city_id ) {
               printed.push(result)
             } 
         })
