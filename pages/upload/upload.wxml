@@ -130,7 +130,7 @@
                 </block>
                   <swiper-item class="swiper-item-add-photo">
                     <image name="photo_urls" bindtap='uploadSmallPhoto' class="upload-small-photo" src="../../assets/icons/focus.png"/>
-                    <view>use different photo's</view> 
+                    <view>use different photos</view> 
                   </swiper-item>
                 
               </swiper>

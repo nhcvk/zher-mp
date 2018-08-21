@@ -177,11 +177,11 @@ Page({
     console.log("hello", e)
     console.log("result", app.globalData)
     myRequest.post({
-      // path: `cities/${app.globalData.currentTarget}/places`,
-      path: `cities/1/places`,
+      path: `cities/${app.globalData.currentUser.city_id}/places`,
+      // path: `cities/1/places`,
       data: { 
         place: {
-          city_id: app.globalData.city,
+          city_id: app.globalData.currentUser.city_id,
           user_id: app.globalData.userId, 
           main_photo_url: page.data.imageUrl, 
           name: e.detail.value.name,
@@ -195,6 +195,9 @@ Page({
       success(res) {
         console.log(res)
       }
+    }),
+    wx.redirectTo({
+      url: '/pages/show/show'
     })
 
   },
