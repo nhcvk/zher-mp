@@ -54,7 +54,7 @@
     </view>
     <view class="tab">
       <view class="tabHeader">
-        <view class="cityName">{{items[0].city.name}}</view>
+        <view bindtap="toIndex" data-set="{{items[0].place.city_id}}" class="cityName">{{items[0].city.name}}</view>
       </view>
     </view>
     <view class="tab" bindtap="bookmark">
