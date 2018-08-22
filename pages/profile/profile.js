@@ -48,10 +48,9 @@ Page({
     }),
       myRequest.get({
         path: `users/${app.globalData.selectLocal}`,
-      // path: `users/13`,
         success(res) {
           page.setData({
-            currentUser: res.data,
+            local: res.data,
           })
         }
       })
