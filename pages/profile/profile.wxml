@@ -50,9 +50,9 @@
         </view>
       </view>
       <view class="user-description">
-        <image class="avatar" mode="aspectFill" src="{{user.avatar_url}}"/>
+        <image class="avatar" mode="aspectFill" src="{{currentUser.avatar_url}}"/>
         <view class="flex-item-msg-description">
-          {{user.biography}}
+          {{currentuser.biography}}
         </view>
       </view>
     </view>
@@ -96,19 +96,19 @@
       <view class="flex-item-msg-contact">
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/phone.png"/>
-          <view>{{user.phone_number}}</view>
+          <view>{{currentUser.phone_number}}</view>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/wechat.png"/>
-          <view>{{user.wechat_id}}</view>
+          <view>{{currentUser.wechat_id}}</view>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/mail.png"/>
-          <view>{{user.email}}</view>
+          <view>{{currentUser.email}}</view>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/house.png"/>
-          <view>{{user.website}}</view>
+          <view>{{currentUser.website}}</view>
         </view>
       </view>
     </view>
@@ -124,7 +124,7 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader distance">{{user.name}}</view>
+    <view class="tabHeader distance">{{currentUser.name}}</view>
   </view>
   <view class="tab" bindtap="bookmark">
     <view class="tabHeader">
