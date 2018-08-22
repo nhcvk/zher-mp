@@ -52,7 +52,7 @@
       <view class="user-description">
         <image class="avatar" mode="aspectFill" src="{{currentUser.avatar_url}}"/>
         <view class="flex-item-msg-description">
-          {{currentuser.biography}}
+          {{currentUser.biography}}
         </view>
       </view>
     </view>
@@ -68,19 +68,11 @@
       </view>
       <view class="flex-item-msg">
         <block wx:for="{{places}}" wx:for-item ="place">
-          <view class="cardBackground card" style="background-image: url('{{place.main_photo_url}}');">
+          <view class="cardBackground card" style="background-image: url('{{place.main_photo_url}}');" bindtap="goShow" id='{{place.id}}'>
             <!-- <view class="locationDistance">1.5km</view> -->
             <view class="locationName">{{place.name}}</view>
           </view>
         </block>
-        <!-- <map   
-        show-location="{{showLocation}}"
-        scale="13"
-        latitude="{{userLocation.latitude}}"
-        longitude="{{userLocation.longitude}}"
-        markers="{{ [{ latitude: place.latitude, longitude: place.longitude}]}}"
-        style="margin: auto; margin-top: 8rpx; margin-bottom: 18rpx;"
-        ></map> -->
       </view>
     </view>
   </view> 
@@ -96,19 +88,31 @@
       <view class="flex-item-msg-contact">
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/phone.png"/>
+          <block wx:if="{{currentUser.phone_number == null}}"></block>
+          <block wx:if="{{currentUser.phone_number != null}}">
           <view>{{currentUser.phone_number}}</view>
+          </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/wechat.png"/>
-          <view>{{currentUser.wechat_id}}</view>
+          <block wx:if="{{currentUser.wechat_id == null}}"></block>
+          <block wx:if="{{currentUser.wechat_id != null}}">
+            <view>{{currentUser.wechat_id}}</view>
+          </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/mail.png"/>
+          <block wx:if="{{currentUser.email == null}}"></block>
+          <block wx:if="{{currentUser.email != null}}">
           <view>{{currentUser.email}}</view>
+          </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/house.png"/>
+          <block wx:if="{{currentUser.website == null}}"></block>
+          <block wx:if="{{currentUser.website != null}}">
           <view>{{currentUser.website}}</view>
+          </block>
         </view>
       </view>
     </view>

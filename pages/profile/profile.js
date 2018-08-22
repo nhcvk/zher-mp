@@ -174,7 +174,7 @@ Page({
         changeIcon: "/assets/icons/change-hover.png"
       })
   },
-  
+
   ChangeToUpload: function (e) {
     wx.navigateTo({
       url: '/pages/upload/upload'
@@ -197,6 +197,14 @@ Page({
 
   deg2rad: function (deg) {
     return deg * (Math.PI / 180)
-  }
+  },
+
+  goShow: function (e) {
+    console.log(e)
+    app.globalData.showTarget = parseInt(e.currentTarget.id)
+    wx.navigateTo({
+      url: '../places/places',
+    })
+  }, 
 
 })
