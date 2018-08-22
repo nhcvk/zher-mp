@@ -206,5 +206,17 @@ Page({
       }
     })
   }, 
+
+  previewImage: function (e) {
+    let page = this
+    console.log(3333, e)
+    setTimeout(function () {
+      wx.previewImage({
+        current: page.data.place.photo_urls[e.currentTarget.dataset.imageIndex],
+        urls: page.data.place.photo_urls
+      });
+
+    }, 50)
+  },   
 })
          

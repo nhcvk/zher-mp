@@ -25,7 +25,7 @@
        <view  class="card">
     <view class="flex-wrp">
       <view class="flex-item-msg">
-     <image class="qr" style="width: 200px; height: 200px" src='../../assets/icons/apply.jpeg'></image>
+     <image class="qr" bindtap='previewImage' style="width: 200px; height: 200px" src='../../assets/icons/apply.jpeg'></image>
       </view>
     </view>
   </view> 
