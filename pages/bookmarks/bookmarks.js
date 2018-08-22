@@ -24,7 +24,6 @@ Page({
         }), 
         page.setData({
           items: printed,
-          bookmarked: app.globalData.bookmarked,
           bookmarked_city_array: app.globalData.bookmarked_city_array,
           bookmark_id: app.globalData.bookmark_id
         })
@@ -60,7 +59,7 @@ Page({
         places: page.data.places.sort(propComparator('0'))
       })
     }) 
-    }, 500)
+    }, 8000)
   },
   
   
@@ -125,7 +124,7 @@ Page({
         let name = res.userInfo.nickName
         let avatar_url = res.userInfo.avatarUrl
         myRequest.put({
-          path: `users/${page.data.currentUser.id}`,
+          path: `users/${app.globalData.currentUser.id}`,
           data: {
             name: name,
             avatar_url: avatar_url

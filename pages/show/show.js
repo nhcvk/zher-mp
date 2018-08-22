@@ -7,7 +7,6 @@ const AV = require('../../utils/av-weapp-min.js')
 
 Page({
   data: {
-    showLocation: true, 
     margin: "width: 0",
     bookmarked: {},
     bookmark_id: {},
@@ -18,64 +17,25 @@ Page({
   },
 
 
-  onLoad: function () {
-    let page = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        let userLocation = {
-          latitude: res.latitude,
-          longitude: res.longitude,
-        }
-        page.setData({ 
-          userLocation,
-          user_id: app.globalData.userId
-        });
-        console.log(page.data)
-        let distance = page.data.distance
-        setTimeout(function () {
-          page.data.items.forEach((item) => {
-            distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
-            page.setData({
-              distance
-            })
-          });
-          console.log(page.data.items)
-          let places = []
-          page.data.items.forEach((place, index) => {
-            places.push(Object.assign({}, place, distance[index]))
-            page.setData({ places })
-            page.data
-          })
-          const propComparator = (propName) =>
-            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
-          page.setData({
-            places: page.data.places.sort(propComparator('0'))
-          })}, 10)
 
-      }
-    })
-    myRequest.get({
-      path: `cities/${app.globalData.currentTarget}/places`,
-      success(res) {
-          page.setData({ 
-          items: res.data.places,
-        }) 
-      } 
-    }), 
-      myRequest.get({
-      path: `users/${app.globalData.userId}`,
-      success(res) {
-          page.setData({
-            currentUser: res.data
-          })
-        }
-      }),
+
+
+  onLoad: function () {
+    console.log('test')
+    let page = this
+     //Promise function
+       page.setData({ 
+          userLocation: app.globalData.userLocation,
+          user_id: app.globalData.userId,
+          currentUser: app.globalData.currentUser
+        })
+        page.showPageLoad()
+
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        let bookmarked = page.data.bookmarked
-        let bookmark_id = page.data.bookmark_id
+        let bookmarked = page.data.bookmarked //If true icon changes color
+        let bookmark_id = page.data.bookmark_id 
         res.data.bookmarks.forEach ((bookmark) => {
           bookmark_id[bookmark.place_id] = bookmark.id
           bookmarked[bookmark.place_id] = true
@@ -85,11 +45,15 @@ Page({
           bookmark_id,
           bookmarks: res.data.bookmarks
         })
-        page.addBookmarksToGlobalData()
         page.removeDups()
       }
     })
   },
+
+
+  
+
+  
 
 scroll: function(e) {
   this.setData({
@@ -141,6 +105,7 @@ bookmark: function(e) {
         })
         page.addBookmarksToGlobalData()
         page.removeDups()
+
       }
     })
    } else {
@@ -178,6 +143,7 @@ bookmark: function(e) {
       url: '/pages/upload/upload'
     })
   }, 
+
   getDistanceFromLatLonInKm: function (lat1, lon1, lat2, lon2) {
     let R = 6371
     let dLat = this.deg2rad(lat2 - lat1);
@@ -201,12 +167,10 @@ bookmark: function(e) {
     app.globalData.bookmarks = page.data.bookmarks
     app.globalData.bookmarked = page.data.bookmarked
     app.globalData.bookmark_id = page.data.bookmark_id
-    console.log("GLOBAL DATA", app.globalData)
   }, 
 
   removeDups: function () {
     let page = this
-    setTimeout(function () {
       let bookmarked_city_array = page.data.bookmarked_city_array
       if (page.data.bookmarks.length > 0)  {
         bookmarked_city_array = []
@@ -218,20 +182,18 @@ bookmark: function(e) {
                 }
             temp_array.push(temp_object)
             bookmarked_city_array = [...new Set(temp_array)];
+            console.log(bookmarked_city_array)
 
         }) 
         page.setData({
           bookmarked_city_array
         })
       } else {
-          const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
-          bookmarked_city_array.splice(index, 1)
           page.setData({
-            bookmarked_city_array
+            bookmarked_city_array: []
           })
         }
       app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
-    }, 500) 
       }, 
     
   previewImage: function (e) {
@@ -245,6 +207,11 @@ bookmark: function(e) {
 
     }, 50)
   },   
+
+
+
+
+  
   toBookmark: function (e) {
     console.log(e)
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
@@ -252,6 +219,18 @@ bookmark: function(e) {
       url: '../bookmarks/bookmarks',
     })
   }, 
+
+
+
+
+
+
+
+
+
+
+
+
 
   backToHome: function (e) {
     wx.redirectTo({
@@ -278,6 +257,23 @@ bookmark: function(e) {
       }
     })
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   uploadSmallPhoto: function (e) {
     let that = this
@@ -335,16 +331,96 @@ bookmark: function(e) {
       })
   }, 
 
+
+
+
+
+
+
+
+
+
   goToMap: function(e) {
     console.log(e)
-    app.globalData.placeLatitude = e.currentTarget.dataset.latitude
-    app.globalData.placeLongitude = e.currentTarget.dataset.longitude
-    console.log(app.globalData)
-    setTimeout(function () {
-      wx.redirectTo({
-        url: '/pages/map/map',
-      })}, 50)
-    
-  }
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success(res) {
+      wx.openLocation({
+        latitude: e.currentTarget.dataset.latitude,
+        longitude: e.currentTarget.dataset.longitude,
+        scale: 13,
+        showLocation: true
+      })
+    }
+   })
+  },
+
+
+
+
+
+
+
+
+
+
+  showPageLoad: function() {  
+    this.setDataPromise()
+    .then(places => this.assignDistance(places))
+    .then(places => this.createPlaces(places))
+    .then(places => this.sortPlaces(places))
+  },
+
+  setDataPromise: function() {
+  let that = this  
+   return new Promise(function (resolve, reject){  
+    myRequest.get({
+      path: `cities/${app.globalData.currentTarget}/places`,
+      success(res) {
+
+        console.log("res", res);
+        resolve({places: res.data.places}) 
+      } 
+    })
+  })
+},
+
+    assignDistance: function (places) {
+      let that = this
+      return new Promise(function(resolve, reject) {
+
+        let distance = []
+        console.log(1212, places);
+        places.places.forEach((item) => {
+          console.log(12, item.latitude)
+          console.log(that.data.userLocation);
+          
+          distance.push([that.getDistanceFromLatLonInKm(item.latitude, item.longitude, that.data.userLocation.latitude, that.data.userLocation.longitude)])
+          resolve({...places, distance})
+        })
+      })
+    },
+
+    createPlaces: function (places) {
+      return new Promise(function(resolve, reject) {
+        let newPlaces = []
+        console.log(places)
+        places.places.forEach((place, index) => {
+          console.log(places.distance[index])
+          newPlaces.push({ ...place, distance: places.distance[index][0]})
+          // this.setData({ places })
+          resolve(newPlaces)
+        })
+      })     
+    },
+
+    sortPlaces: function (places) {
+      const propComparator = (propName) =>
+      (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
+    this.setData({
+      places: places.sort(propComparator('distance'))
+    })
+    },
+
  })
 
