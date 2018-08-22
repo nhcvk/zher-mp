@@ -240,6 +240,8 @@
 .sub-contact {
   display: flex;
   align-items: center;
+  margin-bottom: 10rpx;
+  margin-top: 10rpx;
 }
 
 .contact-logo {
