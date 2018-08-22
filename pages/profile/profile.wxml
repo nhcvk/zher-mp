@@ -45,9 +45,12 @@
       </view>
       <view class="user-description">
         <image class="avatar" mode="aspectFill" src="{{local.avatar_url}}"/>
-        <view class="flex-item-msg-description">
-          {{local.biography}}
-        </view>
+        <block wx:if="{{local.biography == null}}"></block>
+        <block wx:if="{{local.biography != null}}">
+          <view class="flex-item-msg-description">
+            {{local.biography}}
+          </view>
+        </block>
       </view>
     </view>
   </view> 
