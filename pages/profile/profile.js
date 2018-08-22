@@ -7,12 +7,8 @@ Page({
   data: {
     showLocation: true,
     margin: "width: 0",
-    bookmarked: {},
-    bookmark_id: {},
-    bookmarks: [],
     changeIcon: "/assets/icons/change.png",
     distance: [],
-    bookmarked_city_array: []
   },
 
   // onLoad: function () {
@@ -32,39 +28,6 @@ Page({
 
   onLoad: function () {
     let page = this
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success: function (res) {
-    //     let userLocation = {
-    //       latitude: res.latitude,
-    //       longitude: res.longitude,
-    //     }
-    //     page.setData({
-    //       userLocation,
-    //       user_id: app.globalData.userId
-    //     });
-    //     console.log(777, app.globalData.userId)
-    //     console.log(666, page.data)
-    //     let distance = page.data.distance
-    //     page.data.items.forEach((item) => {
-    //       distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
-    //       page.setData({
-    //         distance
-    //       })
-    //     });
-    //     console.log(1234567, page.data.items)
-    //     let places = []
-    //     page.data.items.forEach((place, index) => {
-    //       places.push(Object.assign({}, place, distance[index]))
-    //       page.setData({ places })
-    //     })
-    //     const propComparator = (propName) =>
-    //       (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
-    //     page.setData({
-    //       places: page.data.places.sort(propComparator('0'))
-    //     })
-    //   }
-    // }),
     myRequest.get({
       path: `cities/${app.globalData.cityLocal}/places`,
       success(res) {
@@ -76,9 +39,11 @@ Page({
             }
           }),
       page.setData({
-        places: placeLocal
+        places: placeLocal,
+        bookmarked_city_array: app.globalData.bookmarked_city_array,
+        bookmark_id: app.globalData.bookmark_id,
+        currentUser: app.globalData.currentUser
       })
-
       }
     }),
       myRequest.get({
@@ -86,23 +51,7 @@ Page({
       // path: `users/13`,
         success(res) {
           page.setData({
-            currentUser: res.data
-          })
-        }
-      }),
-      myRequest.get({
-        path: `users/${app.globalData.userId}/bookmarks`,
-        success(res) {
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          res.data.bookmarks.forEach((bookmark) => {
-            bookmark_id[bookmark.place_id] = bookmark.id
-            bookmarked[bookmark.place_id] = true
-          })
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks: res.data.bookmarks
+            currentUser: res.data,
           })
         }
       })
@@ -167,17 +116,41 @@ Page({
   },
 
   ChangeToIndex: function (e) {
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  },
+
+  toBookmark: function (e) {
+    app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
     wx.navigateTo({
-      url: '/pages/index/index'
-    }),
-      this.setData({
-        changeIcon: "/assets/icons/change-hover.png"
-      })
+      url: '../bookmarks/bookmarks',
+    })
   },
 
   ChangeToUpload: function (e) {
     wx.navigateTo({
       url: '/pages/upload/upload'
+    })
+  },
+  becomeLocal: function (e) {
+    let page = this
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res)
+        let name = res.userInfo.nickName
+        let avatar_url = res.userInfo.avatarUrl
+        myRequest.put({
+          path: `users/${page.data.currentUser.id}`,
+          data: {
+            name: name,
+            avatar_url: avatar_url
+          }
+        })
+        wx.redirectTo({
+          url: '../signup/signup',
+        })
+      }
     })
   },
 
