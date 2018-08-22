@@ -74,6 +74,21 @@ Page({
     }
   },
 
+  goToMap: function(e) {
+    console.log(e)
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success(res) {
+      wx.openLocation({
+        latitude: e.currentTarget.dataset.latitude,
+        longitude: e.currentTarget.dataset.longitude,
+        scale: 13,
+        showLocation: true
+      })
+    }
+   })
+  },
+
   backToHome: function (e) {
     wx.redirectTo({
       url: '../index/index',

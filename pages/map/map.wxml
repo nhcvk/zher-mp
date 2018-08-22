@@ -1,9 +1,0 @@
-
-<view class="map">
- <map   
-    show-location="true"
-    scale="13"
-    latitude="{{latitude}}"
-    longitude="{{longitude}}"
-    markers="{{ [{ latitude: latitude, longitude: longitude}]}}"
-></map></view>

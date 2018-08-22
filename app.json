@@ -9,8 +9,7 @@
     "pages/upload/upload",
     "pages/edit/edit",
     "pages/signup/signup",
-    "pages/places/places",
-    "pages/map/map"
+    "pages/places/places"
   ],
   "window":{
     "backgroundTextStyle":"light",
