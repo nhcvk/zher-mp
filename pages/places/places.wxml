@@ -33,11 +33,11 @@
 
 <!-- SWIPERRRRRRRRRRRRRRRRRRRRRRRRRRRRR -->
 
-<image  id="main_image" mode="aspectFill" src="{{place.main_photo_url}}" style="{{filter}};"/>
+<image  id="main_image" mode="aspectFill" src="{{place[0].place.main_photo_url}}" style="{{filter}};"/>
 <!--bottom location name-->
 <scroll-view scroll-y class="scroll" bindscroll="scroll">
 <view class="scroll-content">
-    <view class="namelocation">{{place.name}}</view>
+    <view class="namelocation">{{place[0].place.name}}</view>
     <!-- UNDER HERE IS CARD -->
   <view  class="card">
     <view class="flex-wrp">
@@ -47,7 +47,7 @@
         </view>
       </view>
       <view class="flex-item-msg">
-        {{place.description}}
+        {{place[0].place.description}}
       </view>
     </view>
   </view> 
@@ -63,11 +63,11 @@
       </view>
        <view class="flex-item-msg">
         <swiper indicator-dots="true" indicator-active-color='white' >
-       <block  wx:for="{{place.photo_urls}}" >
+       <block  wx:for="{{place[0].place.photo_urls}}" >
       <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
        </block>
             <swiper-item  class="preview-small-photo" style="text-align: center">
-              <image name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+              <image name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place[0].place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
          </swiper-item>
         </swiper>
       </view>
@@ -78,7 +78,7 @@
  <view  class="card-map">
     <view class="flex-wrp">
       <view class="flex-item-msg">
-<view class="map" bindtap='goToMap' data-longitude="{{place.longitude}}" data-latitude="{{place.latitude}}"><image class='map-icon' src="../../assets/icons/map-of-roads.png" ></image></view>
+<view class="map" bindtap='goToMap' data-longitude="{{place[0].place.longitude}}" data-latitude="{{place[0].place.latitude}}"><image class='map-icon' src="../../assets/icons/map-of-roads.png" ></image></view>
       </view>
     </view>
   </view> 
@@ -91,9 +91,9 @@
             <view class="card-head-left">Local</view>
         </view>
       </view>
-      <view class="local-img" data-city-id="{{place.user.city_id}}" data-local-id="{{place.user_id}}" bindtap="goToLocal">
-        <image class="local" mode="aspectFill" src="{{place.user.avatar_url}}"></image>
-        <view class="name">{{place.user.name}}</view>
+      <view class="local-img" data-city-id="{{place[0].place.user.city_id}}" data-local-id="{{place[0].place.user_id}}" bindtap="goToLocal">
+        <image class="local" mode="aspectFill" src="{{place[0].place.user.avatar_url}}"></image>
+        <view class="name">{{place[0].place.user.name}}</view>
       </view> 
     </view>
   </view> 
@@ -108,7 +108,7 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader distance">{{distance}}公里</view>
+    <view class="tabHeader distance">{{place[0].distance}}公里</view>
   </view>
   <view id="{{place.id}}" class="tab" bindtap="toBookmark">
     <view class="tabHeader">
