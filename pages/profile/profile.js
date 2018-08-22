@@ -32,51 +32,58 @@ Page({
 
   onLoad: function () {
     let page = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        let userLocation = {
-          latitude: res.latitude,
-          longitude: res.longitude,
-        }
-        page.setData({
-          userLocation,
-          user_id: app.globalData.userId
-        });
-        console.log(777, app.globalData.userId)
-        console.log(666, page.data)
-        let distance = page.data.distance
-        page.data.items.forEach((item) => {
-          distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
-          page.setData({
-            distance
-          })
-        });
-        console.log(1234567, page.data.items)
-        let places = []
-        page.data.items.forEach((place, index) => {
-          places.push(Object.assign({}, place, distance[index]))
-          page.setData({ places })
-        })
-        const propComparator = (propName) =>
-          (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
-        page.setData({
-          places: page.data.places.sort(propComparator('0'))
-        })
-      }
-    }),
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: function (res) {
+    //     let userLocation = {
+    //       latitude: res.latitude,
+    //       longitude: res.longitude,
+    //     }
+    //     page.setData({
+    //       userLocation,
+    //       user_id: app.globalData.userId
+    //     });
+    //     console.log(777, app.globalData.userId)
+    //     console.log(666, page.data)
+    //     let distance = page.data.distance
+    //     page.data.items.forEach((item) => {
+    //       distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
+    //       page.setData({
+    //         distance
+    //       })
+    //     });
+    //     console.log(1234567, page.data.items)
+    //     let places = []
+    //     page.data.items.forEach((place, index) => {
+    //       places.push(Object.assign({}, place, distance[index]))
+    //       page.setData({ places })
+    //     })
+    //     const propComparator = (propName) =>
+    //       (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
+    //     page.setData({
+    //       places: page.data.places.sort(propComparator('0'))
+    //     })
+    //   }
+    // }),
     myRequest.get({
-      // path: `cities/${app.globalData.currentTarget}/places`,
-      path: `cities/8/places`,
+      path: `cities/${app.globalData.cityLocal}/places`,
       success(res) {
-        page.setData({
-          items: res.data.places,
-        })
+        let placeLocal = []
+            console.log(12123131, res)
+            res.data.places.forEach((place) => {
+            if (place.user_id === app.globalData.selectLocal) {
+              placeLocal.push(place)
+            }
+          }),
+      page.setData({
+        places: placeLocal
+      })
+
       }
     }),
       myRequest.get({
-        // path: `users/${app.globalData.userId}`,
-      path: `users/13`,
+        path: `users/${app.globalData.selectLocal}`,
+      // path: `users/13`,
         success(res) {
           page.setData({
             currentUser: res.data
@@ -113,22 +120,21 @@ Page({
   //       console.log(1232131, page.data.user)
   //     } 
   //   })
-  //   setTimeout(function(){
+  //   setTimeout(function () {
   //       myRequest.get({
   //         path: `users/${app.globalData.userId}/cities/${app.globalData.currentUser.city_id}`
   //       // path: `cities/${page.data.user.city_id}/places`,
-  //     success(res) {
-  //       let printed = []
-  //       console.log("RES", res)
-  //       res.data.places.forEach((result) => {
-  //         if (page.data.user.id === result.user_id)
-  //           printed.push(result)
-  //       })
-  //       page.setData({
-  //         items: printed
-  //       })
-        
-  //     }
+  //       success(res) {
+  //         let printed = []
+  //         console.log("RES", res)
+  //         res.data.places.forEach((result) => {
+  //           if (page.data.user.id === result.user_id)
+  //             printed.push(result)
+  //         })
+  //         page.setData({
+  //           items: printed
+  //         })   
+  //       }
   //     })
   //   }, 500)
   // },
@@ -160,51 +166,6 @@ Page({
     })
   },
 
-  bookmark: function (e) {
-    let page = this
-    if (page.data.bookmarked[e.currentTarget.id] == true) {
-      myRequest.delete({
-        path: `users/${app.globalData.userId}/bookmarks/${page.data.bookmark_id[e.currentTarget.id]}`,
-        success(res) {
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          let bookmarks = page.data.bookmarks
-          bookmarks.splice(bookmarks.indexOf(e.currentTarget.id), 1)
-          delete bookmark_id[e.currentTarget.id]
-          delete bookmarked[e.currentTarget.id]
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks
-          })
-        }
-      })
-    } else {
-      myRequest.post({
-        path: `users/${app.globalData.userId}/bookmarks`,
-        data: {
-          user_id: app.globalData.userId,
-          place_id: e.currentTarget.id
-        },
-        success(res) {
-          console.log(12312312, res)
-          console.log(123123123, e.currentTarget.id)
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          let bookmarks = page.data.bookmarks
-          bookmarks.splice(e.currentTarget.id, 0, res.data)
-          bookmarked[e.currentTarget.id] = true
-          bookmark_id[e.currentTarget.id] = res.data.id
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks,
-          })
-        }
-      })
-    }
-  },
-
   ChangeToIndex: function (e) {
     wx.navigateTo({
       url: '/pages/index/index'
@@ -213,6 +174,7 @@ Page({
         changeIcon: "/assets/icons/change-hover.png"
       })
   },
+  
   ChangeToUpload: function (e) {
     wx.navigateTo({
       url: '/pages/upload/upload'

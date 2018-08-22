@@ -422,5 +422,14 @@ bookmark: function(e) {
     })
     },
 
+  goToLocal : function (e) {
+    console.log(789, e)
+    app.globalData.selectLocal = e.currentTarget.dataset.localId
+    app.globalData.cityLocal = e.currentTarget.dataset.cityId
+    wx.navigateTo({
+      url: `/pages/profile/profile`
+    })
+  }
+
  })
 

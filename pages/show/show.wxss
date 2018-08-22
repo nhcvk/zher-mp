@@ -28,8 +28,8 @@
 }
 
 .bookmark {
-  width: 75rpx;
-  height: 75rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 #main_image {
