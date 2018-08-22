@@ -91,7 +91,7 @@
             <view class="card-head-left">Local</view>
         </view>
       </view>
-       <view class="local-img">
+      <view class="local-img" data-city-id="{{place.user.city_id}}" data-local-id="{{place.user_id}}" bindtap="goToLocal">
         <image class="local" mode="aspectFill" src="{{place.user.avatar_url}}"></image>
         <view class="name">{{place.user.name}}</view>
       </view> 
