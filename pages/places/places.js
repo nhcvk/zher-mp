@@ -178,7 +178,6 @@ Page({
               that.setData({
                 photo_urls: photo_url
               })
-              console.log(123, that.data.places[e.currentTarget.dataset.imageId].photo_urls)
             }, 30),
               wx.showToast({
                 title: '好'
