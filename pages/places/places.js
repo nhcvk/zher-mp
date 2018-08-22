@@ -12,37 +12,78 @@ Page({
 
   onLoad: function () {
     let page = this
-    myRequest.get({
-      path: `cities/${app.globalData.bookmarkTarget}/places/${app.globalData.showTarget}`,
-      success(res) {
-        console.log("RES", res)
-        page.setData({
-          place: res.data
-        })
-      }
+    page.showPageLoad()
+    page.setData({
+      bookmarked_city_array: app.globalData.bookmarked_city_array,
+      bookmark_id: app.globalData.bookmark_id,
+      currentUser: app.globalData.currentUser
+
     })
-    myRequest.get({
-      path: `users/${app.globalData.userId}`,
-      success(res) {
-        page.setData({
-          currentUser: res.data
-        })
-      }
-    }),
-    setTimeout(function () {
-      page.setData({ user_id: app.globalData.userId })
-      let distance = page.data.distance
-      console.log()
-        distance.push([page.getDistanceFromLatLonInKm(page.data.place.latitude, page.data.place.longitude, app.globalData.userLocation.latitude, app.globalData.userLocation.longitude)])
-        page.setData({
-          distance,
-          bookmarked: [app.globalData.bookmarked],
-          bookmarked_city_array: app.globalData.bookmarked_city_array,
-          bookmark_id: app.globalData.bookmark_id
-        })
-    }, 200)
+
   },
   
+  showPageLoad: function () {
+    this.setDataPromise()
+      .then(place => this.assignDistance(place))
+      .then(place => this.createPlaces(place))
+      .then(place => this.setPlace(place))
+  },
+
+  setDataPromise: function () {
+    let that = this
+    return new Promise(function (resolve, reject) {
+      myRequest.get({
+        path: `cities/${app.globalData.bookmarkTarget}/places/${app.globalData.showTarget}`,
+        success(res) {
+
+          console.log("res", res);
+          resolve({ place: res.data })
+        }
+      })
+    })
+  },
+
+  assignDistance: function (place) {
+    let that = this
+    return new Promise(function (resolve, reject) {
+
+      let distance = []
+      console.log(1212, place);
+        console.log(app.globalData.userLocation);
+        distance.push([that.getDistanceFromLatLonInKm(place.place.latitude, place.place.longitude, app.globalData.userLocation.latitude, app.globalData.userLocation.longitude)])
+        resolve({ ...place, distance })
+    })
+  },
+
+  createPlaces: function (place) {
+    return new Promise(function (resolve, reject) {
+      let newPlace = []
+      console.log(24324, place)
+        newPlace.push({ ...place, distance: place.distance})
+        console.log(111, newPlace)
+        resolve(newPlace)
+      })
+    },
+
+  setPlace: function (places) {
+    this.setData({
+      place: places
+    })
+    console.log("DATA", this.data.place)
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   ChangeToIndex: function (e) {
     wx.navigateTo({

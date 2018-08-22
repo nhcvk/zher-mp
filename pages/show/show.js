@@ -23,7 +23,6 @@ Page({
   onLoad: function () {
     console.log('test')
     let page = this
-     //Promise function
        page.setData({ 
           userLocation: app.globalData.userLocation,
           user_id: app.globalData.userId,
@@ -49,12 +48,6 @@ Page({
       }
     })
   },
-
-
-  
-
-  
-
 scroll: function(e) {
   this.setData({
     filter: `filter: blur(${e.detail.scrollTop  / 60 }rpx);`

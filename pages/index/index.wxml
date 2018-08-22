@@ -10,15 +10,16 @@
   duration="{{duration}}" 
   previous-margin="{{previousMargin}}px" 
   next-margin="{{nextMargin}}px"
+  bindchange="pageChange"
   height="100vh">
   <block wx:for="{{cities}}" wx:for-item ="city">
-<swiper-item>
+<swiper-item >
 <image class="logo-inside" id="{{city.id}}" bindtap='{{logo}}'/>
     <view class="backgroundblack">
        <view id="{{index}}"  class="titlewhite" style="{{visibility}}" bindtap='goShow'>
         <view >{{city.name}}</view>
       </view> 
-      <image class="city" src="../../assets/icons/{{city.name}}.png"/>
+      <image class="city" src="../../assets/icons/Chengdu.png"/>
     </view>
 </swiper-item>
 </block>
