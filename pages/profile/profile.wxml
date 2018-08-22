@@ -44,9 +44,9 @@
         </view>
       </view>
       <view class="user-description">
-        <image class="avatar" mode="aspectFill" src="{{currentUser.avatar_url}}"/>
+        <image class="avatar" mode="aspectFill" src="{{local.avatar_url}}"/>
         <view class="flex-item-msg-description">
-          {{currentUser.biography}}
+          {{local.biography}}
         </view>
       </view>
     </view>
@@ -82,30 +82,30 @@
       <view class="flex-item-msg-contact">
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/phone.png"/>
-          <block wx:if="{{currentUser.phone_number == null}}"></block>
-          <block wx:if="{{currentUser.phone_number != null}}">
-          <view>{{currentUser.phone_number}}</view>
+          <block wx:if="{{local.phone_number == null}}"></block>
+          <block wx:if="{{local.phone_number != null}}">
+          <view>{{local.phone_number}}</view>
           </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/wechat.png"/>
-          <block wx:if="{{currentUser.wechat_id == null}}"></block>
-          <block wx:if="{{currentUser.wechat_id != null}}">
-            <view>{{currentUser.wechat_id}}</view>
+          <block wx:if="{{local.wechat_id == null}}"></block>
+          <block wx:if="{{local.wechat_id != null}}">
+            <view>{{local.wechat_id}}</view>
           </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/mail.png"/>
-          <block wx:if="{{currentUser.email == null}}"></block>
-          <block wx:if="{{currentUser.email != null}}">
-          <view>{{currentUser.email}}</view>
+          <block wx:if="{{local.email == null}}"></block>
+          <block wx:if="{{local.email != null}}">
+          <view>{{local.email}}</view>
           </block>
         </view>
         <view class="sub-contact">
           <image class="contact-logo" src="../../assets/icons/house.png"/>
-          <block wx:if="{{currentUser.website == null}}"></block>
-          <block wx:if="{{currentUser.website != null}}">
-          <view>{{currentUser.website}}</view>
+          <block wx:if="{{local.website == null}}"></block>
+          <block wx:if="{{local.website != null}}">
+          <view>{{local.website}}</view>
           </block>
         </view>
       </view>
@@ -122,7 +122,7 @@
     </view>
   </view>
   <view class="tab">
-    <view class="tabHeader distance">{{currentUser.name}}</view>
+    <view class="tabHeader distance">{{local.name}}</view>
   </view>
   <view class="tab" bindtap="bookmark">
     <view class="tabHeader">
