@@ -77,6 +77,12 @@ Page({
     })
   },
 
+  ChangeToUpload: function (e) {
+    wx.navigateTo({
+      url: '/pages/upload/upload'
+    })
+  }, 
+
   getDistanceFromLatLonInKm: function (lat1, lon1, lat2, lon2) {
     let R = 6371
     let dLat = this.deg2rad(lat2 - lat1);

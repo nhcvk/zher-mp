@@ -9,6 +9,7 @@ Page({
     user_id: app.globalData.userId,
     distance: [],
     margin: "width: 0",
+    source: ['../../assets/icons/apply.jpeg']
   },
 
   onLoad: function () {
@@ -46,6 +47,17 @@ Page({
       wx.navigateTo({
         url: '../bookmarks/bookmarks',
       })
-    }
+    },
+    previewImage: function (e) {
+      let page = this
+      console.log(3333, e)
+      setTimeout(function () {
+        wx.previewImage({
+          current: page.data.source[0],
+          urls: page.data.source
+        });
+
+      }, 50)
+    },   
 
 })
