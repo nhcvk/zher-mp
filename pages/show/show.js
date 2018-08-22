@@ -408,6 +408,7 @@ bookmark: function(e) {
         places.places.forEach((place, index) => {
           console.log(places.distance[index])
           newPlaces.push({ ...place, distance: places.distance[index][0]})
+          console.log(111, newPlaces)
           // this.setData({ places })
           resolve(newPlaces)
         })
@@ -420,6 +421,7 @@ bookmark: function(e) {
     this.setData({
       places: places.sort(propComparator('distance'))
     })
+    console.log("DATA", this.data.places)
     },
 
   goToLocal : function (e) {
