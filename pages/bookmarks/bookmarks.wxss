@@ -11,6 +11,13 @@ page {
   color: white;
 }
 
+.scroll {
+  position: absolute;
+  overflow: scroll; 
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
 .scroll-content {
   margin-top: 10vh;
 }
