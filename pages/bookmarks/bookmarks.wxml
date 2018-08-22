@@ -31,18 +31,17 @@
 <scroll-view scroll-y class="scroll">
 <view class="scroll-content">
   <view class="background">
-      <view wx:if="{{items.length > 0}}">  
-
-    <!-- Favorites cards -->
-
-    <block wx:for="{{places}}" wx:for-item ="place">
-      <view bindtap="toShow" id="{{place.place_id}}"class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
-        <view class="locationDistance">{{place["0"]}}公里</view>
+      <view class="no-bookmarks" wx:if="{{places.length == 0}}">  
+              NO BOOKMARKS YET
+      </view>
+      <view  wx:else>
+          <block wx:for="{{places}}" wx:for-item ="place">
+          <view bindtap="toShow" id="{{place.place_id}}"class="cardBackground card" style="background-image: url('{{place.place.main_photo_url}}');">
+        <view class="locationDistance">{{place.distance}}公里</view>
         <view class="locationName">{{place.place.name}}</view>
       </view>
     </block>
-        </view>
-       <view class="no-bookmarks" wx:else>NO BOOKMARKS YET</view>  
+    </view>  
   </view>
 
   <!--top menu-->
@@ -54,7 +53,7 @@
     </view>
     <view class="tab">
       <view class="tabHeader">
-        <view bindtap="toIndex" data-set="{{items[0].place.city_id}}" class="cityName">{{items[0].city.name}}</view>
+        <view bindtap="toIndex" data-set="{{places[0].place.city_id}}" class="cityName">{{places[0].city.name}}</view>
       </view>
     </view>
     <view class="tab" bindtap="bookmark">

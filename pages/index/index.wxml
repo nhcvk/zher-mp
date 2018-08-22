@@ -1,6 +1,6 @@
 <!--index.wxml-->
  <view class="parent">
-<image class="logo" src="../../assets/icons/logo_zher.png"/>  
+ <image class="logo" src="../../assets/icons/logo_zher.png"/>   
 <swiper
   class="cityswiper"
   autoplay="{{autoplay}}" 
@@ -12,17 +12,16 @@
   next-margin="{{nextMargin}}px"
   height="100vh">
   <block wx:for="{{cities}}" wx:for-item ="city">
-<swiper-item bindchange="pageChange">
-<image class="logo-inside"  id="{{city.id}}" bindtap='toBookmark'/>
+<swiper-item>
+<image class="logo-inside" id="{{city.id}}" bindtap='{{logo}}'/>
     <view class="backgroundblack">
-      <view id="{{index}}"  class="titlewhite" style="{{visibility}}" bindtap='goShow'>
+       <view id="{{index}}"  class="titlewhite" style="{{visibility}}" bindtap='goShow'>
         <view >{{city.name}}</view>
-      </view>
+      </view> 
       <image class="city" src="../../assets/icons/{{city.name}}.png"/>
     </view>
 </swiper-item>
 </block>
-
 </swiper>
 </view>
 
