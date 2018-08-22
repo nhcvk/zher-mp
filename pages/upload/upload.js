@@ -22,76 +22,11 @@ Page({
 
   onLoad: function () {
     let page = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        let userLocation = {
-          latitude: res.latitude,
-          longitude: res.longitude,
-        }
         page.setData({
-          userLocation,
-          user_id: app.globalData.userId
-        });
-        console.log(page.data)
-        let distance = page.data.distance
-        setTimeout(function () {
-          page.data.items.forEach((item) => {
-            distance.push([page.getDistanceFromLatLonInKm(item.latitude, item.longitude, page.data.userLocation.latitude, page.data.userLocation.longitude)])
-            page.setData({
-              distance
-            })
-          });
-          console.log(page.data.items)
-          let places = []
-          page.data.items.forEach((place, index) => {
-            places.push(Object.assign({}, place, distance[index]))
-            page.setData({ places })
-            page.data
-          })
-          const propComparator = (propName) =>
-            (a, b) => a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
-          page.setData({
-            places: page.data.places.sort(propComparator('0'))
-          })
-        }, 600)
-
-      }
+          bookmarked_city_array: app.globalData.bookmarked_city_array,
+          bookmark_id: app.globalData.bookmark_id,
+          currentUser: app.globalData.currentUser
     })
-    myRequest.get({
-      path: `cities/${app.globalData.currentTarget}/places`,
-      success(res) {
-        page.setData({
-          items: res.data.places,
-        })
-      }
-    }),
-      myRequest.get({
-        path: `users/${app.globalData.userId}`,
-        success(res) {
-          page.setData({
-            currentUser: res.data
-          })
-        }
-      }),
-      myRequest.get({
-        path: `users/${app.globalData.userId}/bookmarks`,
-        success(res) {
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          res.data.bookmarks.forEach((bookmark) => {
-            bookmark_id[bookmark.place_id] = bookmark.id
-            bookmarked[bookmark.place_id] = true
-          })
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks: res.data.bookmarks
-          })
-          page.addBookmarksToGlobalData()
-          page.removeDups()
-        }
-      })
   },
 
   uploadPhoto: function () {
@@ -287,87 +222,29 @@ Page({
 
   removeDups: function () {
     let page = this
-    setTimeout(function () {
       let bookmarked_city_array = page.data.bookmarked_city_array
-      if (page.data.bookmarks.length > 0) {
+      if (page.data.bookmarks.length > 0)  {
         bookmarked_city_array = []
         page.data.bookmarks.forEach((bookmark) => {
           let temp_array = []
           let temp_object = {
-            id: bookmark.place.city_id,
-            name: bookmark.city.name
-          }
-          temp_array.push(temp_object)
-          bookmarked_city_array = [...new Set(temp_array)];
+                id: bookmark.place.city_id,
+                name: bookmark.city.name
+                }
+            temp_array.push(temp_object)
+            bookmarked_city_array = [...new Set(temp_array)];
+            console.log(bookmarked_city_array)
 
-        })
+        }) 
         page.setData({
           bookmarked_city_array
         })
       } else {
-        const index = bookmarked_city_array.indexOf(page.data.items[0].city.name)
-        bookmarked_city_array.splice(index, 1)
-        page.setData({
-          bookmarked_city_array
-        })
-      }
+          page.setData({
+            bookmarked_city_array: []
+          })
+        }
       app.globalData.bookmarked_city_array = page.data.bookmarked_city_array
-    }, 500)
-  }, 
-
-  addBookmarksToGlobalData: function () {
-    let page = this
-    app.globalData.bookmarks = page.data.bookmarks
-    app.globalData.bookmarked = page.data.bookmarked
-    app.globalData.bookmark_id = page.data.bookmark_id
-    console.log("GLOBAL DATA", app.globalData)
-  },
-
-  bookmark: function (e) {
-    let page = this
-    if (page.data.bookmarked[e.currentTarget.id] == true) {
-      myRequest.delete({
-        path: `users/${app.globalData.userId}/bookmarks/${page.data.bookmark_id[e.currentTarget.id]}`,
-        success(res) {
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          let bookmarks = page.data.bookmarks
-          bookmarks.splice(bookmarks.indexOf(e.currentTarget.id), 1)
-          delete bookmark_id[e.currentTarget.id]
-          delete bookmarked[e.currentTarget.id]
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks
-          })
-          page.addBookmarksToGlobalData()
-          page.removeDups()
-        }
-      })
-    } else {
-      myRequest.post({
-        path: `users/${app.globalData.userId}/bookmarks`,
-        data: {
-          user_id: app.globalData.userId,
-          place_id: e.currentTarget.id
-        },
-        success(res) {
-          let bookmarked = page.data.bookmarked
-          let bookmark_id = page.data.bookmark_id
-          let bookmarks = page.data.bookmarks
-          bookmarks.splice(e.currentTarget.id, 0, res.data)
-          bookmarked[e.currentTarget.id] = true
-          bookmark_id[e.currentTarget.id] = res.data.id
-          page.setData({
-            bookmarked,
-            bookmark_id,
-            bookmarks,
-          })
-          page.addBookmarksToGlobalData()
-          page.removeDups()
-        }
-      })
-    }
-  },  
+      }, 
 
 })

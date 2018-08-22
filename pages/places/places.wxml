@@ -52,30 +52,9 @@
     </view>
   </view> 
   <!-- ABOVE HERE IS CARD  -->
-     <!-- UNDER HERE IS CARD -->
-  <view  class="card">
-    <view class="flex-wrp">
-      <view class="flex-item-head ">
-        <view class="card-head">
-            <view class="card-head-left">Map</view>
-        </view>
-      </view>
-      <view class="flex-item-msg">
-        <map   
-        show-location="true"
-        scale="13"
-        latitude="{{ place.latitude}}"
-        longitude="{{place.longitude}}"
-        markers="{{ [{ latitude: place.latitude, longitude: place.longitude}]}}"
-        style="margin: auto; margin-top: 8rpx; margin-bottom: 18rpx;"
 
-        ></map>
-      </view>
-    </view>
-  </view> 
-  <!-- ABOVE HERE IS CARD  -->
       <!-- UNDER HERE IS CARD -->
-  <view  class="card">
+    <view  class="card">
     <view class="flex-wrp">
       <view class="flex-item-head ">
         <view class="card-head">
@@ -95,16 +74,25 @@
     </view>
   </view> 
   <!-- ABOVE HERE IS CARD  -->
-      <!-- UNDER HERE IS CARD -->
-  <view  class="card">
+       <!-- UNDER HERE IS CARD -->
+ <view  class="card-map">
     <view class="flex-wrp">
-      <view class="flex-item-head ">
+      <view class="flex-item-msg">
+<view class="map" bindtap='goToMap' data-longitude="{{place.longitude}}" data-latitude="{{place.latitude}}"><image class='map-icon' src="../../assets/icons/map-of-roads.png" ></image></view>
+      </view>
+    </view>
+  </view> 
+  <!-- ABOVE HERE IS CARD  -->
+      <!-- UNDER HERE IS CARD -->
+  <view  class="card-local">
+    <view class="flex-wrp-local">
+      <view class="flex-item-head-local ">
         <view class="card-head">
             <view class="card-head-left">Local</view>
         </view>
       </view>
        <view class="local-img">
-        <image class="local" src="{{place.user.avatar_url}}"></image>
+        <image class="local" mode="aspectFill" src="{{place.user.avatar_url}}"></image>
         <view class="name">{{place.user.name}}</view>
       </view> 
     </view>
@@ -122,7 +110,7 @@
   <view class="tab">
     <view class="tabHeader distance">{{distance}}公里</view>
   </view>
-  <view id="{{place.id}}" class="tab" bindtap="bookmark">
+  <view id="{{place.id}}" class="tab" bindtap="toBookmark">
     <view class="tabHeader">
     <view class="bookmark"/>
     </view>

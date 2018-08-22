@@ -16,28 +16,21 @@ Page({
     myRequest.get({
       path: `users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        let printed = []
+        let selectedCity = []
         res.data.bookmarks.forEach ((result) => {
             if (app.globalData.bookmarkTarget === result.place.city_id || app.globalData.currentTarget === result.place.city_id ) {
-              printed.push(result)
+              selectedCity.push(result)
             } 
         }), 
         page.setData({
-          items: printed,
+          items: selectedCity,
           bookmarked_city_array: app.globalData.bookmarked_city_array,
-          bookmark_id: app.globalData.bookmark_id
+          bookmark_id: app.globalData.bookmark_id,
+          currentUser: app.globalData.currentUser
         })
         console.log("GLOBAL", page.data)
       } 
     }) 
-    myRequest.get({
-      path: `users/${app.globalData.userId}`,
-      success(res) {
-        page.setData({
-          currentUser: res.data
-        })
-      }
-    }),
     setTimeout(function (){
     page.setData({ user_id: app.globalData.userId })
     let distance = page.data.distance
@@ -59,7 +52,7 @@ Page({
         places: page.data.places.sort(propComparator('0'))
       })
     }) 
-    }, 8000)
+    }, 200)
   },
   
   
@@ -135,6 +128,13 @@ Page({
         })
       }
     })
-  }
+  },
 
+  toIndex: function(e) {
+    console.log(e)
+    app.globalData.currentTarget = e.currentTarget.dataset.set
+    wx.navigateTo({
+      url: '../show/show',
+    })
+  }
 })
