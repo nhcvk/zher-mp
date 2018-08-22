@@ -13,10 +13,9 @@
           <image  class="change-location" src="/assets/icons/bookmarked.png"></image>
           <view class="sideNaveSubTitle" id="{{bookmark.id}}" bindtap="toBookmark" style="color: white" >{{bookmark.name}}</view>
           </view> 
-        </block>
-        
-      </view>
+        </block>        
   </view>
+</view>
 <!--Side Nav: end-->
 
 <!--background image-->
