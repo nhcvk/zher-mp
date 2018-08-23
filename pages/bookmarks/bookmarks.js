@@ -40,7 +40,10 @@ Page({
         success(res) {
           let selectedCity = []
           res.data.bookmarks.forEach((result) => {
-            if (app.globalData.bookmarkTarget === result.place.city_id || app.globalData.currentTarget === result.place.city_id) {
+            console.log('app.globalData.bookmarkTarget', app.globalData.bookmarkTarget)
+            console.log("result.place.city_id", result.place.city_id  )
+            console.log("app.globalData.currentTarget", app.globalData.currentTarget)
+            if (app.globalData.bookmarkTarget === result.place.city_id) {
               selectedCity.push(result)
               console.log("result", result)
             }

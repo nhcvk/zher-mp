@@ -167,17 +167,17 @@ bookmark: function(e) {
       let bookmarked_city_array = page.data.bookmarked_city_array
       if (page.data.bookmarks.length > 0)  {
         bookmarked_city_array = []
+        let temp_array = []
         page.data.bookmarks.forEach((bookmark) => {
-          let temp_array = []
           let temp_object = {
                 id: bookmark.place.city_id,
                 name: bookmark.city.name
                 }
             temp_array.push(temp_object)
-            bookmarked_city_array = [...new Set(temp_array)];
-            console.log(bookmarked_city_array)
-
         }) 
+        console.log("temp", temp_array)
+        bookmarked_city_array = [...new Map(temp_array.map(o => [JSON.stringify(o), o])).values()];
+        console.log("city", bookmarked_city_array)
         page.setData({
           bookmarked_city_array
         })
