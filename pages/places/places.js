@@ -202,7 +202,7 @@ Page({
             })
             that.setData({ smallImageUrl: myImages })
             console.log(e)
-            let photo_url = that.data.place.photo_urls
+            let photo_url = that.data.place[0].place.photo_urls
             setTimeout(function () {
               that.data.smallImageUrl.forEach((image) => {
                 photo_url.push(image)
@@ -210,7 +210,7 @@ Page({
               console.log(22222, photo_url)
               console.log(that.data.place.photo_urls)
               myRequest.put({
-                path: `cities/${app.globalData.currentTarget}/places/${that.data.place.id}`,
+                path: `cities/${app.globalData.currentTarget}/places/${that.data.place[0].place.id}`,
                 data: {
                   place: { photo_urls: photo_url }
                 }

@@ -13,7 +13,7 @@ Page({
     bookmarks: [],
     distance: [],
     bookmarked_city_array: [],
-    current : 0
+    current : 0, 
   },
 
 
@@ -32,7 +32,7 @@ Page({
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        let bookmarked = page.data.bookmarked //If true icon changes color
+        let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id 
         res.data.bookmarks.forEach ((bookmark) => {
           bookmark_id[bookmark.place_id] = bookmark.id
@@ -41,8 +41,10 @@ Page({
         page.setData({
           bookmarked,
           bookmark_id,
-          bookmarks: res.data.bookmarks
+          bookmarks: res.data.bookmarks,
         })
+        if (page.data.bookmarked == true) {
+        }
         page.removeDups()
       }
     })
@@ -85,14 +87,14 @@ bookmark: function(e) {
       success(res) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-        let bookmarks = page.data.bookmarks
+        let bookmarks = page.data.bookmarks        
         bookmarks.splice(bookmarks.indexOf(e.currentTarget.id), 1)
         delete bookmark_id[e.currentTarget.id]
         delete bookmarked[e.currentTarget.id]
         page.setData({
           bookmarked, 
           bookmark_id ,
-          bookmarks     
+          bookmarks ,    
         })
         page.addBookmarksToGlobalData()
         page.removeDups()
@@ -226,20 +228,6 @@ bookmark: function(e) {
       }
     })
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
