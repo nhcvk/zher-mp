@@ -43,7 +43,7 @@
             <view class="add-main-image" bindtap="uploadPhoto">
               <image class="upload-photo" src="../../assets/icons/focus.png"/>
               <view>Cover Photo</view>
-              <view>(portret mode)</view>
+              <view>(portrait mode)</view>
             </view>
           </block>
         </view>
