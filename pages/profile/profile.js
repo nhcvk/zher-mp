@@ -174,7 +174,7 @@ Page({
   goShow: function (e) {
     console.log(e)
     app.globalData.showTarget = parseInt(e.currentTarget.id)
-    wx. reLaunch({
+    wx. navigateTo({
       url: '../places/places',
     })
   }, 

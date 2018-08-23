@@ -65,7 +65,7 @@
       </view>
       <view class="flex-item-msg">
         <block wx:for="{{places}}" wx:for-item ="place">
-          <view class="cardBackground card" style="background-image: url('{{place.main_photo_url}}');" bindtap="goShow" id='{{place.id}}'>
+          <view class="cardBackground" style="background-image: url('{{place.main_photo_url}}');" bindtap="goShow" id='{{place.id}}'>
             <!-- <view class="locationDistance">1.5km</view> -->
             <view class="locationName">{{place.name}}</view>
           </view>
