@@ -80,6 +80,7 @@ pageChange: function(e) {
 },
 
 bookmark: function(e) {
+  console.log("CLICKED")
   let page = this
   if (page.data.bookmarked[e.currentTarget.id] == true) {
     myRequest.delete({
