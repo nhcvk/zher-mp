@@ -1,5 +1,3 @@
-/**index.wxss**/
-
 page {
   background-color: black;
 }
@@ -35,7 +33,7 @@ page {
 .city {
   width: 106vw;
   position: fixed;
-  bottom: -150rpx;
+  bottom: -130rpx;
 }
 
 .titlewhite {

@@ -23,7 +23,7 @@ Page({
       path: 'cities',
       success(res) {
           page.setData({
-          cities: res.data.cities
+          cities: res.data.cities,
         })
       }
     }),
@@ -81,10 +81,10 @@ Page({
                         bookmark_id,
                         bookmarks: res.data.bookmarks,
                         visibility: "visibility:show",
-                        logo: 'toBookmark'
+                        logo: 'toBookmark',
                       })
                       page.addBookmarksToGlobalData()
-                      page.removeDups()
+                      page.removeDups()                     
                     }
                   })
                 }

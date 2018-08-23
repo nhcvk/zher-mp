@@ -19,7 +19,7 @@
        <view id="{{index}}"  class="titlewhite" style="{{visibility}}" bindtap='goShow'>
         <view >{{city.name}}</view>
       </view> 
-      <image class="city" src="../../assets/icons/Chengdu.png"/>
+      <image class="city" src="../../assets/icons/{{city.id}}.png"/>
     </view>
 </swiper-item>
 </block>
