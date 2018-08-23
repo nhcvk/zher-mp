@@ -9,7 +9,7 @@ Page({
     user_id: app.globalData.userId,
     distance: [],
     margin: "width: 0",
-    source: ['../../assets/icons/apply.jpeg']
+    source: ["http://lc-0lo9ds81.cn-n1.lcfile.com/84d65aeab8b3637c12aa.jpeg"]
   },
 
   onLoad: function () {
