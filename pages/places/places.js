@@ -237,8 +237,8 @@ Page({
     console.log(3333, e)
     setTimeout(function () {
       wx.previewImage({
-        current: page.data.place.photo_urls[e.currentTarget.dataset.imageIndex],
-        urls: page.data.place.photo_urls
+        current: page.data.place[0].place.photo_urls[e.currentTarget.dataset.imageIndex],
+        urls: page.data.place[0].place.photo_urls
       });
 
     }, 50)

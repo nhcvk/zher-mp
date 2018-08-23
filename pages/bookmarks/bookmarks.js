@@ -102,7 +102,7 @@ Page({
   },
 
   ChangeToIndex: function (e) {
-    wx.reLauch({
+    wx.reLaunch({
       url: '../index/index',
     })
   },
