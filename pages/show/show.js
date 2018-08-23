@@ -13,7 +13,7 @@ Page({
     bookmarks: [],
     distance: [],
     bookmarked_city_array: [],
-    current : 0
+    current : 0, 
   },
 
 
@@ -21,7 +21,6 @@ Page({
 
 
   onLoad: function () {
-    console.log('test')
     let page = this
        page.setData({ 
           userLocation: app.globalData.userLocation,
@@ -33,7 +32,7 @@ Page({
     myRequest.get({
       path:`users/${app.globalData.userId}/bookmarks`,
       success(res) {
-        let bookmarked = page.data.bookmarked //If true icon changes color
+        let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id 
         res.data.bookmarks.forEach ((bookmark) => {
           bookmark_id[bookmark.place_id] = bookmark.id
@@ -42,8 +41,10 @@ Page({
         page.setData({
           bookmarked,
           bookmark_id,
-          bookmarks: res.data.bookmarks
+          bookmarks: res.data.bookmarks,
         })
+        if (page.data.bookmarked == true) {
+        }
         page.removeDups()
       }
     })
@@ -71,7 +72,6 @@ goMenu: function(e) {
 
 pageChange: function(e) {
   let current = e.detail.current
-  console.log(e)
   
   this.setData({
     filter: "filter: blur(0px);", 
@@ -87,14 +87,14 @@ bookmark: function(e) {
       success(res) {
         let bookmarked = page.data.bookmarked
         let bookmark_id = page.data.bookmark_id
-        let bookmarks = page.data.bookmarks
+        let bookmarks = page.data.bookmarks        
         bookmarks.splice(bookmarks.indexOf(e.currentTarget.id), 1)
         delete bookmark_id[e.currentTarget.id]
         delete bookmarked[e.currentTarget.id]
         page.setData({
           bookmarked, 
           bookmark_id ,
-          bookmarks     
+          bookmarks ,    
         })
         page.addBookmarksToGlobalData()
         page.removeDups()
@@ -127,7 +127,7 @@ bookmark: function(e) {
 }
 }, 
   ChangeToIndex: function (e) {
-      wx.navigateTo({
+      wx.reLaunch({
         url: '/pages/index/index'
       })
   }, 
@@ -167,17 +167,15 @@ bookmark: function(e) {
       let bookmarked_city_array = page.data.bookmarked_city_array
       if (page.data.bookmarks.length > 0)  {
         bookmarked_city_array = []
+        let temp_array = []
         page.data.bookmarks.forEach((bookmark) => {
-          let temp_array = []
           let temp_object = {
                 id: bookmark.place.city_id,
                 name: bookmark.city.name
                 }
             temp_array.push(temp_object)
-            bookmarked_city_array = [...new Set(temp_array)];
-            console.log(bookmarked_city_array)
-
         }) 
+        bookmarked_city_array = [...new Map(temp_array.map(o => [JSON.stringify(o), o])).values()];
         page.setData({
           bookmarked_city_array
         })
@@ -191,7 +189,6 @@ bookmark: function(e) {
     
   previewImage: function (e) {
     let page = this
-    console.log(3333,e)
     setTimeout(function () {
       wx.previewImage({
         current: page.data.places[e.currentTarget.dataset.placeIndex].photo_urls[e.currentTarget.dataset.imageIndex],
@@ -206,35 +203,16 @@ bookmark: function(e) {
 
   
   toBookmark: function (e) {
-    console.log(e)
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
     wx.navigateTo({
       url: '../bookmarks/bookmarks',
     })
   }, 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  backToHome: function (e) {
-    wx.redirectTo({
-      url: '../index/index',
-    })
-  },
   becomeLocal: function (e) {
     let page = this
     wx.getUserInfo({
       success: function (res) {
-        console.log(res)
         let name = res.userInfo.nickName
         let avatar_url = res.userInfo.avatarUrl
         myRequest.put({
@@ -254,22 +232,8 @@ bookmark: function(e) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   uploadSmallPhoto: function (e) {
-    let that = this
+    var that = this
     let myImages = []
     console.log("that >> ")
       wx.chooseImage({
@@ -277,10 +241,13 @@ bookmark: function(e) {
         sizeType: ['compressed'],
         sourceType: ['camera', 'album'],
         success: function (res) {
+
           let tempFilePaths = res.tempFilePaths;
          console.log(res.tempFilePaths)
+
           let tempFilePathsLength = tempFilePaths.length;
           res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
+            
             blob: {
               uri: tempFilePath,
             },
@@ -334,7 +301,6 @@ bookmark: function(e) {
 
 
   goToMap: function(e) {
-    console.log(e)
     wx.authorize({
       scope: 'scope.userLocation',
       success(res) {
@@ -370,8 +336,6 @@ bookmark: function(e) {
     myRequest.get({
       path: `cities/${app.globalData.currentTarget}/places`,
       success(res) {
-
-        console.log("res", res);
         resolve({places: res.data.places}) 
       } 
     })
@@ -383,11 +347,7 @@ bookmark: function(e) {
       return new Promise(function(resolve, reject) {
 
         let distance = []
-        console.log(1212, places);
         places.places.forEach((item) => {
-          console.log(12, item.latitude)
-          console.log(that.data.userLocation);
-          
           distance.push([that.getDistanceFromLatLonInKm(item.latitude, item.longitude, that.data.userLocation.latitude, that.data.userLocation.longitude)])
           resolve({...places, distance})
         })
@@ -397,11 +357,8 @@ bookmark: function(e) {
     createPlaces: function (places) {
       return new Promise(function(resolve, reject) {
         let newPlaces = []
-        console.log(places)
         places.places.forEach((place, index) => {
-          console.log(places.distance[index])
           newPlaces.push({ ...place, distance: places.distance[index][0]})
-          console.log(111, newPlaces)
           // this.setData({ places })
           resolve(newPlaces)
         })
@@ -414,11 +371,9 @@ bookmark: function(e) {
     this.setData({
       places: places.sort(propComparator('distance'))
     })
-    console.log("DATA", this.data.places)
     },
 
   goToLocal : function (e) {
-    console.log(789, e)
     app.globalData.selectLocal = e.currentTarget.dataset.localId
     app.globalData.cityLocal = e.currentTarget.dataset.cityId
     wx.navigateTo({

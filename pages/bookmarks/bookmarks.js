@@ -40,7 +40,10 @@ Page({
         success(res) {
           let selectedCity = []
           res.data.bookmarks.forEach((result) => {
-            if (app.globalData.bookmarkTarget === result.place.city_id || app.globalData.currentTarget === result.place.city_id) {
+            console.log('app.globalData.bookmarkTarget', app.globalData.bookmarkTarget)
+            console.log("result.place.city_id", result.place.city_id  )
+            console.log("app.globalData.currentTarget", app.globalData.currentTarget)
+            if (app.globalData.bookmarkTarget === result.place.city_id) {
               selectedCity.push(result)
               console.log("result", result)
             }
@@ -82,15 +85,6 @@ Page({
     })
     console.log("DATA", this.data.places)
   },
-
-  goToLocal: function (e) {
-    console.log(789, e)
-    app.globalData.selectLocal = e.currentTarget.dataset.localId
-    app.globalData.cityLocal = e.currentTarget.dataset.cityId
-    wx.navigateTo({
-      url: `/pages/profile/profile`
-    })
-  },
   
   goMenu: function (e) {
     if (this.data.margin == "width: 0") {
@@ -108,7 +102,7 @@ Page({
   },
 
   ChangeToIndex: function (e) {
-    wx.redirectTo({
+    wx.reLauch({
       url: '../index/index',
     })
   },
@@ -139,7 +133,7 @@ Page({
 
     toBookmark: function (e) {
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
-    wx.navigateTo({
+    wx.reLaunch({
       url: '../bookmarks/bookmarks',
     })
   },
@@ -175,7 +169,7 @@ Page({
   toIndex: function(e) {
     console.log(23232232, e)
     app.globalData.currentTarget = e.currentTarget.dataset.set
-    wx.navigateTo({
+    wx.reLaunch({
       url: '../show/show',
     })
   },

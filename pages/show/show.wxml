@@ -68,10 +68,10 @@
       <view class="flex-item-msg">
         <swiper indicator-dots="true" indicator-active-color='white' >
        <block  wx:for="{{place.photo_urls}}" >
-      <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
+      <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'mode="aspectFill"></image> </swiper-item>
        </block>
             <swiper-item  class="preview-small-photo" style="text-align: center">
-              <image name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+              <image mode="aspectFill" name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
          </swiper-item>
         </swiper>
       </view>
@@ -114,7 +114,7 @@
   <view class="tab">
     <view class="tabHeader distance">{{place.distance}}公里</view>
   </view>
-  <view id="{{place.id}}" data-set="{{bookmarks}}" class="tab" bindtap="bookmark">
+  <view id="{{place.id}}"  class="tab" bindtap="bookmark">
     <view class="tabHeader">
     <image wx:if="{{bookmarked[place.id] === true}}"  class="bookmark" src="../../assets/icons/bookmarked.png"/>
       <image wx:else class="bookmark"  src="../../assets/icons/bookmark.png"/>

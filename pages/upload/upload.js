@@ -207,7 +207,7 @@ Page({
   },
 
   ChangeToIndex: function (e) {
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/index/index'
     })
   }, 
@@ -215,7 +215,7 @@ Page({
   toBookmark: function (e) {
     console.log(e)
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
-    wx.navigateTo({
+    wx.reLaunch({
       url: '../bookmarks/bookmarks',
     })
   },

@@ -64,10 +64,10 @@
        <view class="flex-item-msg">
         <swiper indicator-dots="true" indicator-active-color='white' >
        <block  wx:for="{{place[0].place.photo_urls}}" >
-      <swiper-item style="text-align: center"> <image src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
+      <swiper-item style="text-align: center"> <image mode="aspectFill" src='{{item}}' bindtap='previewImage' data-place-index='{{placeIndex}}' data-image-index='{{index}}'></image> </swiper-item>
        </block>
             <swiper-item  class="preview-small-photo" style="text-align: center">
-              <image name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place[0].place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
+              <image mode="aspectFill" name="photo_urls" bindtap='uploadSmallPhoto' data-place-id="{{place[0].place.id}}" data-image-id="{{placeIndex}}" class="upload-small-photo" src="../../assets/icons/focus.png"/> 
          </swiper-item>
         </swiper>
       </view>

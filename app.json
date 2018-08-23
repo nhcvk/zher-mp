@@ -2,12 +2,9 @@
   "pages":[
     "pages/index/index",
     "pages/show/show",
-    "pages/details/details",
     "pages/bookmarks/bookmarks",
-    "pages/locals/locals",
     "pages/profile/profile",
     "pages/upload/upload",
-    "pages/edit/edit",
     "pages/signup/signup",
     "pages/places/places"
   ],

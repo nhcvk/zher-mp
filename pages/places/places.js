@@ -86,12 +86,9 @@ Page({
 
 
   ChangeToIndex: function (e) {
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/index/index'
-    }),
-      this.setData({
-        changeIcon: "/assets/icons/change-hover.png"
-      })
+    })
   },
   ChangeToUpload: function (e) {
     wx.navigateTo({
@@ -130,12 +127,6 @@ Page({
    })
   },
 
-  backToHome: function (e) {
-    wx.redirectTo({
-      url: '../index/index',
-    })
-  },
-
   getDistanceFromLatLonInKm: function (lat1, lon1, lat2, lon2) {
     let R = 6371
     let dLat = this.deg2rad(lat2 - lat1);
@@ -156,17 +147,10 @@ Page({
 
   toBookmark: function (e) {
     app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
-    wx.navigateTo({
+    wx.reLaunch({
       url: '../bookmarks/bookmarks',
     })
   },
-
-  toShow: function (e) {
-    app.globalData.showTarget = parseInt(e.currentTarget.id)
-    wx.navigateTo({
-      url: '../places/places',
-    })
-  }, 
 
   scroll: function (e) {
     this.setData({
@@ -218,7 +202,7 @@ Page({
             })
             that.setData({ smallImageUrl: myImages })
             console.log(e)
-            let photo_url = that.data.place.photo_urls
+            let photo_url = that.data.place[0].place.photo_urls
             setTimeout(function () {
               that.data.smallImageUrl.forEach((image) => {
                 photo_url.push(image)
@@ -226,7 +210,7 @@ Page({
               console.log(22222, photo_url)
               console.log(that.data.place.photo_urls)
               myRequest.put({
-                path: `cities/${app.globalData.currentTarget}/places/${that.data.place.id}`,
+                path: `cities/${app.globalData.currentTarget}/places/${that.data.place[0].place.id}`,
                 data: {
                   place: { photo_urls: photo_url }
                 }
@@ -263,7 +247,7 @@ Page({
     console.log(789, e)
     app.globalData.selectLocal = e.currentTarget.dataset.localId
     app.globalData.cityLocal = e.currentTarget.dataset.cityId
-    wx.navigateTo({
+    wx.reLaunch({
       url: `/pages/profile/profile`
     })
   }
