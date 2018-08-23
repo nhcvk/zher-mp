@@ -202,14 +202,15 @@
 }
 
 .cardBackground {
-  width: 87vw;
+  /* width: 87vw; */
   /* height: 15vh; */
-  font-weight: lighter;
+  /* font-weight: lighter; */
   position: relative;
   height: 225rpx;
   background-position: center;
   background-size: 100vw;
   margin: 2rpx;
+  text-shadow: 2rpx 2rpx 5rpx rgba(0, 0, 0, 0.3);
 }
 
 .cardBackground :before {
