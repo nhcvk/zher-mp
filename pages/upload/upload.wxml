@@ -42,8 +42,8 @@
           <block wx:if="{{imageUrl.length == 0}}">
             <view class="add-main-image" bindtap="uploadPhoto">
               <image class="upload-photo" src="../../assets/icons/focus.png"/>
-              <view>upload cover photo</view>
-              <view>in portret view</view>
+              <view>Cover Photo</view>
+              <view>(portrait mode)</view>
             </view>
           </block>
         </view>
