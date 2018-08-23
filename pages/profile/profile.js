@@ -115,7 +115,7 @@ Page({
   },
 
   ChangeToIndex: function (e) {
-    wx.redirectTo({
+    wx.reLaunch({
       url: '../index/index',
     })
   },
@@ -174,7 +174,7 @@ Page({
   goShow: function (e) {
     console.log(e)
     app.globalData.showTarget = parseInt(e.currentTarget.id)
-    wx.navigateTo({
+    wx. reLaunch({
       url: '../places/places',
     })
   }, 

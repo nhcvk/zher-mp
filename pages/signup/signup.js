@@ -37,14 +37,14 @@ Page({
     },
 
     ChangeToIndex: function (e) {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../index/index',
       })
     },
 
     toBookmark: function (e) {
       app.globalData.bookmarkTarget = parseInt(e.currentTarget.id)
-      wx.navigateTo({
+      wx.reLaunch({
         url: '../bookmarks/bookmarks',
       })
     },
