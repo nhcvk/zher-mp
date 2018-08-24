@@ -65,7 +65,7 @@
                 <view class="card-head-left">Description</view>
             </view>
           </view>
-          <textarea class="flex-item-msg" name="description" placeholder="Enter a discription" type="text"/>
+          <textarea maxlength="-1" class="flex-item-msg" name="description" placeholder="Enter a discription" type="text"/>
         </view>
       </view> 
       <!-- ABOVE HERE IS CARD  -->
